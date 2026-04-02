@@ -6,17 +6,10 @@
   <meta name="robots" content="noindex" />
   <title>Content Manager — Rent Without Fear</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
 </head>
 <body>
-  <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script>
-    // Load site CSS into preview pane
-    CMS.registerPreviewStyle("/style.css");
-    CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
-    // createClass helper for preview components
-    var createClass = window.createClass = CMS.createClass || window.createClass;
-  </script>
   <script src="preview.js"></script>
 </body>
 </html>

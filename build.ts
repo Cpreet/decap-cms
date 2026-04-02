@@ -109,8 +109,13 @@ function generatePreviewScript(adminDist: string, partials: Record<string, strin
  * Registers Decap CMS preview templates using the actual Mustache partials.
  */
 (function() {
-  var h = window.CMS.h;
+  // Decap CMS v3 exposes these on the window after CMS script loads
+  var h = window.h;
   var createClass = window.createClass;
+
+  // Site CSS + fonts for the preview iframe
+  CMS.registerPreviewStyle("/style.css");
+  CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
 
   // Embedded Mustache partials (from src/templates/partials/)
   var partials = {
@@ -336,10 +341,10 @@ ${Object.entries(partialsObj).map(([k, v]) => `    "${k}": \`${v}\``).join(',\n'
         actionHtml = render(\`<div class="action-box"><h3>{{heading}}</h3><ul>{{#steps}}<li><strong>{{label}}:</strong> {{description}}</li>{{/steps}}</ul></div>\`, d.action_box);
       }
       return h('div', {},
-        h('div', { dangerouslySetInnerHTML: { __html: headerHtml } }),
+        previewWrap(headerHtml),
         h('div', { className: 'article-body', style: { maxWidth: '760px', margin: '0 auto', padding: '48px 40px' } },
-          bodyWidget,
-          h('div', { dangerouslySetInnerHTML: { __html: quotesHtml + actionHtml } })
+          bodyWidget || null,
+          previewWrap(quotesHtml + actionHtml)
         )
       );
     }

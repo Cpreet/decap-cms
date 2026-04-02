@@ -1,0 +1,9 @@
+site_title: "Rent Without Fear"
+tagline: "Empowering urban Indian renters against illegal evictions and landlord discrimination"
+footer_text: "© 2025 Rent Without Fear — The Campaigner. For general awareness only, not legal advice. For free legal aid, call NALSA helpline: 15100"
+nalsa_helpline: "15100"
+colors:
+  primary: "#f59f0a"
+  bg: "#1a1a1a"
+  danger: "#dc2626"
+  info: "#3b82f6"

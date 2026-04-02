@@ -1,0 +1,12 @@
+[build]
+  command = "bun install && bun run build"
+  publish = "dist"
+
+[build.environment]
+  BUN_VERSION = "1"
+
+# Redirect /admin to the CMS
+[[redirects]]
+  from = "/admin/"
+  to = "/admin/index.html"
+  status = 200

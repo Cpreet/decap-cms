@@ -1,0 +1,64 @@
+<!-- ===== PAGE: HOME ===== -->
+<div class="page active" id="page-home">
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-bg" {{#hero.hero_bg}}style="background-image: linear-gradient(to top, var(--bg) 0%, rgba(26,26,26,0.7) 50%, transparent 100%), url('{{hero.hero_bg}}') center/cover no-repeat"{{/hero.hero_bg}}></div>
+            <div class="hero-content">
+                <h1>{{hero.heading_line1}}<br />{{hero.heading_line2}}</h1>
+                <p>{{hero.subheading}}</p>
+                <button class="btn-primary" onclick="showPage('{{hero.cta_page}}')">{{hero.cta_text}}</button>
+            </div>
+        </section>
+
+        <!-- Ticker -->
+        {{#has_statistics}}
+        <section class="ticker" aria-label="Statistics">
+            <div class="ticker-track">
+                {{#statistics_doubled}}
+                <span class="stat">{{text}}</span>
+                <span class="dot">•</span>
+                {{/statistics_doubled}}
+            </div>
+        </section>
+        {{/has_statistics}}
+
+        <!-- Navigation Grid -->
+        {{#has_nav_grid}}
+        <nav class="home-grid" aria-label="Site sections">
+            {{#nav_grid}}
+            <a class="grid-cell {{#wide}}grid-cell-wide{{/wide}}" onclick="showPage('{{link_page}}')">
+                <div class="cell-top">
+                    <span class="material-symbols-outlined">{{icon}}</span>
+                    <span class="cell-num">{{cell_number}}</span>
+                </div>
+                <div>
+                    <h2>{{title}}</h2>
+                    <p>{{description}}</p>
+                </div>
+            </a>
+            {{/nav_grid}}
+        </nav>
+        {{/has_nav_grid}}
+
+        <!-- Emergency Banner -->
+        {{#has_emergency_banner}}
+        <div class="emergency-banner">
+            <div>
+                <strong>{{emergency_banner.title}}</strong>
+                <p>{{emergency_banner.description}}</p>
+            </div>
+            <button class="btn-primary" onclick="showPage('{{emergency_banner.button_page}}')">{{emergency_banner.button_text}}</button>
+        </div>
+        {{/has_emergency_banner}}
+    </main>
+
+    <footer>
+        <p>{{settings.footer_text}}<br />For free legal aid, call NALSA helpline: <strong>{{settings.nalsa_helpline}}</strong></p>
+        <div style="display:flex;gap:20px;flex-wrap:wrap">
+            <a onclick="showPage('rights')">Know Your Rights</a>
+            <a onclick="showPage('wall')">The Wall</a>
+            <a onclick="showPage('action')">Get Help Now</a>
+        </div>
+    </footer>
+</div>

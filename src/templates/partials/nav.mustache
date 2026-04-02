@@ -1,0 +1,29 @@
+<!-- Navigation -->
+<nav>
+    <a class="nav-logo" onclick="showPage('home')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 300">
+            <g transform="translate(0,20)">
+                <path d="M175 30 L60 105 L90 105 L90 170 C90 220 125 245 175 260Z" fill="currentColor" />
+                <path d="M175 30 L290 105 L260 105 L260 170 C260 220 225 245 175 260Z" fill="#F97316" />
+            </g>
+        </svg>
+        <span>{{settings.site_title}}</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+        <a onclick="showPage('rights')" data-page="rights">Know Your Rights</a>
+        <a onclick="showPage('stories')" data-page="stories">Stories</a>
+        <a onclick="showPage('journal')" data-page="journal">Journal</a>
+        <a onclick="showPage('wall')" data-page="wall">The Wall</a>
+        <a onclick="showPage('map')" data-page="map">The Crisis Map</a>
+    </div>
+    <button class="nav-cta" onclick="showPage('action')">Get Help Now</button>
+    <button class="hamburger" onclick="toggleMenu()"><span class="material-symbols-outlined" style="font-size:28px">menu</span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+    <a onclick="showPage('rights');toggleMenu()">Know Your Rights</a>
+    <a onclick="showPage('stories');toggleMenu()">Stories</a>
+    <a onclick="showPage('journal');toggleMenu()">Journal</a>
+    <a onclick="showPage('wall');toggleMenu()">The Wall</a>
+    <a onclick="showPage('map');toggleMenu()">The Crisis Map</a>
+    <a onclick="showPage('action');toggleMenu()" style="color:var(--primary)">Get Help Now</a>
+</div>

@@ -1,0 +1,67 @@
+<!-- ===== PAGE: THE WALL ===== -->
+<div class="page" id="page-wall">
+    <div class="wall-hero">
+        <h1>The Wall</h1>
+        <div class="sub-h">Post a warning. Stay anonymous.</div>
+        <p>A real-time ledger of tenant grievances. Share your experience to warn others about hostile landlords, illegal deductions, and arbitrary rules.</p>
+    </div>
+
+    <div class="wall-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Neighbourhood / City</label>
+                <input class="form-input" type="text" placeholder="e.g. Koramangala, Bengaluru" id="wall-city" />
+            </div>
+            <div class="form-group">
+                <label class="form-label">Issue Type</label>
+                <select class="form-select" id="wall-issue">
+                    <option value="" disabled selected>Select an issue</option>
+                    <option value="deposit">Deposit Withholding</option>
+                    <option value="eviction">Illegal Eviction / Lockout</option>
+                    <option value="harassment">Landlord Harassment</option>
+                    <option value="hike">Arbitrary Rent Hike</option>
+                    <option value="discrimination">Discrimination (Caste/Religion/Gender)</option>
+                    <option value="rwa">RWA Discrimination</option>
+                    <option value="other">Other Violation</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" style="margin-bottom:20px">
+            <label class="form-label">Your Message</label>
+            <textarea class="form-textarea" id="wall-msg" placeholder="Describe the situation clearly. Do not include identifiable personal information of yourself, but mention specific buildings or landlords if warning others."></textarea>
+        </div>
+        <div style="display:flex;justify-content:flex-end">
+            <button class="form-submit" onclick="postWallWarning()">
+                <span class="material-symbols-outlined" style="font-size:18px">campaign</span> Post Warning
+            </button>
+        </div>
+    </div>
+
+    <div class="wall-sort">
+        <h3>Recent Warnings</h3>
+        <div class="sort-btns">
+            <button class="sort-btn active" onclick="sortWall('latest',this)">Latest</button>
+            <span style="color:var(--border)">|</span>
+            <button class="sort-btn" onclick="sortWall('upvoted',this)">Most Upvoted</button>
+        </div>
+    </div>
+
+    <div class="masonry" id="wall-cards">
+        {{#all_wall_posts}}
+        <div class="wall-card {{#urgent}}wall-card-urgent{{/urgent}}{{^urgent}}wall-card-normal{{/urgent}}">
+            {{#urgent}}<div class="urgent-badge">Urgent</div>{{/urgent}}
+            <div class="card-location"><span class="material-symbols-outlined" style="font-size:14px">location_on</span> {{location}}</div>
+            <div class="card-badge {{#urgent}}card-badge-danger{{/urgent}}">{{issue_type}}</div>
+            <p>{{body}}</p>
+            <div class="card-footer">
+                <button class="upvote-btn" onclick="upvote(this)"><span class="material-symbols-outlined" style="font-size:18px">arrow_upward</span><span>{{upvotes}}</span></button>
+                <button class="share-btn" onclick="showToast('Link copied!')"><span class="material-symbols-outlined" style="font-size:18px">share</span></button>
+            </div>
+        </div>
+        {{/all_wall_posts}}
+    </div>
+
+    <div class="wall-load-more">
+        <button class="btn-outline" onclick="showToast('Loading more warnings...')">Load More Warnings</button>
+    </div>
+</div>

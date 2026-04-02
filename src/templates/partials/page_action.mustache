@@ -1,0 +1,46 @@
+<!-- ===== PAGE: Get Help Now ===== -->
+<div class="page" id="page-action">
+    <div class="action-layout" style="flex:1">
+        <!-- Left: Legal Templates -->
+        <div class="action-left">
+            <div class="action-eyebrow">Legal Resources</div>
+            <h1>Defend Your Rights.</h1>
+            <p class="lead">Download these legally-vetted templates to respond to your landlord immediately. Fill them out and send via registered post or email to establish a paper trail.</p>
+
+            {{#templates}}
+            <div class="template-card">
+                <div class="template-card-top">
+                    <div>
+                        <h3>{{title}}</h3>
+                        <p>{{description}}</p>
+                    </div>
+                    <span class="material-symbols-outlined">{{icon}}</span>
+                </div>
+                <button class="btn-download" onclick="showToast('{{download_filename}} downloading...')">
+                    <span class="material-symbols-outlined" style="font-size:18px">download</span> Download PDF Form
+                </button>
+            </div>
+            {{/templates}}
+        </div>
+
+        <!-- Right: Crisis Panel -->
+        <div class="action-right">
+            <div class="crisis-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">warning</span></div>
+            <h2>{{crisis_panel.heading}}</h2>
+            <div class="donot">{{crisis_panel.warning_text}}</div>
+            <p class="sub">{{crisis_panel.description}}</p>
+
+            {{#has_crisis_contacts}}
+            {{#crisis_panel.contacts}}
+            <a class="contact-card" href="{{phone_uri}}">
+                <div>
+                    <div class="contact-label">{{label}}</div>
+                    <div class="contact-num">{{number}}</div>
+                </div>
+                <div class="contact-icon"><span class="material-symbols-outlined" style="font-size:22px">{{icon}}</span></div>
+            </a>
+            {{/crisis_panel.contacts}}
+            {{/has_crisis_contacts}}
+        </div>
+    </div>
+</div>

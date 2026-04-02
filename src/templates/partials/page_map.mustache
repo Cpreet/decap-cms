@@ -1,0 +1,71 @@
+<!-- ===== PAGE: CRISIS MAP ===== -->
+<div class="page" id="page-map">
+    <div class="map-wrap" style="flex:1">
+        <div class="map-bg"></div>
+        <div class="map-grid-overlay"></div>
+        <div class="map-search">
+            <span class="material-symbols-outlined" style="color:var(--muted);font-size:20px">search</span>
+            <input type="text" placeholder="Search neighbourhood..." />
+        </div>
+
+        <!-- Red markers (incidents) -->
+        {{#red_markers}}
+        <div class="marker marker-red" style="top:{{pos_top}}%;left:{{pos_left}}%">
+            <div class="map-tooltip">
+                <div class="tooltip-inner">
+                    <div class="tooltip-tag tooltip-tag-red">{{tag}}</div>
+                    <div class="tooltip-city">{{title}}</div>
+                    <div class="tooltip-desc">{{description}}</div>
+                </div>
+            </div>
+        </div>
+        {{/red_markers}}
+
+        <!-- Blue markers (rent spikes) -->
+        {{#blue_markers}}
+        <div class="marker marker-blue" style="top:{{pos_top}}%;left:{{pos_left}}%">
+            {{#description}}
+            <div class="map-tooltip">
+                <div class="tooltip-inner">
+                    <div class="tooltip-tag tooltip-tag-blue">{{tag}}</div>
+                    <div class="tooltip-city">{{title}}</div>
+                    {{#rent_spike}}
+                    <div class="tooltip-desc" style="font-size:18px;font-weight:700;color:var(--info)">{{rent_spike}}</div>
+                    {{/rent_spike}}
+                    {{^rent_spike}}
+                    <div class="tooltip-desc">{{description}}</div>
+                    {{/rent_spike}}
+                </div>
+            </div>
+            {{/description}}
+        </div>
+        {{/blue_markers}}
+
+        <!-- Legend -->
+        <div class="map-legend">
+            <div class="legend-header">
+                <h3>The Crisis Map</h3>
+                <p>Live data from anonymous tenant reports</p>
+            </div>
+            <div class="legend-body">
+                <div class="legend-item">
+                    <div class="legend-dot-red"></div><span>Reported Illegal Evictions</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot-blue"></div><span>Rent Spikes (&gt;20% YoY)</span>
+                </div>
+            </div>
+            <div class="legend-footer">
+                <button class="report-btn" onclick="showPage('wall')">
+                    <span class="material-symbols-outlined" style="font-size:16px">add</span> Report an Incident
+                </button>
+            </div>
+        </div>
+
+        <div class="map-controls">
+            <button class="map-ctrl-btn"><span class="material-symbols-outlined" style="font-size:18px">my_location</span></button>
+            <button class="map-ctrl-btn"><span class="material-symbols-outlined" style="font-size:18px">add</span></button>
+            <button class="map-ctrl-btn"><span class="material-symbols-outlined" style="font-size:18px">remove</span></button>
+        </div>
+    </div>
+</div>

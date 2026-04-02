@@ -1,0 +1,333 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Editorial Workflow: draft → in_review → ready → published
+publish_mode: editorial_workflow
+
+media_folder: "static/img"
+public_folder: "/img"
+
+# =====================================================
+# Site Settings (singleton)
+# =====================================================
+collections:
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "general"
+        label: "General Settings"
+        file: "content/settings/general.yml"
+        fields:
+          - { label: "Site Title", name: "site_title", widget: "string", default: "Rent Without Fear" }
+          - { label: "Site Tagline", name: "tagline", widget: "string" }
+          - { label: "Footer Text", name: "footer_text", widget: "text" }
+          - { label: "NALSA Helpline", name: "nalsa_helpline", widget: "string", default: "15100" }
+          - label: "Brand Colors"
+            name: "colors"
+            widget: "object"
+            fields:
+              - { label: "Primary", name: "primary", widget: "color", default: "#f59f0a" }
+              - { label: "Background", name: "bg", widget: "color", default: "#1a1a1a" }
+              - { label: "Danger", name: "danger", widget: "color", default: "#dc2626" }
+              - { label: "Info", name: "info", widget: "color", default: "#3b82f6" }
+
+      - name: "hero"
+        label: "Homepage Hero"
+        file: "content/settings/hero.yml"
+        fields:
+          - { label: "Heading Line 1", name: "heading_line1", widget: "string", default: "Your Home." }
+          - { label: "Heading Line 2", name: "heading_line2", widget: "string", default: "Your Rights." }
+          - { label: "Subheading", name: "subheading", widget: "text" }
+          - { label: "CTA Button Text", name: "cta_text", widget: "string", default: "Get Help Now" }
+          - { label: "CTA Link Page", name: "cta_page", widget: "select", options: ["action", "rights", "stories", "wall", "map"] }
+          - { label: "Hero Background Image", name: "hero_bg", widget: "image", required: false }
+
+      - name: "emergency_banner"
+        label: "Emergency Banner"
+        file: "content/settings/emergency_banner.yml"
+        fields:
+          - { label: "Visible", name: "visible", widget: "boolean", default: true }
+          - { label: "Title", name: "title", widget: "string", default: "Facing imminent eviction?" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Button Text", name: "button_text", widget: "string", default: "Get Emergency Toolkit" }
+          - { label: "Button Link Page", name: "button_page", widget: "select", options: ["action", "rights", "stories", "wall", "map"] }
+
+      - name: "crisis_panel"
+        label: "Crisis Panel (Get Help Now - Right Side)"
+        file: "content/settings/crisis_panel.yml"
+        fields:
+          - { label: "Heading", name: "heading", widget: "string", default: "Facing a lock-out right now?" }
+          - { label: "Warning Text", name: "warning_text", widget: "string", default: "Do not leave." }
+          - { label: "Description", name: "description", widget: "text" }
+          - label: "Emergency Contacts"
+            name: "contacts"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Number", name: "number", widget: "string" }
+              - { label: "Phone URI", name: "phone_uri", widget: "string", hint: "e.g. tel:100" }
+              - { label: "Icon", name: "icon", widget: "string", default: "call", hint: "Material Symbol name" }
+
+  # =====================================================
+  # Ticker Statistics
+  # =====================================================
+  - name: "statistics"
+    label: "Ticker Statistics"
+    folder: "content/statistics"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Statistic Text", name: "text", widget: "string", hint: "e.g. '68% of Muslim home-seekers refused or given discriminatory terms'" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+      - { label: "Source", name: "source", widget: "string", required: false, hint: "Citation or study name" }
+
+  # =====================================================
+  # Homepage Navigation Grid
+  # =====================================================
+  - name: "nav_grid"
+    label: "Homepage Grid Cells"
+    folder: "content/nav_grid"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Icon", name: "icon", widget: "string", hint: "Material Symbol name, e.g. gavel, history_edu, campaign, map, article" }
+      - { label: "Cell Number", name: "cell_number", widget: "string", hint: "e.g. 01, 02, 03" }
+      - { label: "Link Page", name: "link_page", widget: "select", options: ["rights", "stories", "journal", "wall", "map", "action"] }
+      - { label: "Wide Cell (spans 2 columns)", name: "wide", widget: "boolean", default: false }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+
+  # =====================================================
+  # Know Your Rights — Legal Categories & Cards
+  # =====================================================
+  - name: "legal_rights"
+    label: "Know Your Rights"
+    folder: "content/legal_rights"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "category_title"
+    fields:
+      - { label: "Category Title", name: "category_title", widget: "string", hint: "e.g. Eviction Safeguards, Maintenance & Essential Services" }
+      - { label: "Category Description", name: "category_description", widget: "text" }
+      - { label: "Sidebar Label", name: "sidebar_label", widget: "string", hint: "Short name for sidebar navigation" }
+      - { label: "Sidebar Anchor ID", name: "anchor_id", widget: "string", hint: "e.g. eviction, services, deposit" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+      - label: "Legal Cards"
+        name: "cards"
+        widget: "list"
+        fields:
+          - { label: "Card Title", name: "title", widget: "string" }
+          - { label: "Card Body", name: "body", widget: "text" }
+          - { label: "Legal Reference", name: "legal_ref", widget: "string", hint: "e.g. Transfer of Property Act, Section 106" }
+
+  # =====================================================
+  # State-wise Rent Laws
+  # =====================================================
+  - name: "state_laws"
+    label: "State-wise Rent Laws"
+    folder: "content/state_laws"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "state_name"
+    fields:
+      - { label: "State Name", name: "state_name", widget: "string" }
+      - { label: "Act Name", name: "act", widget: "string" }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "MTA Adopted", value: "mta" }
+          - { label: "Older Act", value: "old" }
+          - { label: "In Transition / Partial", value: "partial" }
+      - { label: "Security Deposit Info", name: "deposit", widget: "string" }
+      - { label: "Notice Period", name: "notice", widget: "string" }
+      - { label: "Authority", name: "authority", widget: "string" }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        field: { label: "Tag", name: "tag", widget: "string" }
+      - label: "Rights & Warnings"
+        name: "rights"
+        widget: "list"
+        fields:
+          - { label: "Is Positive (green check)?", name: "ok", widget: "boolean", default: true }
+          - { label: "Text", name: "text", widget: "text" }
+      - { label: "External Link URL", name: "link", widget: "string", required: false }
+      - { label: "Link Text", name: "link_text", widget: "string", required: false }
+
+  # =====================================================
+  # Helplines & Resources
+  # =====================================================
+  - name: "helplines"
+    label: "Helplines & Resources"
+    folder: "content/helplines"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Organization Name", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - label: "Contact Type"
+        name: "contact_type"
+        widget: "select"
+        options:
+          - { label: "Phone Helpline", value: "phone" }
+          - { label: "Website", value: "website" }
+          - { label: "Both", value: "both" }
+      - { label: "Phone Number", name: "phone", widget: "string", required: false }
+      - { label: "Website URL", name: "url", widget: "string", required: false }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+
+  # =====================================================
+  # Stories (Editorial Grid)
+  # =====================================================
+  - name: "stories"
+    label: "Stories"
+    folder: "content/stories"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Placeholder Icon", name: "placeholder_icon", widget: "string", required: false, hint: "Material Symbol fallback if no image, e.g. mosque, visibility_off" }
+      - label: "Tag"
+        name: "tag"
+        widget: "select"
+        options:
+          - "Discrimination"
+          - "Eviction"
+          - "Harassment"
+          - "Legal Aid"
+          - "Arbitrary Rules"
+          - "Deposit Dispute"
+          - "RWA Issue"
+          - "Policy"
+          - "Victory"
+      - label: "Tag Style"
+        name: "tag_style"
+        widget: "select"
+        options:
+          - { label: "Default (Primary/Gold)", value: "default" }
+          - { label: "Danger (Red)", value: "danger" }
+        default: "default"
+      - { label: "City", name: "city", widget: "string" }
+      - { label: "Publication Date", name: "date", widget: "datetime" }
+      - { label: "Featured (large card, spans 2 columns)", name: "featured", widget: "boolean", default: false }
+      - { label: "Full Article Body", name: "body", widget: "markdown", required: false, hint: "Optional long-form story content" }
+
+  # =====================================================
+  # Journal Articles (Long-form)
+  # =====================================================
+  - name: "journal"
+    label: "Journal"
+    folder: "content/journal"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Eyebrow Label", name: "eyebrow", widget: "string", hint: "e.g. 'Policy Update · October 12, 2023'" }
+      - { label: "Publication Date", name: "date", widget: "datetime" }
+      - label: "Author"
+        name: "author"
+        widget: "object"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Role", name: "role", widget: "string" }
+          - { label: "Avatar", name: "avatar", widget: "image", required: false }
+      - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Pull Quotes"
+        name: "pull_quotes"
+        widget: "list"
+        required: false
+        field: { label: "Quote", name: "quote", widget: "text" }
+      - label: "Action Box"
+        name: "action_box"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Heading", name: "heading", widget: "string", required: false }
+          - label: "Steps"
+            name: "steps"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Bold Label", name: "label", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+  # =====================================================
+  # Legal Templates (Get Help Now - Left Side)
+  # =====================================================
+  - name: "templates"
+    label: "Legal Templates"
+    folder: "content/templates"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Template Name", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Icon", name: "icon", widget: "string", default: "description", hint: "Material Symbol name" }
+      - { label: "PDF File", name: "pdf_file", widget: "file", required: false }
+      - { label: "Download Filename", name: "download_filename", widget: "string", hint: "e.g. Eviction_Notice_Reply.pdf" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+
+  # =====================================================
+  # The Wall — Posts / Warnings
+  # =====================================================
+  - name: "wall_posts"
+    label: "The Wall Posts"
+    folder: "content/wall_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Location", name: "location", widget: "string", hint: "e.g. Andheri West, MUM" }
+      - label: "Issue Type"
+        name: "issue_type"
+        widget: "select"
+        options:
+          - "Illegal Eviction"
+          - "Deposit Withholding"
+          - "Landlord Harassment"
+          - "Arbitrary Rent Hike"
+          - "Discrimination"
+          - "RWA Discrimination"
+          - "Other Violation"
+      - { label: "Message", name: "body", widget: "text" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Urgent", name: "urgent", widget: "boolean", default: false }
+      - { label: "Upvotes", name: "upvotes", widget: "number", value_type: "int", default: 0 }
+
+  # =====================================================
+  # Crisis Map Markers
+  # =====================================================
+  - name: "crisis_map_markers"
+    label: "Crisis Map Markers"
+    folder: "content/crisis_map_markers"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Neighbourhood / City", name: "title", widget: "string" }
+      - label: "Marker Type"
+        name: "marker_type"
+        widget: "select"
+        options:
+          - { label: "Red — Illegal Eviction / Forced Vacate / Harassment", value: "red" }
+          - { label: "Blue — Rent Spike", value: "blue" }
+      - label: "Incident Tag"
+        name: "tag"
+        widget: "select"
+        options:
+          - "Illegal Eviction"
+          - "Forced Vacate"
+          - "Harassment"
+          - "Rent Spike"
+          - "Lockout"
+          - "Utility Cutoff"
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Date Reported", name: "date", widget: "datetime" }
+      - { label: "Position Top (%)", name: "pos_top", widget: "number", value_type: "float", hint: "CSS top % on the map" }
+      - { label: "Position Left (%)", name: "pos_left", widget: "number", value_type: "float", hint: "CSS left % on the map" }
+      - { label: "Rent Spike Value", name: "rent_spike", widget: "string", required: false, hint: "e.g. +28% YoY — only for blue markers" }

@@ -1,0 +1,66 @@
+<!-- ===== PAGE: JOURNAL ===== -->
+<div class="page" id="page-journal">
+    {{#latest_journal}}
+    <div class="journal-hero">
+        <div class="eyebrow">{{eyebrow}}</div>
+        <h1>{{title}}</h1>
+        <div class="article-meta">
+            <div class="author-avatar">
+                {{#author.avatar}}
+                <img src="{{author.avatar}}" alt="{{author.name}}" />
+                {{/author.avatar}}
+                {{^author.avatar}}
+                <div style="width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center">
+                    <span class="material-symbols-outlined" style="font-size:24px;color:var(--muted)">person</span>
+                </div>
+                {{/author.avatar}}
+            </div>
+            <div>
+                <div class="author-name">{{author.name}}</div>
+                <div class="author-role">{{author.role}}</div>
+            </div>
+        </div>
+    </div>
+
+    {{#featured_image}}
+    <img class="article-featured-img" src="{{featured_image}}" alt="{{title}}" />
+    {{/featured_image}}
+    {{^featured_image}}
+    <div class="article-featured-img" style="background:linear-gradient(135deg,#111,#222);display:flex;align-items:center;justify-content:center;height:400px">
+        <span class="material-symbols-outlined" style="font-size:72px;color:var(--border)">image</span>
+    </div>
+    {{/featured_image}}
+
+    <div class="article-body">
+        {{{rendered_body}}}
+
+        {{#pull_quotes}}
+        <div class="pull-quote">{{.}}</div>
+        {{/pull_quotes}}
+
+        {{#action_box}}
+        {{#heading}}
+        <div class="action-box">
+            <h3>{{heading}}</h3>
+            <ul>
+                {{#steps}}
+                <li><strong>{{label}}:</strong> {{description}}</li>
+                {{/steps}}
+            </ul>
+        </div>
+        {{/heading}}
+        {{/action_box}}
+    </div>
+
+    <div class="article-footer">
+        <div style="display:flex;gap:12px">
+            <button class="btn-outline" style="padding:10px 14px" onclick="showToast('Link copied!')"><span class="material-symbols-outlined" style="font-size:18px">share</span></button>
+            <button class="btn-outline" style="padding:10px 14px" onclick="showToast('Saved!')"><span class="material-symbols-outlined" style="font-size:18px">bookmark</span></button>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn-outline" onclick="showPage('rights')">Know Your Rights</button>
+            <button class="btn-primary" onclick="showPage('action')">Access Toolkit</button>
+        </div>
+    </div>
+    {{/latest_journal}}
+</div>

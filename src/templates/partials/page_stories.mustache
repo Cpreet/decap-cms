@@ -1,0 +1,50 @@
+<!-- ===== PAGE: STORIES ===== -->
+<div class="page" id="page-stories">
+    <div class="stories-hero">
+        <h1>Stories</h1>
+        <p>Tenant experiences and documentary journalism. Read. Share. Build community resilience against discrimination and illegal evictions.</p>
+    </div>
+    <div class="stories-grid">
+        {{#featured_story}}
+        <div class="story-card story-card-featured">
+            {{#image}}
+            <img class="story-img" src="{{image}}" alt="{{title}}" />
+            {{/image}}
+            {{^image}}
+            <div class="story-img" style="background:linear-gradient(135deg,#1a1a1a,#333);display:flex;align-items:center;justify-content:center;aspect-ratio:16/9">
+                <span class="material-symbols-outlined" style="font-size:64px;color:var(--border)">{{#placeholder_icon}}{{placeholder_icon}}{{/placeholder_icon}}{{^placeholder_icon}}image{{/placeholder_icon}}</span>
+            </div>
+            {{/image}}
+            <div class="story-content">
+                <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}}</div>
+                <h3>{{title}}</h3>
+                <p>{{excerpt}}</p>
+                <div class="story-meta"><span>{{city}}</span></div>
+            </div>
+        </div>
+        {{/featured_story}}
+
+        {{#regular_stories}}
+        <div class="story-card">
+            {{#image}}
+            <img class="story-img" src="{{image}}" alt="{{title}}" />
+            {{/image}}
+            {{^image}}
+            <div class="story-img" style="background:linear-gradient(135deg,#1a1a1a,#2a2a2a);display:flex;align-items:center;justify-content:center;aspect-ratio:16/10">
+                <span class="material-symbols-outlined" style="font-size:40px;color:var(--border)">{{#placeholder_icon}}{{placeholder_icon}}{{/placeholder_icon}}{{^placeholder_icon}}image{{/placeholder_icon}}</span>
+            </div>
+            {{/image}}
+            <div class="story-content">
+                <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}}</div>
+                <h3>{{title}}</h3>
+                <p>{{excerpt}}</p>
+                <div class="story-meta"><span>{{city}}</span></div>
+            </div>
+        </div>
+        {{/regular_stories}}
+    </div>
+    <div class="stories-footer">
+        <button class="btn-outline">Load More Stories</button>
+        <button class="btn-primary" onclick="showToast('Story submission form coming soon!')">Share Your Story</button>
+    </div>
+</div>

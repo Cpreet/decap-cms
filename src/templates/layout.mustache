@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{settings.site_title}}</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="progress"></div>
+
+    {{> nav}}
+
+    {{> page_home}}
+    {{> page_rights}}
+    {{> page_stories}}
+    {{> page_journal}}
+    {{> page_action}}
+    {{> page_map}}
+    {{> page_wall}}
+
+    {{> toast}}
+
+    <!-- State laws data injected from CMS -->
+    <script>
+        const statesData = {{{state_laws_json}}};
+    </script>
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "rent-without-fear",
+  "version": "1.0.0",
+  "description": "Rent Without Fear — CMS-driven campaign site",
+  "scripts": {
+    "build": "bun build.ts",
+    "dev": "bun build.ts --watch"
+  },
+  "dependencies": {
+    "mustache": "^4.2.0",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "glob": "^10.3.10",
+    "marked": "^12.0.0",
+    "chokidar": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.11",
+    "@types/js-yaml": "^4.0.9",
+    "@types/mustache": "^4.2.6"
+  }
+}

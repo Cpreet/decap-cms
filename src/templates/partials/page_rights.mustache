@@ -8,7 +8,6 @@
             <a class="sidebar-link {{active_class}}" onclick="scrollKYR('{{anchor_id}}',this)">{{sidebar_label}}</a>
             {{/sidebar_links}}
             <a class="sidebar-link" onclick="scrollKYR('statelaws',this)">State-wise Laws</a>
-            <a class="sidebar-link" onclick="scrollKYR('helplines',this)">Help & Helplines</a>
         </aside>
 
         <!-- Main Content -->
@@ -29,7 +28,7 @@
                 <div class="legal-card">
                     <h3>{{title}}</h3>
                     <p>{{body}}</p>
-                    <div class="legal-tag"><span class="material-symbols-outlined" style="font-size:14px">gavel</span> {{legal_ref}}</div>
+                    <div class="legal-tag">{{#source_url}}<span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> <a href="{{source_url}}" target="_blank" style="color:inherit;text-decoration:none">{{legal_ref}} &rarr;</a>{{/source_url}}{{^source_url}}<span class="material-symbols-outlined" style="font-size:14px">gavel</span> {{legal_ref}}{{/source_url}}</div>
                 </div>
                 {{/cards}}
             </section>
@@ -40,30 +39,6 @@
                 <h2>State-wise Rent Laws</h2>
                 <p>Find the specific protections that apply in your state.</p>
                 <div id="state-widget-kyr"></div>
-            </section>
-
-            <!-- Helplines -->
-            <section id="kyr-helplines" class="kyr-section">
-                <div class="kyr-section-header">
-                    <h2>Where to Get Help</h2>
-                    <p>Free legal aid contacts and complaint bodies across India.</p>
-                </div>
-                {{#has_helplines}}
-                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
-                    {{#helplines}}
-                    <div class="legal-card">
-                        <h3 style="font-size:15px">{{title}}</h3>
-                        <p>{{description}}</p>
-                        {{#phone}}
-                        <div class="legal-tag" style="color:var(--primary);font-family:'Work Sans',sans-serif;font-size:13px">Helpline: <strong>{{phone}}</strong></div>
-                        {{/phone}}
-                        {{#url}}
-                        <div class="legal-tag" style="color:var(--info);font-size:13px;font-family:'Work Sans',sans-serif">{{url}}</div>
-                        {{/url}}
-                    </div>
-                    {{/helplines}}
-                </div>
-                {{/has_helplines}}
             </section>
         </main>
     </div>

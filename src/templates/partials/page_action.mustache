@@ -1,46 +1,51 @@
 <!-- ===== PAGE: Get Help Now ===== -->
 <div class="page" id="page-action">
-    <div class="action-layout" style="flex:1">
-        <!-- Left: Legal Templates -->
-        <div class="action-left">
-            <div class="action-eyebrow">Legal Resources</div>
-            <h1>Defend Your Rights.</h1>
-            <p class="lead">Download these legally-vetted templates to respond to your landlord immediately. Fill them out and send via registered post or email to establish a paper trail.</p>
-
-            {{#templates}}
-            <div class="template-card">
-                <div class="template-card-top">
-                    <div>
-                        <h3>{{title}}</h3>
-                        <p>{{description}}</p>
-                    </div>
-                    <span class="material-symbols-outlined">{{icon}}</span>
-                </div>
-                <button class="btn-download" onclick="showToast('{{download_filename}} downloading...')">
-                    <span class="material-symbols-outlined" style="font-size:18px">download</span> Download PDF Form
-                </button>
+    <div class="stories-hero" style="border-bottom:1px solid var(--border)">
+        <div style="font-size:11px;font-weight:700;color:var(--primary);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px">Support &amp; Resources</div>
+        <h1>Get Help Now</h1>
+        <p style="color:var(--muted);font-size:16px;max-width:600px;line-height:1.7">Free legal aid, official complaint bodies, and mental health support. You do not have to face this alone.</p>
+    </div>
+    <div style="max-width:960px;margin:0 auto;padding:48px 40px 80px">
+        {{#has_legal_helplines}}
+        <div class="kyr-section-header" style="margin-bottom:28px">
+            <h2 style="font-size:26px;font-weight:700;margin-bottom:6px">Legal Aid &amp; Helplines</h2>
+            <p style="color:var(--muted);font-size:14px">All services below are free or low-cost. If you cannot afford a lawyer, NALSA is your first call.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:48px">
+            {{#legal_helplines}}
+            <div class="legal-card">
+                <h3 style="font-size:15px">{{title}}</h3>
+                <p>{{description}}</p>
+                {{#phone}}
+                <div class="legal-tag" style="color:var(--primary);font-family:'Work Sans',sans-serif;font-size:13px">Call: <strong>{{phone}}</strong></div>
+                {{/phone}}
+                {{#url}}
+                <div class="legal-tag" style="font-family:'Work Sans',sans-serif;font-size:13px"><a href="{{url}}" target="_blank" style="color:var(--primary)">{{url}} &rarr;</a></div>
+                {{/url}}
             </div>
-            {{/templates}}
+            {{/legal_helplines}}
         </div>
+        {{/has_legal_helplines}}
 
-        <!-- Right: Crisis Panel -->
-        <div class="action-right">
-            <div class="crisis-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">warning</span></div>
-            <h2>{{crisis_panel.heading}}</h2>
-            <div class="donot">{{crisis_panel.warning_text}}</div>
-            <p class="sub">{{crisis_panel.description}}</p>
-
-            {{#has_crisis_contacts}}
-            {{#crisis_panel.contacts}}
-            <a class="contact-card" href="{{phone_uri}}">
-                <div>
-                    <div class="contact-label">{{label}}</div>
-                    <div class="contact-num">{{number}}</div>
-                </div>
-                <div class="contact-icon"><span class="material-symbols-outlined" style="font-size:22px">{{icon}}</span></div>
-            </a>
-            {{/crisis_panel.contacts}}
-            {{/has_crisis_contacts}}
+        {{#has_mental_health_helplines}}
+        <div class="kyr-section-header" style="margin-bottom:28px;border-top:1px solid var(--border);padding-top:40px">
+            <h2 style="font-size:26px;font-weight:700;margin-bottom:6px">Mental Health Support</h2>
+            <p style="color:var(--muted);font-size:14px">Losing your home or facing discrimination can be deeply traumatic. You don&rsquo;t have to process this alone.</p>
         </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+            {{#mental_health_helplines}}
+            <div class="legal-card">
+                <h3 style="font-size:15px">{{title}}</h3>
+                <p>{{description}}</p>
+                {{#phone}}
+                <div class="legal-tag" style="color:var(--primary);font-family:'Work Sans',sans-serif;font-size:13px">Call: <strong>{{phone}}</strong></div>
+                {{/phone}}
+                {{#url}}
+                <div class="legal-tag" style="font-family:'Work Sans',sans-serif;font-size:13px"><a href="{{url}}" target="_blank" style="color:var(--primary)">{{url}} &rarr;</a></div>
+                {{/url}}
+            </div>
+            {{/mental_health_helplines}}
+        </div>
+        {{/has_mental_health_helplines}}
     </div>
 </div>

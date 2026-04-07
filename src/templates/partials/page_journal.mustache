@@ -1,66 +1,35 @@
-<!-- ===== PAGE: JOURNAL ===== -->
+<!-- ===== PAGE: TESTIMONIALS ===== -->
 <div class="page" id="page-journal">
-    {{#latest_journal}}
-    <div class="journal-hero">
-        <div class="eyebrow">{{eyebrow}}</div>
-        <h1>{{title}}</h1>
-        <div class="article-meta">
-            <div class="author-avatar">
-                {{#author.avatar}}
-                <img src="{{author.avatar}}" alt="{{author.name}}" />
-                {{/author.avatar}}
-                {{^author.avatar}}
-                <div style="width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center">
-                    <span class="material-symbols-outlined" style="font-size:24px;color:var(--muted)">person</span>
+    <div class="stories-hero" style="border-bottom:1px solid var(--border)">
+        <div style="font-size:11px;font-weight:700;color:var(--primary);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px">First-hand Accounts</div>
+        <h1>Testimonials</h1>
+        <p style="color:var(--muted);font-size:16px;max-width:580px;line-height:1.7">Audio conversations with renters who have faced discrimination, illegal eviction, and landlord harassment.</p>
+    </div>
+    <div style="max-width:860px;margin:0 auto;padding:48px 40px 80px">
+        {{^has_journal}}
+        <div style="text-align:center;padding:80px 20px;border:1px solid var(--border);background:var(--surface)">
+            <span class="material-symbols-outlined" style="font-size:56px;color:var(--border);display:block;margin-bottom:20px">mic</span>
+            <h2 style="font-size:24px;font-weight:700;margin-bottom:12px;font-family:'Lora',serif">Audio testimonials coming soon.</h2>
+            <p style="color:var(--muted);font-size:15px;line-height:1.7;max-width:420px;margin:0 auto">We are recording conversations with renters across India. Their experiences will be published here.</p>
+        </div>
+        {{/has_journal}}
+        {{#journal}}
+        <div class="legal-card" style="margin-bottom:24px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:16px;flex-wrap:wrap">
+                <div>
+                    {{#tag}}<div style="font-size:10px;font-weight:700;color:var(--primary);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px">{{tag}}</div>{{/tag}}
+                    <h3 style="font-size:18px;font-weight:700;font-family:'Lora',serif">{{title}}</h3>
                 </div>
-                {{/author.avatar}}
+                <span class="material-symbols-outlined" style="color:var(--muted);font-size:28px;flex-shrink:0">mic</span>
             </div>
-            <div>
-                <div class="author-name">{{author.name}}</div>
-                <div class="author-role">{{author.role}}</div>
-            </div>
+            <p style="color:#d1d5db;font-size:14px;line-height:1.75;margin-bottom:16px">{{description}}</p>
+            {{#audio}}
+            <audio controls style="width:100%;accent-color:var(--primary);margin-top:8px">
+                <source src="{{audio}}" type="audio/mpeg">
+            </audio>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px">Audio shared with permission. Identity protected.</div>
+            {{/audio}}
         </div>
+        {{/journal}}
     </div>
-
-    {{#featured_image}}
-    <img class="article-featured-img" src="{{featured_image}}" alt="{{title}}" />
-    {{/featured_image}}
-    {{^featured_image}}
-    <div class="article-featured-img" style="background:linear-gradient(135deg,#111,#222);display:flex;align-items:center;justify-content:center;height:400px">
-        <span class="material-symbols-outlined" style="font-size:72px;color:var(--border)">image</span>
-    </div>
-    {{/featured_image}}
-
-    <div class="article-body">
-        {{{rendered_body}}}
-
-        {{#pull_quotes}}
-        <div class="pull-quote">{{.}}</div>
-        {{/pull_quotes}}
-
-        {{#action_box}}
-        {{#heading}}
-        <div class="action-box">
-            <h3>{{heading}}</h3>
-            <ul>
-                {{#steps}}
-                <li><strong>{{label}}:</strong> {{description}}</li>
-                {{/steps}}
-            </ul>
-        </div>
-        {{/heading}}
-        {{/action_box}}
-    </div>
-
-    <div class="article-footer">
-        <div style="display:flex;gap:12px">
-            <button class="btn-outline" style="padding:10px 14px" onclick="showToast('Link copied!')"><span class="material-symbols-outlined" style="font-size:18px">share</span></button>
-            <button class="btn-outline" style="padding:10px 14px" onclick="showToast('Saved!')"><span class="material-symbols-outlined" style="font-size:18px">bookmark</span></button>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-            <button class="btn-outline" onclick="showPage('rights')">Know Your Rights</button>
-            <button class="btn-primary" onclick="showPage('action')">Access Toolkit</button>
-        </div>
-    </div>
-    {{/latest_journal}}
 </div>

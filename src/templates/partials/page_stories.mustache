@@ -2,11 +2,11 @@
 <div class="page" id="page-stories">
     <div class="stories-hero">
         <h1>Stories</h1>
-        <p>Tenant experiences and documentary journalism. Read. Share. Build community resilience against discrimination and illegal evictions.</p>
+        <p>Documentary journalism, articles and research curated for you. Read. Share. Build community resilience against discrimination and illegal evictions.</p>
     </div>
     <div class="stories-grid">
         {{#featured_story}}
-        <div class="story-card story-card-featured">
+        <a class="story-card story-card-featured" {{#url}}href="{{url}}" target="_blank"{{/url}} style="text-decoration:none;color:var(--text)">
             {{#image}}
             <img class="story-img" src="{{image}}" alt="{{title}}" />
             {{/image}}
@@ -16,16 +16,16 @@
             </div>
             {{/image}}
             <div class="story-content">
-                <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}}</div>
+                <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}} {{#city}}&middot; {{city}}{{/city}}</div>
                 <h3>{{title}}</h3>
                 <p>{{excerpt}}</p>
-                <div class="story-meta"><span>{{city}}</span></div>
+                <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span>&rarr; {{link_action}}</span>{{/link_action}}</div>
             </div>
-        </div>
+        </a>
         {{/featured_story}}
 
         {{#regular_stories}}
-        <div class="story-card">
+        <a class="story-card" {{#url}}href="{{url}}" target="_blank"{{/url}} style="text-decoration:none;color:var(--text)">
             {{#image}}
             <img class="story-img" src="{{image}}" alt="{{title}}" />
             {{/image}}
@@ -35,16 +35,15 @@
             </div>
             {{/image}}
             <div class="story-content">
-                <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}}</div>
+                <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}} {{#city}}&middot; {{city}}{{/city}}</div>
                 <h3>{{title}}</h3>
                 <p>{{excerpt}}</p>
-                <div class="story-meta"><span>{{city}}</span></div>
+                <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span>&rarr; {{link_action}}</span>{{/link_action}}</div>
             </div>
-        </div>
+        </a>
         {{/regular_stories}}
     </div>
     <div class="stories-footer">
-        <button class="btn-outline">Load More Stories</button>
         <button class="btn-primary" onclick="showToast('Story submission form coming soon!')">Share Your Story</button>
     </div>
 </div>

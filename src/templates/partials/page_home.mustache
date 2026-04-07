@@ -3,12 +3,13 @@
     <main>
         <!-- Hero -->
         <section class="hero">
-            <div class="hero-bg" {{#hero.hero_bg}}style="background-image: linear-gradient(to top, var(--bg) 0%, rgba(26,26,26,0.7) 50%, transparent 100%), url('{{hero.hero_bg}}') center/cover no-repeat"{{/hero.hero_bg}}></div>
+            <div class="hero-bg" {{#hero.hero_bg}}style="background: linear-gradient(to top, var(--bg) 0%, rgba(26,26,26,0.7) 50%, transparent 100%), url('{{hero.hero_bg}}') center/cover no-repeat"{{/hero.hero_bg}}></div>
             <div class="hero-content">
                 <h1>{{hero.heading_line1}}<br />{{hero.heading_line2}}</h1>
                 <p>{{hero.subheading}}</p>
                 <button class="btn-primary" onclick="showPage('{{hero.cta_page}}')">{{hero.cta_text}}</button>
             </div>
+            {{#hero.hero_bg}}<div class="hero-credit">Image by <a href="https://pixabay.com/users/freesearcher-1134103/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5433298" target="_blank" rel="noopener noreferrer">Pankaj Mullick</a> from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5433298" target="_blank" rel="noopener noreferrer">Pixabay</a></div>{{/hero.hero_bg}}
         </section>
 
         <!-- Ticker -->
@@ -16,7 +17,7 @@
         <section class="ticker" aria-label="Statistics">
             <div class="ticker-track">
                 {{#statistics_doubled}}
-                <span class="stat">{{text}}</span>
+                <span class="stat">{{#source}}<a href="{{source}}" target="_blank" rel="noopener noreferrer">{{text}}</a>{{/source}}{{^source}}{{text}}{{/source}}</span>
                 <span class="dot">•</span>
                 {{/statistics_doubled}}
             </div>

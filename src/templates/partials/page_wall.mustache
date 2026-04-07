@@ -37,6 +37,13 @@
         </div>
     </div>
 
+    {{^has_community_posts}}
+    <div class="wall-notice">
+        <span class="material-symbols-outlined">info</span>
+        <p>The warnings below are illustrative examples to show how the wall works. Real submissions from the community will appear here once posted.</p>
+    </div>
+    {{/has_community_posts}}
+
     <div class="wall-sort">
         <h3>Recent Warnings</h3>
         <div class="sort-btns">

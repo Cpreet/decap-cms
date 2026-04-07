@@ -81,7 +81,7 @@ collections:
     fields:
       - { label: "Statistic Text", name: "text", widget: "string", hint: "e.g. '68% of Muslim home-seekers refused or given discriminatory terms'" }
       - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
-      - { label: "Source", name: "source", widget: "string", required: false, hint: "Citation or study name" }
+      - { label: "Source URL", name: "source", widget: "string", required: false, hint: "URL to the source (e.g. https://example.com/study)" }
 
   # =====================================================
   # Homepage Navigation Grid
@@ -121,7 +121,8 @@ collections:
         fields:
           - { label: "Card Title", name: "title", widget: "string" }
           - { label: "Card Body", name: "body", widget: "text" }
-          - { label: "Legal Reference", name: "legal_ref", widget: "string", hint: "e.g. Transfer of Property Act, Section 106" }
+          - { label: "Source Label", name: "legal_ref", widget: "string", hint: "e.g. LegalKart — Full Guide" }
+          - { label: "Source URL", name: "source_url", widget: "string", required: false, hint: "Link to external resource" }
 
   # =====================================================
   # State-wise Rent Laws
@@ -169,6 +170,13 @@ collections:
     fields:
       - { label: "Organization Name", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Legal Aid & Helplines", value: "legal" }
+          - { label: "Mental Health Support", value: "mental_health" }
+        default: "legal"
       - label: "Contact Type"
         name: "contact_type"
         widget: "select"
@@ -213,50 +221,28 @@ collections:
           - { label: "Default (Primary/Gold)", value: "default" }
           - { label: "Danger (Red)", value: "danger" }
         default: "default"
-      - { label: "City", name: "city", widget: "string" }
+      - { label: "Source Name", name: "city", widget: "string", hint: "e.g. YouTube, The Wire, DW, Cornell University" }
+      - { label: "External URL", name: "url", widget: "string", required: false, hint: "Link to the external article/video" }
+      - { label: "Link Action", name: "link_action", widget: "string", required: false, default: "Read", hint: "e.g. Read, Watch, Download PDF" }
       - { label: "Publication Date", name: "date", widget: "datetime" }
       - { label: "Featured (large card, spans 2 columns)", name: "featured", widget: "boolean", default: false }
       - { label: "Full Article Body", name: "body", widget: "markdown", required: false, hint: "Optional long-form story content" }
 
   # =====================================================
-  # Journal Articles (Long-form)
+  # Testimonials (Audio)
   # =====================================================
   - name: "journal"
-    label: "Journal"
+    label: "Testimonials"
     folder: "content/journal"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Eyebrow Label", name: "eyebrow", widget: "string", hint: "e.g. 'Policy Update · October 12, 2023'" }
+      - { label: "Title / Name", name: "title", widget: "string", hint: "Name or description of the person" }
+      - { label: "Tag", name: "tag", widget: "string", hint: "e.g. Deposit Dispute · Mumbai" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Audio File", name: "audio", widget: "file", required: false, hint: "Upload MP3 audio testimonial" }
       - { label: "Publication Date", name: "date", widget: "datetime" }
-      - label: "Author"
-        name: "author"
-        widget: "object"
-        fields:
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Role", name: "role", widget: "string" }
-          - { label: "Avatar", name: "avatar", widget: "image", required: false }
-      - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
-      - label: "Pull Quotes"
-        name: "pull_quotes"
-        widget: "list"
-        required: false
-        field: { label: "Quote", name: "quote", widget: "text" }
-      - label: "Action Box"
-        name: "action_box"
-        widget: "object"
-        required: false
-        fields:
-          - { label: "Heading", name: "heading", widget: "string", required: false }
-          - label: "Steps"
-            name: "steps"
-            widget: "list"
-            required: false
-            fields:
-              - { label: "Bold Label", name: "label", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
 
   # =====================================================
   # Legal Templates (Get Help Now - Left Side)
@@ -299,35 +285,5 @@ collections:
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Urgent", name: "urgent", widget: "boolean", default: false }
       - { label: "Upvotes", name: "upvotes", widget: "number", value_type: "int", default: 0 }
+      - { label: "Community Post", name: "community", widget: "boolean", default: false, hint: "Check if this is a real community submission (not an illustrative example)" }
 
-  # =====================================================
-  # Crisis Map Markers
-  # =====================================================
-  - name: "crisis_map_markers"
-    label: "Crisis Map Markers"
-    folder: "content/crisis_map_markers"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Neighbourhood / City", name: "title", widget: "string" }
-      - label: "Marker Type"
-        name: "marker_type"
-        widget: "select"
-        options:
-          - { label: "Red — Illegal Eviction / Forced Vacate / Harassment", value: "red" }
-          - { label: "Blue — Rent Spike", value: "blue" }
-      - label: "Incident Tag"
-        name: "tag"
-        widget: "select"
-        options:
-          - "Illegal Eviction"
-          - "Forced Vacate"
-          - "Harassment"
-          - "Rent Spike"
-          - "Lockout"
-          - "Utility Cutoff"
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Date Reported", name: "date", widget: "datetime" }
-      - { label: "Position Top (%)", name: "pos_top", widget: "number", value_type: "float", hint: "CSS top % on the map" }
-      - { label: "Position Left (%)", name: "pos_left", widget: "number", value_type: "float", hint: "CSS left % on the map" }
-      - { label: "Rent Spike Value", name: "rent_spike", widget: "string", required: false, hint: "e.g. +28% YoY — only for blue markers" }

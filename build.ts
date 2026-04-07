@@ -147,8 +147,7 @@ ${Object.entries(partialsObj).map(([k, v]) => `    "${k}": \`${v}\``).join(',\n'
       var tpl = \`
       <section class="ticker" style="position:relative;height:80px;display:flex;align-items:center">
         <div class="ticker-track" style="animation:none">
-          <span class="stat">{{text}}</span>
-          {{#source}}<span class="dot" style="margin-left:16px;font-size:12px;color:var(--muted)">— {{source}}</span>{{/source}}
+          <span class="stat">{{#source}}<a href="{{source}}" target="_blank" rel="noopener noreferrer">{{text}}</a>{{/source}}{{^source}}{{text}}{{/source}}</span>
         </div>
       </section>\`;
       return previewWrap(render(tpl, d));
@@ -302,51 +301,20 @@ ${Object.entries(partialsObj).map(([k, v]) => `    "${k}": \`${v}\``).join(',\n'
   CMS.registerPreviewTemplate('journal', createClass({
     render: function() {
       var d = entryToJS(this.props.entry);
-      var getAsset = this.props.getAsset;
-      if (d.featured_image && getAsset) d._feat_url = getAsset(d.featured_image).toString();
-      if (d.author && d.author.avatar && getAsset) d.author._avatar_url = getAsset(d.author.avatar).toString();
-      // Render markdown body via the widgetFor helper
-      var bodyWidget = this.props.widgetFor('body');
       var tpl = \`
-      <div>
-        <div class="journal-hero" style="padding:60px 40px;max-width:900px">
-          <div class="eyebrow" style="font-size:11px;font-weight:700;color:var(--primary);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px">{{eyebrow}}</div>
-          <h1 style="font-size:clamp(32px,5vw,64px);font-weight:700;line-height:1.1;margin-bottom:20px">{{title}}</h1>
-          <div class="article-meta" style="display:flex;align-items:center;gap:16px;margin-top:16px">
-            <div class="author-avatar">
-              {{#author._avatar_url}}<img src="{{author._avatar_url}}" alt="{{author.name}}" style="width:100%;height:100%;object-fit:cover;filter:grayscale(80%)" />{{/author._avatar_url}}
-              {{^author._avatar_url}}<div style="width:100%;height:100%;background:var(--surface);display:flex;align-items:center;justify-content:center"><span class="material-symbols-outlined" style="font-size:24px;color:var(--muted)">person</span></div>{{/author._avatar_url}}
-            </div>
+      <div style="max-width:600px;padding:20px">
+        <div class="legal-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:16px">
             <div>
-              <div class="author-name">{{author.name}}</div>
-              <div class="author-role">{{author.role}}</div>
+              {{#tag}}<div style="font-size:10px;font-weight:700;color:var(--primary);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px">{{tag}}</div>{{/tag}}
+              <h3 style="font-size:18px;font-weight:700;font-family:'Lora',serif">{{title}}</h3>
             </div>
+            <span class="material-symbols-outlined" style="color:var(--muted);font-size:28px">mic</span>
           </div>
+          <p style="color:#d1d5db;font-size:14px;line-height:1.75">{{description}}</p>
         </div>
-        {{#_feat_url}}<img class="article-featured-img" src="{{_feat_url}}" alt="{{title}}" />{{/_feat_url}}
-        {{^_feat_url}}<div class="article-featured-img" style="background:linear-gradient(135deg,#111,#222);display:flex;align-items:center;justify-content:center;height:400px"><span class="material-symbols-outlined" style="font-size:72px;color:var(--border)">image</span></div>{{/_feat_url}}
       </div>\`;
-      var headerHtml = render(tpl, d);
-      // Pull quotes
-      var quotesHtml = '';
-      if (d.pull_quotes && d.pull_quotes.length) {
-        d.pull_quotes.forEach(function(q) {
-          var qt = typeof q === 'string' ? q : (q.quote || q);
-          quotesHtml += '<div class="pull-quote">' + Mustache.render('{{val}}', {val: qt}) + '</div>';
-        });
-      }
-      // Action box
-      var actionHtml = '';
-      if (d.action_box && d.action_box.heading) {
-        actionHtml = render(\`<div class="action-box"><h3>{{heading}}</h3><ul>{{#steps}}<li><strong>{{label}}:</strong> {{description}}</li>{{/steps}}</ul></div>\`, d.action_box);
-      }
-      return h('div', {},
-        previewWrap(headerHtml),
-        h('div', { className: 'article-body', style: { maxWidth: '760px', margin: '0 auto', padding: '48px 40px' } },
-          bodyWidget || null,
-          previewWrap(quotesHtml + actionHtml)
-        )
-      );
+      return previewWrap(render(tpl, d));
     }
   }));
 
@@ -391,32 +359,6 @@ ${Object.entries(partialsObj).map(([k, v]) => `    "${k}": \`${v}\``).join(',\n'
           <div class="card-footer">
             <button class="upvote-btn"><span class="material-symbols-outlined" style="font-size:18px">arrow_upward</span><span>{{upvotes}}</span></button>
             <button class="share-btn"><span class="material-symbols-outlined" style="font-size:18px">share</span></button>
-          </div>
-        </div>
-      </div>\`;
-      return previewWrap(render(tpl, d));
-    }
-  }));
-
-  // ═══════════════════════════════════════════════════════════
-  // Collection: Crisis Map Markers
-  // ═══════════════════════════════════════════════════════════
-  CMS.registerPreviewTemplate('crisis_map_markers', createClass({
-    render: function() {
-      var d = entryToJS(this.props.entry);
-      d._is_red = d.marker_type === 'red';
-      d._is_blue = d.marker_type === 'blue';
-      var tpl = \`
-      <div style="padding:20px">
-        <div style="display:inline-block;position:relative">
-          <div class="marker {{#_is_red}}marker-red{{/_is_red}}{{#_is_blue}}marker-blue{{/_is_blue}}" style="position:relative;display:inline-block">
-          </div>
-          <div style="background:var(--surface);border:1px solid var(--border);padding:14px;margin-top:8px;min-width:240px">
-            <div class="tooltip-tag {{#_is_red}}tooltip-tag-red{{/_is_red}}{{#_is_blue}}tooltip-tag-blue{{/_is_blue}}">{{tag}}</div>
-            <div class="tooltip-city" style="font-weight:700;margin:6px 0 4px">{{title}}</div>
-            <div class="tooltip-desc">{{description}}</div>
-            {{#rent_spike}}<div style="font-size:18px;font-weight:700;color:var(--info);margin-top:6px">{{rent_spike}}</div>{{/rent_spike}}
-            <div style="font-size:11px;color:var(--muted);margin-top:8px">Position: top {{pos_top}}% · left {{pos_left}}%</div>
           </div>
         </div>
       </div>\`;
@@ -563,7 +505,6 @@ function build() {
     journal: readCollection('journal'),
     templates: readCollection('templates'),
     wall_posts: readCollection('wall_posts'),
-    crisis_map_markers: readCollection('crisis_map_markers'),
   };
 
   // 2. Computed helpers for Mustache
@@ -574,20 +515,17 @@ function build() {
   data.featured_story = data.stories.find((s: any) => s.featured) || data.stories[0] || null;
   data.regular_stories = data.stories.filter((s: any) => s !== data.featured_story);
 
-  // First journal article for the journal page
-  data.latest_journal = data.journal[0] || null;
-  if (data.latest_journal && data.latest_journal._body) {
-    data.latest_journal.rendered_body = data.latest_journal._body;
-  }
-
-  // Map markers by type
-  data.red_markers = (data.crisis_map_markers || []).filter((m: any) => m.marker_type === 'red');
-  data.blue_markers = (data.crisis_map_markers || []).filter((m: any) => m.marker_type === 'blue');
+  // Helplines by category
+  data.legal_helplines = (data.helplines || []).filter((h: any) => h.category !== 'mental_health');
+  data.mental_health_helplines = (data.helplines || []).filter((h: any) => h.category === 'mental_health');
+  data.has_legal_helplines = data.legal_helplines.length > 0;
+  data.has_mental_health_helplines = data.mental_health_helplines.length > 0;
 
   // Wall posts: separate urgent vs normal
   data.urgent_posts = (data.wall_posts || []).filter((p: any) => p.urgent);
   data.normal_posts = (data.wall_posts || []).filter((p: any) => !p.urgent);
   data.all_wall_posts = [...data.urgent_posts, ...data.normal_posts];
+  data.has_community_posts = (data.wall_posts || []).some((p: any) => p.community);
 
   // State laws: serialize as JSON for the JS state widget
   data.state_laws_json = JSON.stringify(data.state_laws || []);
@@ -607,7 +545,6 @@ function build() {
   data.has_templates = data.templates.length > 0;
   data.has_wall_posts = data.wall_posts.length > 0;
   data.has_helplines = data.helplines.length > 0;
-  data.has_markers = data.crisis_map_markers.length > 0;
   data.has_emergency_banner = data.emergency_banner && data.emergency_banner.visible !== false;
   data.has_crisis_contacts = data.crisis_panel && data.crisis_panel.contacts && data.crisis_panel.contacts.length > 0;
 

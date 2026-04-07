@@ -1,21 +1,31 @@
 ---
-title: "New Eviction Moratorium Passed: What Renters Need to Know"
-eyebrow: "Policy Update · October 12, 2023"
-date: 2023-10-12T00:00:00.000Z
-author:
-  name: "Priya Sharma"
-  role: "Lead Legal Advocate, Rent Without Fear"
-pull_quotes:
-  - "We are no longer asking for basic decency; we are mandating it. This legislation shifts the balance of power back to the communities that actually keep this city running."
 action_box:
-  heading: "Immediate Action Steps"
+  heading: Immediate Action Steps
   steps:
-    - label: "Review your current lease"
-      description: "Identify your current security deposit amount. If it exceeds one month's rent, send a formal request for rent credit."
-    - label: "Document everything"
-      description: "If you are currently facing an eviction notice without a stated 'just cause', it is likely now invalid. Do not self-evict."
-    - label: "Use the Toolkit"
-      description: "Download our updated Notice to Vacate Response template, which now cites the new legislation."
+    - label: Review your current lease
+      description: Identify your current security deposit amount. If it exceeds one
+        month's rent, send a formal request for rent credit.
+    - label: Document everything
+      description: If you are currently facing an eviction notice without a stated
+        'just cause', it is likely now invalid. Do not self-evict.
+    - label: Use the Toolkit
+      description: Download our updated Notice to Vacate Response template, which now
+        cites the new legislation.
+eyebrow: Policy Update · October 12, 2023
+author:
+  name: Priya Sharma
+  role: Lead Legal Advocate, Rent Without Fear
+title: We are recording conversations with renters across India. Their
+  experiences will be published here.
+tag: Testimonials coming soon
+description: Real people, real conversations, real experiences. The problem is
+  bigger than we think.
+date: 2023-10-12T00:00:00.000Z
+order: -1
+pull_quotes:
+  - We are no longer asking for basic decency; we are mandating it. This
+    legislation shifts the balance of power back to the communities that
+    actually keep this city running.
 ---
 
 In a landmark decision late Tuesday evening, the city council voted 8-3 to pass the Emergency Tenant Protection Act of 2023. This sweeping legislation introduces an immediate 90-day moratorium on all "no-fault" evictions and caps security deposits at one month's rent across all urban districts.

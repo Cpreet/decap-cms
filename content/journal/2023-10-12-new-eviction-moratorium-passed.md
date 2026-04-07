@@ -21,7 +21,7 @@ tag: Testimonials coming soon
 description: Real people, real conversations, real experiences. The problem is
   bigger than we think.
 date: 2023-10-12T00:00:00.000Z
-order: -1
+order: 0
 pull_quotes:
   - We are no longer asking for basic decency; we are mandating it. This
     legislation shifts the balance of power back to the communities that

@@ -1,6 +1,6 @@
 ---
-title: "The Crisis Map"
-description: "Interactive data visualisation of eviction hotspots and rent hikes across urban India."
+title: "Updates"
+description: "News, events, and initiatives from Rent Without Fear — campaign milestones, community actions, and everything happening in the fight for renter rights in India."
 icon: "map"
 cell_number: "04"
 link_page: "map"

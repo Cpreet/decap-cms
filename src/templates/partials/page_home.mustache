@@ -42,20 +42,10 @@
         </nav>
         {{/has_nav_grid}}
 
-        <!-- Emergency Banner -->
-        {{#has_emergency_banner}}
-        <div class="emergency-banner">
-            <div>
-                <strong>{{emergency_banner.title}}</strong>
-                <p>{{emergency_banner.description}}</p>
-            </div>
-            <button class="btn-primary" onclick="showPage('{{emergency_banner.button_page}}')">{{emergency_banner.button_text}}</button>
-        </div>
-        {{/has_emergency_banner}}
     </main>
 
     <footer>
-        <p>{{settings.footer_text}}<br />For free legal aid, call NALSA helpline: <strong>{{settings.nalsa_helpline}}</strong></p>
+        <p>{{settings.footer_text}}</p>
         <div style="display:flex;gap:20px;flex-wrap:wrap">
             <a onclick="showPage('rights')">Know Your Rights</a>
             <a onclick="showPage('wall')">The Wall</a>

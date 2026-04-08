@@ -201,11 +201,19 @@ collections:
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Featured Image", name: "image", widget: "image", required: false }
       - { label: "Placeholder Icon", name: "placeholder_icon", widget: "string", required: false, hint: "Material Symbol fallback if no image, e.g. mosque, visibility_off" }
+      - label: "Section"
+        name: "section"
+        widget: "select"
+        options:
+          - { label: "Stories", value: "stories" }
+          - { label: "Research & Reports", value: "research" }
+        default: "stories"
       - label: "Tag"
         name: "tag"
         widget: "select"
         options:
           - "Discrimination"
+          - "Documentary"
           - "Eviction"
           - "Harassment"
           - "Legal Aid"

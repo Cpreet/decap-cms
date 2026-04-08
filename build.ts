@@ -511,9 +511,16 @@ function build() {
   // Duplicate statistics for infinite ticker scroll
   data.statistics_doubled = [...data.statistics, ...data.statistics];
 
-  // Separate featured vs regular stories
-  data.featured_story = data.stories.find((s: any) => s.featured) || data.stories[0] || null;
-  data.regular_stories = data.stories.filter((s: any) => s !== data.featured_story);
+  // Add isTagDanger helper for mustache rendering
+  data.stories.forEach((s: any) => { s.isTagDanger = s.tag_style === 'danger'; });
+
+  // Separate stories vs research, then featured vs regular
+  const storyItems = data.stories.filter((s: any) => s.section !== 'research');
+  const researchItems = data.stories.filter((s: any) => s.section === 'research');
+  data.featured_story = storyItems.find((s: any) => s.featured) || storyItems[0] || null;
+  data.regular_stories = storyItems.filter((s: any) => s !== data.featured_story);
+  data.research_stories = researchItems;
+  data.has_research = researchItems.length > 0;
 
   // Helplines by category
   data.legal_helplines = (data.helplines || []).filter((h: any) => h.category !== 'mental_health');

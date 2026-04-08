@@ -16,7 +16,7 @@
             </div>
             {{/image}}
             <div class="story-content">
-                <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}} {{#city}}&middot; {{city}}{{/city}}</div>
+                <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}} &middot; {{city}}</div>
                 <h3>{{title}}</h3>
                 <p>{{excerpt}}</p>
                 <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span>&rarr; {{link_action}}</span>{{/link_action}}</div>
@@ -35,7 +35,7 @@
             </div>
             {{/image}}
             <div class="story-content">
-                <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}} {{#city}}&middot; {{city}}{{/city}}</div>
+                <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}} &middot; {{city}}</div>
                 <h3>{{title}}</h3>
                 <p>{{excerpt}}</p>
                 <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span>&rarr; {{link_action}}</span>{{/link_action}}</div>
@@ -43,6 +43,26 @@
         </a>
         {{/regular_stories}}
     </div>
+
+    {{#has_research}}
+    <div class="stories-hero" style="padding-top:40px;border-top:1px solid var(--border);border-bottom:none">
+        <h1 style="font-size:clamp(24px,3vw,40px);margin-bottom:12px">Research &amp; Reports</h1>
+        <p style="color:var(--muted);font-size:15px;max-width:580px;line-height:1.7">Academic and advocacy research on housing discrimination in India.</p>
+    </div>
+    <div class="stories-grid" style="padding-top:0">
+        {{#research_stories}}
+        <a class="story-card" {{#url}}href="{{url}}" target="_blank"{{/url}} style="text-decoration:none;color:var(--text)">
+            <div class="story-content" style="padding:24px">
+                <div class="story-tag">{{tag}} &middot; {{city}}</div>
+                <h3>{{title}}</h3>
+                <p>{{excerpt}}</p>
+                <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span>&rarr; {{link_action}}</span>{{/link_action}}</div>
+            </div>
+        </a>
+        {{/research_stories}}
+    </div>
+    {{/has_research}}
+
     <div class="stories-footer">
         <button class="btn-primary" onclick="showToast('Story submission form coming soon!')">Share Your Story</button>
     </div>

@@ -5,10 +5,12 @@ sidebar_label: "Rental Agreements"
 anchor_id: "agreement"
 order: 5
 cards:
-  - title: "Written agreement is essential"
-    body: "Always get a written rental agreement specifying: rent amount, deposit amount, tenure, maintenance responsibilities, notice period, and rent increase terms. Agreements over 11 months must be registered at the local Sub-Registrar's office. Without a registered agreement, you have very limited legal recourse."
-    legal_ref: "Registration Act, 1908"
-  - title: "Rent cannot be increased arbitrarily"
-    body: "Your landlord cannot increase rent mid-tenancy without your consent, unless it's specified in the agreement. Annual increases of 5-8% are common practice. Any hike must come with prior written notice. If a landlord demands a sudden, large rent increase without basis, you have the right to refuse and stay."
-    legal_ref: "State Rent Control Acts"
+  - title: "Rent Agreement Laws in India"
+    body: "A comprehensive guide to what Indian law requires in a rental agreement — deposit limits, notice periods, registration rules, and what happens when agreements are broken."
+    legal_ref: "NoBroker — Rent Agreement Laws in India"
+    source_url: "https://www.nobroker.in/blog/rent-agreement-laws-in-india/"
+  - title: "Create a rental agreement online"
+    body: "Generate a legally valid rental agreement online. Always get it in writing and — if the tenancy is over 11 months — ensure it is registered."
+    legal_ref: "NoBroker — Create Rental Agreement"
+    source_url: "https://www.nobroker.in/rental-agreement"
 ---

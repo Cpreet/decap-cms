@@ -5,27 +5,14 @@ function renderStateWidget(containerId) {
     const c = document.getElementById(containerId);
     if (!c) return;
 
-    // Normalise CMS field names to the widget's expected shape
-    // CMS uses: state_name, ok(bool), text  →  widget uses: name, ok, t
-    const normalised = (statesData || []).map(s => ({
-        name: s.state_name || s.name || '',
-        act: s.act || '',
+    const states = (statesData || []).map(s => ({
+        name: s.state_name || '',
         status: s.status || 'old',
-        deposit: s.deposit || '',
-        notice: s.notice || '',
-        authority: s.authority || '',
-        tags: s.tags || [],
-        rights: (s.rights || []).map(r => ({
-            ok: r.ok !== undefined ? r.ok : true,
-            t: r.text || r.t || ''
-        })),
-        link: s.link || '',
-        lt: s.link_text || s.lt || 'Read more'
+        excerpt: s.excerpt || '',
+        links: (s.links || []).map(l => ({ text: l.text || 'Read more', url: l.url || '' }))
     }));
 
-    // Store normalised data globally for filter/tab functions
-    window._swData = window._swData || {};
-    window._swData[containerId] = normalised;
+    const bInfo = s => s === 'mta' ? ['sw-badge-mta', 'MTA adopted'] : s === 'old' ? ['sw-badge-old', 'Older act'] : ['sw-badge-partial', 'In transition'];
 
     c.innerHTML = `
     <p class="sw-intro">India has no single national rent law. Every state has its own Act. Find yours below — in plain language.</p>
@@ -34,70 +21,17 @@ function renderStateWidget(containerId) {
       <div class="sw-legend-item"><div class="sw-dot" style="background:#fbbf24"></div> Older act</div>
       <div class="sw-legend-item"><div class="sw-dot" style="background:#60a5fa"></div> In transition</div>
     </div>
-    <input class="sw-search" type="text" placeholder="Search your state..." id="${containerId}-search" oninput="filterSW('${containerId}')"/>
-    <div class="sw-tabs">
-      <div class="sw-tab active" onclick="tabSW('${containerId}','all',this)">All states</div>
-      <div class="sw-tab" onclick="tabSW('${containerId}','mta',this)">MTA adopted</div>
-      <div class="sw-tab" onclick="tabSW('${containerId}','old',this)">Older acts</div>
-      <div class="sw-tab" onclick="tabSW('${containerId}','partial',this)">In transition</div>
-    </div>
-    <div id="${containerId}-list"></div>
-  `;
-    renderSWList(containerId, normalised);
-}
-
-function renderSWList(cid, list) {
-    const el = document.getElementById(cid + '-list');
-    if (!el) return;
-    if (!list.length) { el.innerHTML = '<div class="sw-no-results">No states found.</div>'; return; }
-    el.innerHTML = list.map((s, i) => {
-        const bClass = s.status === 'mta' ? 'sw-badge-mta' : s.status === 'old' ? 'sw-badge-old' : 'sw-badge-partial';
-        const bText = s.status === 'mta' ? 'MTA adopted' : s.status === 'old' ? 'Older act' : 'In transition';
+    <div class="sw-grid">${states.map(s => {
+        const [bc, bt] = bInfo(s.status);
         return `<div class="sw-card">
-      <div class="sw-card-header" onclick="toggleSW('${cid}-${i}')">
-        <div><div class="sw-state-name">${s.name}</div><div class="sw-state-act">${s.act}</div></div>
-        <div class="sw-header-right"><span class="sw-badge ${bClass}">${bText}</span><span class="sw-chevron" id="sc-${cid}-${i}">▼</span></div>
-      </div>
-      <div class="sw-body" id="sb-${cid}-${i}">
-        <div class="sw-grid">
-          <div class="sw-metric"><div class="sw-metric-label">Max deposit</div><div class="sw-metric-value">${s.deposit}</div></div>
-          <div class="sw-metric"><div class="sw-metric-label">Eviction notice</div><div class="sw-metric-value">${s.notice}</div></div>
+        <div class="sw-card-header">
+          <span class="sw-state-name">${s.name}</span>
+          <span class="sw-badge ${bc}">${bt}</span>
         </div>
-        <div class="sw-metric" style="margin-bottom:10px"><div class="sw-metric-label">Dispute forum</div><div class="sw-metric-value">${s.authority}</div></div>
-        <div class="sw-pills">${(s.tags || []).map(t => `<span class="sw-pill">${t}</span>`).join('')}</div>
-        <div class="sw-rights-label">Your rights</div>
-        ${(s.rights || []).map(r => `<div class="sw-right"><span class="${r.ok ? 'sw-ok' : 'sw-warn'}">${r.ok ? '✓' : '!'}</span><span>${r.t}</span></div>`).join('')}
-        <a class="sw-link" href="${s.link}" target="_blank">${s.lt} →</a>
-      </div>
-    </div>`;
-    }).join('');
-}
-
-function toggleSW(id) {
-    const b = document.getElementById('sb-' + id);
-    const c = document.getElementById('sc-' + id);
-    if (b) b.classList.toggle('open');
-    if (c) c.classList.toggle('open');
-}
-
-window._swTabs = {};
-function tabSW(cid, tab, el) {
-    window._swTabs[cid] = tab;
-    el.closest('.sw-tabs').querySelectorAll('.sw-tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    filterSW(cid);
-}
-
-function filterSW(cid) {
-    const q = (document.getElementById(cid + '-search') || {}).value || '';
-    const tab = window._swTabs[cid] || 'all';
-    const data = (window._swData && window._swData[cid]) || [];
-    const list = data.filter(s => {
-        const mt = tab === 'all' || s.status === tab;
-        const ms = !q || s.name.toLowerCase().includes(q.toLowerCase()) || s.act.toLowerCase().includes(q.toLowerCase());
-        return mt && ms;
-    });
-    renderSWList(cid, list);
+        <p class="sw-excerpt">${s.excerpt}</p>
+        <div class="sw-links">${s.links.map(l => `<a class="sw-link" href="${l.url}" target="_blank">${l.text} &rarr;</a>`).join('')}</div>
+      </div>`;
+    }).join('')}</div>`;
 }
 
 // ===================== PAGE ROUTING =====================

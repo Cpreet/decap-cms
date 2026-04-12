@@ -1,6 +1,7 @@
 ---
 title: "India: Why Women Who Live Alone Are Never Left Alone"
 excerpt: "DW reporting on the harassment, surveillance, and moral policing that single women face in Indian rental housing."
+image: "https://static.dw.com/image/74779090_1004.webp"
 placeholder_icon: "person"
 tag: "Discrimination"
 tag_style: "default"

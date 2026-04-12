@@ -1,25 +1,8 @@
 ---
 state_name: "Maharashtra"
-act: "Maharashtra Rent Control Act, 1999 + MTA alignment"
 status: "partial"
-deposit: "2 months (residential) under MTA"
-notice: "30 days written notice; court order required"
-authority: "Rent Authority / Court of Small Causes (Mumbai)"
-tags:
-  - "RERA anti-discrimination clause"
-  - "MTA aligning"
-  - "Strong protections"
-rights:
-  - ok: true
-    text: "RERA anti-discrimination clause: landlords cannot refuse based on religion, caste, gender or marital status"
-  - ok: true
-    text: "No sudden eviction — 30-day written notice + court process mandatory"
-  - ok: true
-    text: "Essential services cannot be cut off"
-  - ok: true
-    text: "Security deposit moving toward 2-month cap"
-  - ok: true
-    text: "Can file complaint with Rent Authority or Court of Small Causes"
-link: "https://maharera.mahaonline.gov.in"
-link_text: "Maharashtra RERA portal"
+excerpt: "Governed by the Maharashtra Rent Control Act, 1999 with MTA alignment underway. RERA includes an anti-discrimination clause — landlords cannot refuse tenants based on religion, caste, gender or marital status. No sudden eviction allowed: 30-day written notice and court process are mandatory. Essential services cannot be cut off. Security deposit is moving toward a 2-month cap. Disputes can be filed with the Rent Authority or Court of Small Causes (Mumbai)."
+links:
+  - text: "Maharashtra RERA portal"
+    url: "https://maharera.mahaonline.gov.in"
 ---

@@ -216,26 +216,12 @@ ${Object.entries(partialsObj).map(([k, v]) => `    "${k}": \`${v}\``).join(',\n'
       <div style="padding:20px">
         <div class="sw-card">
           <div class="sw-card-header">
-            <div>
-              <div class="sw-state-name">{{state_name}}</div>
-              <div class="sw-state-act">{{act}}</div>
-            </div>
-            <div class="sw-header-right">
-              <span class="sw-badge {{_badge_class}}">{{_badge_text}}</span>
-            </div>
+            <span class="sw-state-name">{{state_name}}</span>
+            <span class="sw-badge {{_badge_class}}">{{_badge_text}}</span>
           </div>
-          <div class="sw-body" style="display:block">
-            <div class="sw-grid">
-              <div class="sw-metric"><div class="sw-metric-label">Max deposit</div><div class="sw-metric-value">{{deposit}}</div></div>
-              <div class="sw-metric"><div class="sw-metric-label">Eviction notice</div><div class="sw-metric-value">{{notice}}</div></div>
-            </div>
-            <div class="sw-metric" style="margin-bottom:10px"><div class="sw-metric-label">Dispute forum</div><div class="sw-metric-value">{{authority}}</div></div>
-            <div class="sw-pills">{{#tags}}<span class="sw-pill">{{.}}</span>{{/tags}}</div>
-            <div class="sw-rights-label">Your rights</div>
-            {{#rights}}
-            <div class="sw-right"><span class="{{#ok}}sw-ok{{/ok}}{{^ok}}sw-warn{{/ok}}">{{#ok}}✓{{/ok}}{{^ok}}!{{/ok}}</span><span>{{text}}</span></div>
-            {{/rights}}
-            {{#link}}<a class="sw-link" href="{{link}}">{{link_text}} →</a>{{/link}}
+          <p class="sw-excerpt">{{excerpt}}</p>
+          <div class="sw-links">
+            {{#links}}<a class="sw-link" href="{{url}}">{{text}} →</a>{{/links}}
           </div>
         </div>
       </div>\`;

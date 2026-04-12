@@ -1,6 +1,7 @@
 ---
 title: "The Unwritten Rules of Renting in India for Queer People and Muslims"
 excerpt: "What landlords won't say out loud — and what renters have learned to read between the lines."
+image: "https://therevealer.org/wp-content/uploads/2025/02/WhatsApp-Image-2025-01-06-at-20.47.57-1280x600-1.jpg"
 placeholder_icon: "article"
 tag: "Discrimination"
 tag_style: "danger"

@@ -135,7 +135,6 @@ collections:
     identifier_field: "state_name"
     fields:
       - { label: "State Name", name: "state_name", widget: "string" }
-      - { label: "Act Name", name: "act", widget: "string" }
       - label: "Status"
         name: "status"
         widget: "select"
@@ -143,21 +142,13 @@ collections:
           - { label: "MTA Adopted", value: "mta" }
           - { label: "Older Act", value: "old" }
           - { label: "In Transition / Partial", value: "partial" }
-      - { label: "Security Deposit Info", name: "deposit", widget: "string" }
-      - { label: "Notice Period", name: "notice", widget: "string" }
-      - { label: "Authority", name: "authority", widget: "string" }
-      - label: "Tags"
-        name: "tags"
-        widget: "list"
-        field: { label: "Tag", name: "tag", widget: "string" }
-      - label: "Rights & Warnings"
-        name: "rights"
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Plain-language explainer of this state's rent laws, exceptions, and warnings" }
+      - label: "Links"
+        name: "links"
         widget: "list"
         fields:
-          - { label: "Is Positive (green check)?", name: "ok", widget: "boolean", default: true }
-          - { label: "Text", name: "text", widget: "text" }
-      - { label: "External Link URL", name: "link", widget: "string", required: false }
-      - { label: "Link Text", name: "link_text", widget: "string", required: false }
+          - { label: "Link Text", name: "text", widget: "string" }
+          - { label: "URL", name: "url", widget: "string" }
 
   # =====================================================
   # Helplines & Resources
@@ -198,7 +189,7 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Excerpt", name: "excerpt", widget: "string" }
       - { label: "Featured Image", name: "image", widget: "image", required: false }
       - { label: "Placeholder Icon", name: "placeholder_icon", widget: "string", required: false, hint: "Material Symbol fallback if no image, e.g. mosque, visibility_off" }
       - label: "Section"
@@ -294,4 +285,3 @@ collections:
       - { label: "Urgent", name: "urgent", widget: "boolean", default: false }
       - { label: "Upvotes", name: "upvotes", widget: "number", value_type: "int", default: 0 }
       - { label: "Community Post", name: "community", widget: "boolean", default: false, hint: "Check if this is a real community submission (not an illustrative example)" }
-

@@ -1,25 +1,8 @@
 ---
 state_name: "Punjab & Haryana"
-act: "Punjab Urban Rent Restriction Act, 1949 / Haryana Urban Act, 1973"
 status: "old"
-deposit: "2–3 months typical; no formal cap"
-notice: "15 days (monthly); Rent Controller order required"
-authority: "Rent Controller"
-tags:
-  - "Separate acts for each state"
-  - "Old framework"
-  - "No MTA yet"
-rights:
-  - ok: true
-    text: "Eviction requires Rent Controller order — landlord cannot act unilaterally"
-  - ok: true
-    text: "Written notice mandatory before any proceedings"
-  - ok: true
-    text: "Essential services cannot be cut off"
-  - ok: false
-    text: "No formal deposit cap — negotiate and specify clearly in written agreement"
-  - ok: true
-    text: "Discriminatory landlord or RWA action challengeable under Articles 14 and 15"
-link: "https://www.indiacode.nic.in"
-link_text: "India Code — state acts"
+excerpt: "Punjab is governed by the Urban Rent Restriction Act, 1949; Haryana by the Urban Act, 1973. No MTA adoption yet. Eviction requires a Rent Controller order — landlords cannot act unilaterally. Written notice is mandatory before any proceedings. Essential services cannot be cut off. No formal deposit cap exists — negotiate and specify clearly in a written agreement. Discriminatory landlord or RWA action is challengeable under Articles 14 and 15 of the Constitution."
+links:
+  - text: "India Code — state acts"
+    url: "https://www.indiacode.nic.in"
 ---

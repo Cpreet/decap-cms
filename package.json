@@ -7,12 +7,13 @@
     "dev": "bun build.ts --watch"
   },
   "dependencies": {
-    "mustache": "^4.2.0",
+    "@netlify/blobs": "^10.7.4",
+    "chokidar": "^3.6.0",
+    "glob": "^10.3.10",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
-    "glob": "^10.3.10",
     "marked": "^12.0.0",
-    "chokidar": "^3.6.0"
+    "mustache": "^4.2.0"
   },
   "devDependencies": {
     "@types/bun": "^1.3.11",

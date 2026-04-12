@@ -45,6 +45,11 @@ function showPage(id) {
   if (id === 'rights' && !document.getElementById('state-widget-kyr').innerHTML) {
     renderStateWidget('state-widget-kyr');
   }
+  // Load community wall posts on first visit
+  if (id === 'wall' && !window._wallLoaded) {
+    window._wallLoaded = true;
+    loadWallPosts();
+  }
   // Show floater only on homepage
   const floater = document.getElementById('action-floater');
   if (floater) {
@@ -79,40 +84,140 @@ function filterKYR(q) {
 }
 
 // ===================== WALL FUNCTIONS =====================
-function upvote(btn) {
-  btn.classList.toggle('voted');
-  const num = btn.querySelector('span:last-child');
-  num.textContent = parseInt(num.textContent) + (btn.classList.contains('voted') ? 1 : -1);
+const escapeHTML = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+function votedIds() {
+  try { return JSON.parse(localStorage.getItem('wall_voted') || '[]'); } catch { return []; }
+}
+function setVotedIds(ids) {
+  try { localStorage.setItem('wall_voted', JSON.stringify(ids)); } catch {}
 }
 
-function postWallWarning() {
-  const city = document.getElementById('wall-city').value.trim();
-  const issue = document.getElementById('wall-issue').value;
-  const msg = document.getElementById('wall-msg').value.trim();
-  if (!city || !issue || !msg) { showToast('Please fill in all fields before posting.'); return; }
-  const container = document.getElementById('wall-cards');
-  const labels = { deposit: 'Deposit Withholding', eviction: 'Illegal Eviction', harassment: 'Landlord Harassment', hike: 'Arbitrary Rent Hike', discrimination: 'Discrimination', rwa: 'RWA Discrimination', other: 'Other Violation' };
-  const card = document.createElement('div');
-  card.className = 'wall-card wall-card-normal';
-  card.innerHTML = `
-    <div class="card-location"><span class="material-symbols-outlined" style="font-size:14px">location_on</span> ${city} · just now</div>
-    <div class="card-badge">${labels[issue] || issue}</div>
-    <p>${msg}</p>
+function renderWallPost(p) {
+  const urgent = !!p.urgent;
+  const voted = votedIds().includes(p.id);
+  return `<div class="wall-card ${urgent ? 'wall-card-urgent' : 'wall-card-normal'}" data-id="${p.id}">
+    ${urgent ? '<div class="urgent-badge">Urgent</div>' : ''}
+    <div class="card-location"><span class="material-symbols-outlined" style="font-size:14px">location_on</span> ${escapeHTML(p.location)}</div>
+    <div class="card-badge ${urgent ? 'card-badge-danger' : ''}">${escapeHTML(p.issue_type)}</div>
+    <p>${escapeHTML(p.body)}</p>
     <div class="card-footer">
-      <button class="upvote-btn" onclick="upvote(this)"><span class="material-symbols-outlined" style="font-size:18px">arrow_upward</span><span>0</span></button>
+      <button class="upvote-btn ${voted ? 'voted' : ''}" onclick="upvote(this)"><span class="material-symbols-outlined" style="font-size:18px">arrow_upward</span><span>${p.upvotes || 0}</span></button>
       <button class="share-btn" onclick="showToast('Link copied!')"><span class="material-symbols-outlined" style="font-size:18px">share</span></button>
-    </div>`;
-  container.insertBefore(card, container.firstChild);
-  document.getElementById('wall-city').value = '';
-  document.getElementById('wall-issue').value = '';
-  document.getElementById('wall-msg').value = '';
-  showToast('Warning posted anonymously.');
+    </div>
+  </div>`;
+}
+
+window._wallPosts = [];
+window._wallSort = 'latest';
+
+function sortWallPosts() {
+  const sorted = [...window._wallPosts];
+  if (window._wallSort === 'upvoted') sorted.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
+  else sorted.sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
+  return sorted;
+}
+
+function renderWall() {
+  const container = document.getElementById('wall-cards');
+  if (!container) return;
+  const dynamic = sortWallPosts().map(renderWallPost).join('');
+  // Preserve any server-rendered illustrative cards by appending community posts above them
+  const illustrative = container.querySelectorAll('.wall-card:not([data-id])');
+  container.innerHTML = dynamic + Array.from(illustrative).map(el => el.outerHTML).join('');
+}
+
+async function loadWallPosts() {
+  try {
+    const res = await fetch('/api/wall-posts');
+    if (!res.ok) return;
+    const data = await res.json();
+    window._wallPosts = data.posts || [];
+    renderWall();
+  } catch (e) { /* silent; illustrative cards remain */ }
+}
+
+async function upvote(btn) {
+  const card = btn.closest('.wall-card');
+  const id = card && card.dataset.id;
+  const num = btn.querySelector('span:last-child');
+  if (!id) {
+    // Illustrative/local card — just toggle visually
+    btn.classList.toggle('voted');
+    num.textContent = parseInt(num.textContent) + (btn.classList.contains('voted') ? 1 : -1);
+    return;
+  }
+  const voted = votedIds();
+  const alreadyVoted = voted.includes(id);
+  const delta = alreadyVoted ? -1 : 1;
+  // Optimistic update
+  btn.classList.toggle('voted', !alreadyVoted);
+  num.textContent = Math.max(0, parseInt(num.textContent) + delta);
+  const next = alreadyVoted ? voted.filter(v => v !== id) : [...voted, id];
+  setVotedIds(next);
+  try {
+    const res = await fetch('/api/wall-upvote', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ id, delta }),
+    });
+    if (!res.ok) throw new Error('failed');
+    const data = await res.json();
+    num.textContent = data.upvotes;
+    const post = window._wallPosts.find(p => p.id === id);
+    if (post) post.upvotes = data.upvotes;
+  } catch {
+    // Revert on failure
+    btn.classList.toggle('voted', alreadyVoted);
+    num.textContent = Math.max(0, parseInt(num.textContent) - delta);
+    setVotedIds(voted);
+    showToast('Could not record vote. Try again.');
+  }
+}
+
+async function postWallWarning() {
+  const cityEl = document.getElementById('wall-city');
+  const issueEl = document.getElementById('wall-issue');
+  const msgEl = document.getElementById('wall-msg');
+  const city = cityEl.value.trim();
+  const issue = issueEl.value;
+  const msg = msgEl.value.trim();
+  if (!city || !issue || !msg) { showToast('Please fill in all fields before posting.'); return; }
+
+  const btn = document.querySelector('.form-submit');
+  if (btn) btn.disabled = true;
+  try {
+    const res = await fetch('/api/wall-posts', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ location: city, issue_type: issue, body: msg }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'failed');
+    }
+    const data = await res.json();
+    window._wallPosts.unshift(data.post);
+    cityEl.value = '';
+    issueEl.value = '';
+    msgEl.value = '';
+    renderWall();
+    // Hide the illustrative notice if present
+    const notice = document.querySelector('#page-wall .wall-form + div');
+    if (notice && notice.textContent.includes('illustrative examples')) notice.style.display = 'none';
+    showToast('Warning posted anonymously.');
+  } catch (e) {
+    showToast('Could not post warning. Try again.');
+  } finally {
+    if (btn) btn.disabled = false;
+  }
 }
 
 function sortWall(type, el) {
   document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
-  showToast(type === 'upvoted' ? 'Sorted by most upvoted.' : 'Sorted by latest.');
+  window._wallSort = type;
+  renderWall();
 }
 
 // ===================== TOAST =====================

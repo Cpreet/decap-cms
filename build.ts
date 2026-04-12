@@ -221,7 +221,7 @@ ${Object.entries(partialsObj).map(([k, v]) => `    "${k}": \`${v}\``).join(',\n'
           </div>
           <p class="sw-excerpt">{{excerpt}}</p>
           <div class="sw-links">
-            {{#links}}<a class="sw-link" href="{{url}}">{{text}} →</a>{{/links}}
+            {{#links}}<a class="sw-link" href="{{url}}">{{text}} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a>{{/links}}
           </div>
         </div>
       </div>\`;

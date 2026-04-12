@@ -158,7 +158,17 @@
             flex-direction: column;
             gap: 0;
             background: var(--surface);
-            border-bottom: 1px solid var(--border)
+            border-bottom: 1px solid transparent;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.25s ease, border-bottom-color 0.3s ease
+        }
+
+        .mobile-menu.open {
+            max-height: 500px;
+            opacity: 1;
+            border-bottom-color: var(--border)
         }
 
         .mobile-menu a {
@@ -200,7 +210,7 @@
                 display: block
             }
 
-            .mobile-menu.open {
+            .mobile-menu {
                 display: flex
             }
 
@@ -1661,7 +1671,7 @@
             border: 1px solid var(--border);
             border-top: 2px solid var(--primary);
             padding: 28px;
-            margin: 24px 40px;
+            margin: 24px 0;
             box-shadow: 4px 4px 0 #000
         }
 
@@ -1779,39 +1789,37 @@
         }
 
         .masonry {
-            columns: 1;
-            column-gap: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
             padding: 0 40px 40px
         }
 
         @media(min-width:600px) {
             .masonry {
-                columns: 2
+                grid-template-columns: repeat(2, 1fr)
             }
         }
 
         @media(min-width:900px) {
             .masonry {
-                columns: 3
+                grid-template-columns: repeat(3, 1fr)
             }
         }
 
         @media(min-width:1200px) {
             .masonry {
-                columns: 4
+                grid-template-columns: repeat(4, 1fr)
             }
         }
 
         .wall-card {
-            break-inside: avoid;
-            margin-bottom: 1px;
             border: 1px solid var(--border);
             border-top-width: 2px;
             padding: 16px;
             display: flex;
             flex-direction: column;
             background: var(--surface);
-            margin-bottom: 16px;
             transition: border-color 0.2s;
             position: relative
         }
@@ -1923,18 +1931,29 @@
         .wall-load-more {
             display: flex;
             justify-content: center;
-            padding: 20px 40px 40px
+            padding: 20px 0 40px
         }
 
         @media(max-width:600px) {
 
-            .wall-hero,
-            .wall-form,
-            .wall-sort,
-            .masonry,
-            .wall-load-more {
+            .wall-hero {
+                padding: 40px 20px 30px
+            }
+
+            .wall-sort {
                 padding-left: 20px;
                 padding-right: 20px
+            }
+
+            .masonry {
+                padding-left: 20px;
+                padding-right: 20px
+            }
+
+            .wall-form,
+            .wall-load-more {
+                padding-left: 0;
+                padding-right: 0
             }
 
             .form-row {
@@ -2025,7 +2044,16 @@
         .action-floater.visible {
             display: flex;
             align-items: flex-start;
-            gap: 0
+            gap: 0;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.25s ease, transform 0.25s ease
+        }
+
+        .action-floater.menu-hidden {
+            opacity: 0;
+            transform: translateY(-8px);
+            pointer-events: none
         }
 
         .floater-split {

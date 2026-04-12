@@ -28,7 +28,7 @@ function renderStateWidget(containerId) {
           <span class="sw-badge ${bc}">${bt}</span>
         </div>
         <p class="sw-excerpt">${s.excerpt}</p>
-        <div class="sw-links">${s.links.map(l => `<a class="sw-link" href="${l.url}" target="_blank">${l.text} &rarr;</a>`).join('')}</div>
+        <div class="sw-links">${s.links.map(l => `<a class="sw-link" href="${l.url}" target="_blank">${l.text} <span class="material-symbols-outlined" style="font-size:inherit;vertical-align:middle">arrow_forward</span></a>`).join('')}</div>
       </div>`;
   }).join('')}</div>`;
 }
@@ -55,7 +55,9 @@ function showPage(id) {
 
 // ===================== MOBILE MENU =====================
 function toggleMenu() {
-  document.getElementById('mobile-menu').classList.toggle('open');
+  const open = document.getElementById('mobile-menu').classList.toggle('open');
+  const floater = document.getElementById('action-floater');
+  if (floater) floater.classList.toggle('menu-hidden', open);
 }
 
 // ===================== KYR SIDEBAR =====================

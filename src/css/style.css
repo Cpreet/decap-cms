@@ -68,33 +68,36 @@
             z-index: 100;
             background: var(--bg);
             border-bottom: 1px solid var(--border);
-            display: flex;
+            height: 10vh;
+            min-height: 72px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            justify-content: space-between;
-            /*padding: 14px 40px;*/
-            /*gap: 16px*/
+            padding: 0 clamp(1rem, 3vw, 2.5rem);
+            font-size: clamp(0.95rem, 1.6vh, 1.1rem)
         }
 
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.6em;
             cursor: pointer;
             text-decoration: none;
             color: var(--text);
-            flex-shrink: 0
+            justify-self: start
         }
 
         .nav-logo svg {
-            width: 48px;
-            height: 48px;
+            height: 5.5vh;
+            min-height: 40px;
+            width: auto;
             color: var(--primary);
             flex-shrink: 0
         }
 
         .nav-logo span {
             font-family: 'Lora', serif;
-            font-size: 18px;
+            font-size: 1.4em;
             font-weight: 700;
             letter-spacing: -0.01em;
             white-space: nowrap
@@ -103,16 +106,14 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 28px;
-            flex: 1;
-            justify-content: center;
-            min-width: 0
+            gap: clamp(1rem, 2.4vw, 1.75rem);
+            justify-self: center
         }
 
         .nav-links a {
             color: var(--muted);
             text-decoration: none;
-            font-size: 12px;
+            font-size: 0.78em;
             font-weight: 600;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -190,11 +191,11 @@
 
         @media(max-width:1100px) {
             .nav-links {
-                gap: 16px
+                gap: clamp(0.75rem, 1.8vw, 1.25rem)
             }
 
             .nav-links a {
-                font-size: 11px;
+                font-size: 0.72em;
                 letter-spacing: 0.06em
             }
         }
@@ -207,7 +208,8 @@
             }
 
             .hamburger {
-                display: block
+                display: block;
+                justify-self: end
             }
 
             .mobile-menu {
@@ -215,38 +217,33 @@
             }
 
             nav {
-                padding: 12px 20px
+                grid-template-columns: 1fr auto;
+                padding: 0 1.25rem
             }
 
             .nav-logo svg {
-                width: 56px;
-                height: 56px
-            }
-
-            .nav-logo span {
-                font-size: 24px
+                height: 6vh;
+                min-height: 48px
             }
 
             .action-floater {
-                top: 84px
+                top: calc(10vh + 0.75rem);
+                left: 1.25rem;
+                right: auto
             }
 
-            .floater-cta {
-                font-size: 8px;
-                padding: 4px 8px;
-                gap: 3px
+            .action-floater.visible {
+                gap: 8px
             }
 
-            .floater-cta .material-symbols-outlined {
-                font-size: 11px
+            .social-fab {
+                width: 32px;
+                height: 32px
             }
 
-            .floater-toggle {
-                width: 20px
-            }
-
-            .floater-toggle .material-symbols-outlined {
-                font-size: 11px
+            .social-fab svg {
+                width: 15px;
+                height: 15px
             }
         }
 
@@ -2058,16 +2055,16 @@
         /* ===== ACTION FLOATER ===== */
         .action-floater {
             position: fixed;
-            top: 75px;
-            left: 48px;
+            top: calc(10vh + 1rem);
+            right: clamp(1rem, 3vw, 2.5rem);
             z-index: 101;
             display: none
         }
 
         .action-floater.visible {
             display: flex;
-            align-items: flex-start;
-            gap: 0;
+            align-items: center;
+            gap: 10px;
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.25s ease, transform 0.25s ease
@@ -2079,110 +2076,26 @@
             pointer-events: none
         }
 
-        .floater-split {
-            display: flex;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            border-radius: 4px;
-            overflow: hidden
-        }
-
-        .floater-cta {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--primary);
-            color: var(--bg);
-            font-family: 'Work Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 7px 14px;
-            border: none;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 0.05em
-        }
-
-        .floater-cta:hover {
-            background: var(--primary-hover, #e0a800)
-        }
-
-        .floater-cta .material-symbols-outlined {
-            font-size: 16px
-        }
-
-        .floater-toggle {
+        .social-fab {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 30px;
-            background: var(--primary);
-            border: none;
-            border-left: 1px solid rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            color: var(--bg);
-            transition: background 0.2s
-        }
-
-        .floater-toggle:hover {
-            background: var(--primary-hover, #e0a800)
-        }
-
-        .floater-toggle .material-symbols-outlined {
-            font-size: 16px;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             transition: transform 0.2s
         }
 
-        .action-floater.open .floater-toggle .material-symbols-outlined {
-            transform: rotate(45deg)
+        .social-fab:hover {
+            transform: scale(1.1)
         }
 
-        .floater-dropdown-wrap {
-            position: relative
+        .social-telegram {
+            background: #0088cc
         }
 
-        .floater-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            margin-top: 4px;
-            display: flex;
-            flex-direction: column;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            min-width: 160px;
-            opacity: 0;
-            transform: translateY(-8px);
-            pointer-events: none;
-            transition: opacity 0.2s, transform 0.2s
-        }
-
-        .action-floater.open .floater-dropdown {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto
-        }
-
-        .floater-dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            font-size: 12px;
-            font-family: 'Work Sans', sans-serif;
-            color: var(--text);
-            text-decoration: none;
-            transition: background 0.15s;
-            white-space: nowrap
-        }
-
-        .floater-dropdown-item:hover {
-            background: var(--border)
-        }
-
-        .floater-dropdown-item svg {
-            flex-shrink: 0
+        .social-instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)
         }

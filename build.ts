@@ -571,6 +571,12 @@ function build() {
     copyDirSync(staticSrc, staticDist);
   }
 
+  // Duplicate favicon.ico at site root for browsers that probe /favicon.ico
+  const faviconSrc = path.join(staticSrc, 'favicon.ico');
+  if (fs.existsSync(faviconSrc)) {
+    fs.copyFileSync(faviconSrc, path.join(DIST_DIR, 'favicon.ico'));
+  }
+
   const elapsed = Date.now() - startTime;
   console.log(`✅ Built in ${elapsed}ms → dist/`);
   console.log(`   index.html  (${(html.length / 1024).toFixed(1)} KB)`);

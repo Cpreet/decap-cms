@@ -337,10 +337,9 @@ ${Object.entries(partialsObj).map(([k, v]) => `    "${k}": \`${v}\``).join(',\n'
       var d = entryToJS(this.props.entry);
       var tpl = \`
       <div style="padding:20px;max-width:400px">
-        <div class="wall-card {{#urgent}}wall-card-urgent{{/urgent}}{{^urgent}}wall-card-normal{{/urgent}}">
-          {{#urgent}}<div class="urgent-badge">Urgent</div>{{/urgent}}
+        <div class="wall-card">
           <div class="card-location"><span class="material-symbols-outlined" style="font-size:14px">location_on</span> {{location}}</div>
-          <div class="card-badge {{#urgent}}card-badge-danger{{/urgent}}">{{issue_type}}</div>
+          <div class="card-badge">{{issue_type}}</div>
           <p>{{body}}</p>
           <div class="card-footer">
             <button class="upvote-btn"><span class="material-symbols-outlined" style="font-size:18px">arrow_upward</span><span>{{upvotes}}</span></button>
@@ -514,10 +513,8 @@ function build() {
   data.has_legal_helplines = data.legal_helplines.length > 0;
   data.has_mental_health_helplines = data.mental_health_helplines.length > 0;
 
-  // Wall posts: separate urgent vs normal
-  data.urgent_posts = (data.wall_posts || []).filter((p: any) => p.urgent);
-  data.normal_posts = (data.wall_posts || []).filter((p: any) => !p.urgent);
-  data.all_wall_posts = [...data.urgent_posts, ...data.normal_posts];
+  // Wall posts: show all illustrative examples
+  data.all_wall_posts = data.wall_posts || [];
   data.has_community_posts = (data.wall_posts || []).some((p: any) => p.community);
 
   // State laws: serialize as JSON for the JS state widget

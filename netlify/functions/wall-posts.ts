@@ -18,7 +18,6 @@ type WallPost = {
   location: string;
   issue_type: string;
   body: string;
-  urgent: boolean;
   upvotes: number;
   created_at: string;
 };
@@ -68,7 +67,6 @@ export default async (req: Request) => {
       location,
       issue_type: ISSUE_LABELS[issueKey],
       body,
-      urgent: issueKey === 'eviction',
       upvotes: 0,
       created_at: new Date().toISOString(),
     };

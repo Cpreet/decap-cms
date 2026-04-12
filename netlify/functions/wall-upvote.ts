@@ -5,7 +5,6 @@ type WallPost = {
   location: string;
   issue_type: string;
   body: string;
-  urgent: boolean;
   upvotes: number;
   created_at: string;
 };

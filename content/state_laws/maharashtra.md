@@ -1,8 +1,9 @@
 ---
-state_name: "Maharashtra"
+state_name: "Maharashtra Rent Control Act 1999"
 status: "partial"
-excerpt: "Governed by the Maharashtra Rent Control Act, 1999 with MTA alignment underway. RERA includes an anti-discrimination clause — landlords cannot refuse tenants based on religion, caste, gender or marital status. No sudden eviction allowed: 30-day written notice and court process are mandatory. Essential services cannot be cut off. Security deposit is moving toward a 2-month cap. Disputes can be filed with the Rent Authority or Court of Small Causes (Mumbai)."
+order: 5
+excerpt: "Maharashtra's 1999 Act protects tenants: eviction only by Competent Authority order on specific grounds. Standard rent is fixed; annual increase is allowed but generally limited to 4%. No statutory security deposit cap. Essential services cannot be disconnected during disputes. Written notice required before legal action. Tenants can deposit rent with Authority if landlord refuses. Disputes resolved by Rent Court. RERA adds anti-discrimination protections for homebuyers/tenants. License agreements common for newer properties."
 links:
   - text: "Maharashtra Rent Control 1999"
-    url: "indiacode.nic.in/handle/123456789/15817"
+    url: "https://indiacode.nic.in/handle/123456789/15817"
 ---

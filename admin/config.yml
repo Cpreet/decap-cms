@@ -142,6 +142,7 @@ collections:
           - { label: "MTA Adopted", value: "mta" }
           - { label: "Older Act", value: "old" }
           - { label: "In Transition / Partial", value: "partial" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", required: false, hint: "Lower numbers sort first" }
       - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Plain-language explainer of this state's rent laws, exceptions, and warnings" }
       - label: "Links"
         name: "links"
@@ -282,6 +283,5 @@ collections:
           - "Other Violation"
       - { label: "Message", name: "body", widget: "text" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Urgent", name: "urgent", widget: "boolean", default: false }
       - { label: "Upvotes", name: "upvotes", widget: "number", value_type: "int", default: 0 }
       - { label: "Community Post", name: "community", widget: "boolean", default: false, hint: "Check if this is a real community submission (not an illustrative example)" }

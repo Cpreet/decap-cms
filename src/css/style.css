@@ -655,6 +655,41 @@
             color: var(--muted)
         }
 
+        .kyr-disclaimer {
+            margin-bottom: 32px;
+            padding: 16px 18px;
+            border: 1px solid var(--border);
+            border-left: 2px solid var(--primary);
+            background: rgba(245, 159, 10, 0.04)
+        }
+
+        .kyr-disclaimer-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text);
+            margin-bottom: 8px
+        }
+
+        .kyr-disclaimer p {
+            font-size: 12px;
+            line-height: 1.7;
+            color: var(--muted);
+            margin: 0
+        }
+
+        .kyr-disclaimer-meta {
+            margin-top: 10px;
+            font-size: 10px;
+            color: var(--muted);
+            font-style: italic;
+            letter-spacing: 0.04em
+        }
+
         .kyr-section {
             margin-bottom: 48px
         }
@@ -1671,8 +1706,20 @@
             border: 1px solid var(--border);
             border-top: 2px solid var(--primary);
             padding: 28px;
-            margin: 24px 0;
+            margin: 24px 40px;
             box-shadow: 4px 4px 0 #000
+        }
+
+        .wall-notice {
+            margin: 0 40px 20px;
+            padding: 12px 16px;
+            border: 1px solid #444;
+            background: rgba(245, 159, 10, 0.07);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--muted)
         }
 
         .form-row {
@@ -1815,7 +1862,7 @@
 
         .wall-card {
             border: 1px solid var(--border);
-            border-top-width: 2px;
+            border-top: 2px solid var(--primary);
             padding: 16px;
             display: flex;
             flex-direction: column;
@@ -1826,27 +1873,6 @@
 
         .wall-card:hover {
             border-color: #555
-        }
-
-        .wall-card-normal {
-            border-top-color: var(--primary)
-        }
-
-        .wall-card-urgent {
-            border-top-color: var(--danger)
-        }
-
-        .urgent-badge {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--danger);
-            color: #fff;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 3px 8px
         }
 
         .card-location {
@@ -1869,12 +1895,6 @@
             padding: 3px 8px;
             margin-bottom: 10px;
             border: 1px solid #444
-        }
-
-        .card-badge-danger {
-            background: rgba(220, 38, 38, 0.15);
-            color: var(--danger);
-            border-color: var(--danger)
         }
 
         .wall-card p {
@@ -1950,7 +1970,6 @@
                 padding-right: 20px
             }
 
-            .wall-form,
             .wall-load-more {
                 padding-left: 0;
                 padding-right: 0
@@ -1961,7 +1980,11 @@
             }
 
             .wall-form {
-                margin: 16px 0
+                margin: 16px 20px
+            }
+
+            .wall-notice {
+                margin: 0 20px 20px
             }
         }
 

@@ -17,6 +17,15 @@
                 <input type="text" placeholder="Search for 'security deposit', 'eviction', 'RWA'..." id="kyr-search-input" oninput="filterKYR(this.value)" />
             </div>
 
+            <div class="kyr-disclaimer">
+                <div class="kyr-disclaimer-title">
+                    <span class="material-symbols-outlined" style="font-size:16px;color:var(--primary)">gavel</span>
+                    Legal Disclaimer
+                </div>
+                <p>This page links to publicly available resources and provides brief summaries for awareness only. It is not legal advice and does not substitute for professional counsel. Laws change and individual circumstances vary — always verify with official sources and consult a qualified lawyer before making tenancy decisions. Rent Without Fear accepts no liability for actions taken based on this content.</p>
+                <div class="kyr-disclaimer-meta">Last verified: April 12, 2026</div>
+            </div>
+
             <!-- Legal Categories -->
             {{#legal_rights}}
             <section id="kyr-{{anchor_id}}" class="kyr-section">
@@ -37,10 +46,7 @@
             <!-- State-wise Laws Widget -->
             <section id="kyr-statelaws" class="kyr-section state-widget-section">
                 <h2>State-wise Rent Laws</h2>
-                <p>The Model Tenancy Act proposes states adopt standardized rental rules: security deposits capped at 2 months' rent (residential), mandatory written agreements registered with Rent Authority, 60-day eviction notice required, and a 3-tier dispute system (Rent Authority <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span> Rent Court <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span> Tribunal). Essential services cannot be disconnected during disputes. Rent revisions limited to 5-7% annually. Landlords cannot refuse renewal without valid grounds. States must notify adoption for these rules to apply locally.
-                <br/>
-                <a class="sw-link" href="https://prsindia.org/billtrack/the-model-tenancy-act-2021">Model Tenancy Act 2021 (PRS Analysis) <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a>
-                </p>
+                <p>India has no single national rent law. Each state has its own Act with different protections, caps, and procedures. Find yours below — in plain language.</p>
                 <div id="state-widget-kyr"></div>
             </section>
         </main>

@@ -94,12 +94,10 @@ function setVotedIds(ids) {
 }
 
 function renderWallPost(p) {
-  const urgent = !!p.urgent;
   const voted = votedIds().includes(p.id);
-  return `<div class="wall-card ${urgent ? 'wall-card-urgent' : 'wall-card-normal'}" data-id="${p.id}">
-    ${urgent ? '<div class="urgent-badge">Urgent</div>' : ''}
+  return `<div class="wall-card" data-id="${p.id}">
     <div class="card-location"><span class="material-symbols-outlined" style="font-size:14px">location_on</span> ${escapeHTML(p.location)}</div>
-    <div class="card-badge ${urgent ? 'card-badge-danger' : ''}">${escapeHTML(p.issue_type)}</div>
+    <div class="card-badge">${escapeHTML(p.issue_type)}</div>
     <p>${escapeHTML(p.body)}</p>
     <div class="card-footer">
       <button class="upvote-btn ${voted ? 'voted' : ''}" onclick="upvote(this)"><span class="material-symbols-outlined" style="font-size:18px">arrow_upward</span><span>${p.upvotes || 0}</span></button>
@@ -203,8 +201,8 @@ async function postWallWarning() {
     msgEl.value = '';
     renderWall();
     // Hide the illustrative notice if present
-    const notice = document.querySelector('#page-wall .wall-form + div');
-    if (notice && notice.textContent.includes('illustrative examples')) notice.style.display = 'none';
+    const notice = document.querySelector('#page-wall .wall-notice');
+    if (notice) notice.style.display = 'none';
     showToast('Warning posted anonymously.');
   } catch (e) {
     showToast('Could not post warning. Try again.');

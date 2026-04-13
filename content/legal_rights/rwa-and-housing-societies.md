@@ -6,7 +6,7 @@ anchor_id: "rwa"
 order: 4
 cards:
   - title: "Can housing societies issue moral or ethical 'social diktats'?"
-    body: "Analysis of where society rules end and constitutional rights begin — and how to push back against discriminatory bye-laws."
+    body: "Analysis of where society rules end and constitutional rights begin."
     legal_ref: "Housing.com — RWA Social Diktats Explained"
     source_url: "https://housing.com/news/can-housing-societies-issue-moral-ethical-social-diktats/"
   - title: "RWAs can't be urban khaps"

@@ -14,11 +14,7 @@ cards:
     legal_ref: "OnlineLegalQuery — Deposit Disputes"
     source_url: "https://onlinelegalquery.com/blog/security-deposit-disputes-rights-of-tenants-duties-of-landlords"
   - title: "Can landlords deduct repair costs from security deposits?"
-    body: "Real case from Bengaluru raising the key legal question — and what the answer actually is."
+    body: "Real case from Bengaluru raising the key legal question."
     legal_ref: "Hindustan Times — Bengaluru Rental Case"
     source_url: "https://www.hindustantimes.com/real-estate/bengaluru-rental-row-raises-key-question-can-landlords-deduct-repair-costs-from-security-deposits-101774371847290.html"
-  - title: "Deposit discussion on Threads"
-    body: "Real community conversation about deposit practices, shared experiences, and pushback tactics."
-    legal_ref: "The Logical Indian — Threads Discussion"
-    source_url: "https://www.threads.com/@thelogicalindian/post/DWG6zAFjOI8"
 ---

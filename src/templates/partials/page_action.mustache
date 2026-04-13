@@ -3,49 +3,89 @@
     <div class="stories-hero" style="border-bottom:1px solid var(--border)">
         <div style="font-size:11px;font-weight:700;color:var(--primary);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px">Support &amp; Resources</div>
         <h1>Get Help Now</h1>
-        <p style="color:var(--muted);font-size:16px;max-width:600px;line-height:1.7">Free legal aid, official complaint bodies, and mental health support. You do not have to face this alone.</p>
+        <p style="color:var(--muted);font-size:16px;max-width:600px;line-height:1.7">Free legal aid, women's helplines, complaint portals, and mental health support. You do not have to face this alone.</p>
     </div>
-    <div style="max-width:960px;margin:0 auto;padding:48px 40px 80px">
-        {{#has_legal_helplines}}
-        <div class="kyr-section-header" style="margin-bottom:28px">
-            <h2 style="font-size:26px;font-weight:700;margin-bottom:6px">Legal Aid &amp; Helplines</h2>
-            <p style="color:var(--muted);font-size:14px">All services below are free or low-cost. If you cannot afford a lawyer, NALSA is your first call.</p>
+    <div class="action-body">
+
+        {{#has_legal_aid_helplines}}
+        <div class="kyr-section-header action-section-header">
+            <h2>Legal Aid</h2>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:48px">
-            {{#legal_helplines}}
+        <div class="action-grid">
+            {{#legal_aid_helplines}}
             <div class="legal-card">
-                <h3 style="font-size:15px">{{title}}</h3>
+                <h3>{{title}}</h3>
                 <p>{{description}}</p>
                 {{#phone}}
-                <div class="legal-tag" style="color:var(--primary);font-family:'Work Sans',sans-serif;font-size:13px">Call: <strong>{{phone}}</strong></div>
+                <div class="legal-tag legal-tag-primary">Call: <strong>{{phone}}</strong></div>
                 {{/phone}}
                 {{#url}}
-                <div class="legal-tag" style="font-family:'Work Sans',sans-serif;font-size:13px"><a href="{{url}}" target="_blank" style="color:var(--primary)">{{url}} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a></div>
+                <div class="legal-tag"><a href="{{url}}" target="_blank" rel="noopener noreferrer">{{url}} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a></div>
                 {{/url}}
             </div>
-            {{/legal_helplines}}
+            {{/legal_aid_helplines}}
         </div>
-        {{/has_legal_helplines}}
+        {{/has_legal_aid_helplines}}
 
-        {{#has_mental_health_helplines}}
-        <div class="kyr-section-header" style="margin-bottom:28px;border-top:1px solid var(--border);padding-top:40px">
-            <h2 style="font-size:26px;font-weight:700;margin-bottom:6px">Mental Health Support</h2>
-            <p style="color:var(--muted);font-size:14px">Losing your home or facing discrimination can be deeply traumatic. You don&rsquo;t have to process this alone.</p>
+        {{#has_women_helplines}}
+        <div class="kyr-section-header action-section-header action-section-break">
+            <h2>Helplines</h2>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
-            {{#mental_health_helplines}}
+        <div class="action-grid">
+            {{#women_helplines}}
             <div class="legal-card">
-                <h3 style="font-size:15px">{{title}}</h3>
+                <h3>{{title}}</h3>
                 <p>{{description}}</p>
                 {{#phone}}
-                <div class="legal-tag" style="color:var(--primary);font-family:'Work Sans',sans-serif;font-size:13px">Call: <strong>{{phone}}</strong></div>
+                <div class="legal-tag legal-tag-primary">Call: <strong>{{phone}}</strong></div>
                 {{/phone}}
                 {{#url}}
-                <div class="legal-tag" style="font-family:'Work Sans',sans-serif;font-size:13px"><a href="{{url}}" target="_blank" style="color:var(--primary)">{{url}} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a></div>
+                <div class="legal-tag"><a href="{{url}}" target="_blank" rel="noopener noreferrer">{{url}} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a></div>
+                {{/url}}
+            </div>
+            {{/women_helplines}}
+        </div>
+        {{/has_women_helplines}}
+
+        {{#has_complaint_portals}}
+        <div class="kyr-section-header action-section-header action-section-break">
+            <h2>Complaint Portals</h2>
+        </div>
+        <div class="action-grid">
+            {{#complaint_portals}}
+            <div class="legal-card">
+                <h3>{{title}}</h3>
+                <p>{{description}}</p>
+                {{#phone}}
+                <div class="legal-tag legal-tag-primary">Call: <strong>{{phone}}</strong></div>
+                {{/phone}}
+                {{#url}}
+                <div class="legal-tag"><a href="{{url}}" target="_blank" rel="noopener noreferrer">{{url}} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a></div>
+                {{/url}}
+            </div>
+            {{/complaint_portals}}
+        </div>
+        {{/has_complaint_portals}}
+
+        {{#has_mental_health_helplines}}
+        <div class="kyr-section-header action-section-header action-section-break">
+            <h2>Mental Health Support</h2>
+        </div>
+        <div class="action-grid">
+            {{#mental_health_helplines}}
+            <div class="legal-card">
+                <h3>{{title}}</h3>
+                <p>{{description}}</p>
+                {{#phone}}
+                <div class="legal-tag legal-tag-primary">Call: <strong>{{phone}}</strong></div>
+                {{/phone}}
+                {{#url}}
+                <div class="legal-tag"><a href="{{url}}" target="_blank" rel="noopener noreferrer">{{url}} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a></div>
                 {{/url}}
             </div>
             {{/mental_health_helplines}}
         </div>
         {{/has_mental_health_helplines}}
+
     </div>
 </div>

@@ -7,30 +7,18 @@ function renderStateWidget(containerId) {
 
   const states = (statesData || []).map(s => ({
     name: s.state_name || '',
-    status: s.status || 'old',
     excerpt: s.excerpt || '',
     links: (s.links || []).map(l => ({ text: l.text || 'Read more', url: l.url || '' }))
   }));
 
-  const bInfo = s => s === 'mta' ? ['sw-badge-mta', 'MTA adopted'] : s === 'old' ? ['sw-badge-old', 'Older act'] : ['sw-badge-partial', 'In transition'];
-
   c.innerHTML = `
-    <div class="sw-legend">
-      <div class="sw-legend-item"><div class="sw-dot" style="background:#4ade80"></div> MTA Adopted</div>
-      <div class="sw-legend-item"><div class="sw-dot" style="background:#fbbf24"></div> Older act</div>
-      <div class="sw-legend-item"><div class="sw-dot" style="background:#60a5fa"></div> In transition</div>
-    </div>
-    <div class="sw-grid">${states.map(s => {
-    const [bc, bt] = bInfo(s.status);
-    return `<div class="sw-card">
+    <div class="sw-grid">${states.map(s => `<div class="sw-card">
         <div class="sw-card-header">
           <span class="sw-state-name">${s.name}</span>
-          <span class="sw-badge ${bc}">${bt}</span>
         </div>
         <p class="sw-excerpt">${s.excerpt}</p>
         <div class="sw-links">${s.links.map(l => `<a class="sw-link" href="${l.url}" target="_blank">${l.text} <span class="material-symbols-outlined" style="font-size:inherit;vertical-align:middle">arrow_forward</span></a>`).join('')}</div>
-      </div>`;
-  }).join('')}</div>`;
+      </div>`).join('')}</div>`;
 }
 
 // ===================== PAGE ROUTING =====================

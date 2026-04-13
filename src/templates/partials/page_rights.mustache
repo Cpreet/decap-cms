@@ -31,13 +31,12 @@
             <section id="kyr-{{anchor_id}}" class="kyr-section">
                 <div class="kyr-section-header">
                     <h2>{{category_title}}</h2>
-                    <p>{{category_description}}</p>
                 </div>
                 {{#cards}}
                 <div class="legal-card">
                     <h3>{{title}}</h3>
                     <p>{{body}}</p>
-                    <div class="legal-tag">{{#source_url}}<span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> <a href="{{source_url}}" target="_blank" style="color:inherit;text-decoration:none">{{legal_ref}} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a>{{/source_url}}{{^source_url}}<span class="material-symbols-outlined" style="font-size:14px">gavel</span> {{legal_ref}}{{/source_url}}</div>
+                    <div class="legal-tag">{{#source_url}}<span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> <a href="{{source_url}}" target="_blank">{{legal_ref}} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a>{{/source_url}}{{^source_url}}<span class="material-symbols-outlined" style="font-size:14px">gavel</span> {{legal_ref}}{{/source_url}}</div>
                 </div>
                 {{/cards}}
             </section>
@@ -46,7 +45,7 @@
             <!-- State-wise Laws Widget -->
             <section id="kyr-statelaws" class="kyr-section state-widget-section">
                 <h2>State-wise Rent Laws</h2>
-                <p>India has no single national rent law. Each state has its own Act with different protections, caps, and procedures. Find yours below — in plain language.</p>
+                <p>India has no single national rent law. Each state has its own Act with different protections, caps, and procedures. Find yours below</p>
                 <div id="state-widget-kyr"></div>
             </section>
         </main>

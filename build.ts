@@ -210,14 +210,11 @@ ${Object.entries(partialsObj).map(([k, v]) => `    "${k}": \`${v}\``).join(',\n'
   CMS.registerPreviewTemplate('state_laws', createClass({
     render: function() {
       var d = entryToJS(this.props.entry);
-      d._badge_class = d.status === 'mta' ? 'sw-badge-mta' : d.status === 'old' ? 'sw-badge-old' : 'sw-badge-partial';
-      d._badge_text = d.status === 'mta' ? 'MTA adopted' : d.status === 'old' ? 'Older act' : 'In transition';
       var tpl = \`
       <div style="padding:20px">
         <div class="sw-card">
           <div class="sw-card-header">
             <span class="sw-state-name">{{state_name}}</span>
-            <span class="sw-badge {{_badge_class}}">{{_badge_text}}</span>
           </div>
           <p class="sw-excerpt">{{excerpt}}</p>
           <div class="sw-links">
@@ -508,9 +505,14 @@ function build() {
   data.has_research = researchItems.length > 0;
 
   // Helplines by category
-  data.legal_helplines = (data.helplines || []).filter((h: any) => h.category !== 'mental_health');
-  data.mental_health_helplines = (data.helplines || []).filter((h: any) => h.category === 'mental_health');
-  data.has_legal_helplines = data.legal_helplines.length > 0;
+  const allHelplines = data.helplines || [];
+  data.legal_aid_helplines = allHelplines.filter((h: any) => !h.category || h.category === 'legal_aid' || h.category === 'legal');
+  data.women_helplines = allHelplines.filter((h: any) => h.category === 'women_helplines');
+  data.complaint_portals = allHelplines.filter((h: any) => h.category === 'complaint_portals');
+  data.mental_health_helplines = allHelplines.filter((h: any) => h.category === 'mental_health');
+  data.has_legal_aid_helplines = data.legal_aid_helplines.length > 0;
+  data.has_women_helplines = data.women_helplines.length > 0;
+  data.has_complaint_portals = data.complaint_portals.length > 0;
   data.has_mental_health_helplines = data.mental_health_helplines.length > 0;
 
   // Wall posts: show all illustrative examples

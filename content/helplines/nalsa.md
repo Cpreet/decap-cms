@@ -1,8 +1,9 @@
 ---
-title: "NALSA Free Legal Aid"
-description: "National Legal Services Authority. Free legal aid for anyone who cannot afford a lawyer."
-contact_type: "phone"
+title: "National Legal Services Authority (NALSA)"
+description: "Free legal aid for anyone who cannot afford a lawyer."
+category: "legal_aid"
+contact_type: "both"
 phone: "15100"
-url: ""
-order: 0
+url: "https://nalsa.gov.in"
+order: 1
 ---

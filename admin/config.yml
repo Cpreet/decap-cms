@@ -111,7 +111,6 @@ collections:
     identifier_field: "category_title"
     fields:
       - { label: "Category Title", name: "category_title", widget: "string", hint: "e.g. Eviction Safeguards, Maintenance & Essential Services" }
-      - { label: "Category Description", name: "category_description", widget: "text" }
       - { label: "Sidebar Label", name: "sidebar_label", widget: "string", hint: "Short name for sidebar navigation" }
       - { label: "Sidebar Anchor ID", name: "anchor_id", widget: "string", hint: "e.g. eviction, services, deposit" }
       - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
@@ -166,9 +165,11 @@ collections:
         name: "category"
         widget: "select"
         options:
-          - { label: "Legal Aid & Helplines", value: "legal" }
+          - { label: "Legal Aid", value: "legal_aid" }
+          - { label: "Helplines for Women", value: "women_helplines" }
+          - { label: "Complaint Portals", value: "complaint_portals" }
           - { label: "Mental Health Support", value: "mental_health" }
-        default: "legal"
+        default: "legal_aid"
       - label: "Contact Type"
         name: "contact_type"
         widget: "select"

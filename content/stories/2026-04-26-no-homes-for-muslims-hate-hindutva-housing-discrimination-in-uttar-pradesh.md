@@ -10,7 +10,7 @@ image: https://img.youtube.com/vi/SBcxC52eDSM/maxresdefault.jpg
 section: stories
 tag: Discrimination
 tag_style: default
-city: Youtube
+city: The Quint
 url: https://www.youtube.com/watch?v=SBcxC52eDSM
 link_action: Watch
 date: 2026-04-27T01:12:00.000+05:30

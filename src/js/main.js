@@ -17,8 +17,9 @@ function renderStateWidget(containerId) {
           <span class="sw-state-name">${s.name}</span>
         </div>
         <p class="sw-excerpt">${s.excerpt}</p>
-        <div class="sw-links">${s.links.map(l => `<a class="sw-link" href="${l.url}" target="_blank">${l.text} <span class="material-symbols-outlined" style="font-size:inherit;vertical-align:middle">arrow_forward</span></a>`).join('')}</div>
+        <div class="sw-links">${s.links.map(l => `<a class="sw-link" href="${l.url}" target="_blank">${l.text} <i data-lucide="arrow-right" style="vertical-align:middle"></i></a>`).join('')}</div>
       </div>`).join('')}</div>`;
+  if (window.lucide) lucide.createIcons();
 }
 
 // ===================== PAGE ROUTING =====================
@@ -84,12 +85,12 @@ function setVotedIds(ids) {
 function renderWallPost(p) {
   const voted = votedIds().includes(p.id);
   return `<div class="wall-card" data-id="${p.id}">
-    <div class="card-location"><span class="material-symbols-outlined" style="font-size:14px">location_on</span> ${escapeHTML(p.location)}</div>
+    <div class="card-location"><i data-lucide="map-pin" style="width:14px;height:14px"></i> ${escapeHTML(p.location)}</div>
     <div class="card-badge">${escapeHTML(p.issue_type)}</div>
     <p>${escapeHTML(p.body)}</p>
     <div class="card-footer">
-      <button class="upvote-btn ${voted ? 'voted' : ''}" onclick="upvote(this)"><span class="material-symbols-outlined" style="font-size:18px">arrow_upward</span><span>${p.upvotes || 0}</span></button>
-      <button class="share-btn" onclick="showToast('Link copied!')"><span class="material-symbols-outlined" style="font-size:18px">share</span></button>
+      <button class="upvote-btn ${voted ? 'voted' : ''}" onclick="upvote(this)"><i data-lucide="arrow-up" style="width:18px;height:18px"></i><span>${p.upvotes || 0}</span></button>
+      <button class="share-btn" onclick="showToast('Link copied!')"><i data-lucide="share-2" style="width:18px;height:18px"></i></button>
     </div>
   </div>`;
 }
@@ -111,6 +112,7 @@ function renderWall() {
   // Preserve any server-rendered illustrative cards by appending community posts above them
   const illustrative = container.querySelectorAll('.wall-card:not([data-id])');
   container.innerHTML = dynamic + Array.from(illustrative).map(el => el.outerHTML).join('');
+  if (window.lucide) lucide.createIcons();
 }
 
 async function loadWallPosts() {

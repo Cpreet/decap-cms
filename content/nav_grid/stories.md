@@ -1,7 +1,7 @@
 ---
 title: "Stories"
-description: "Editorial grid of tenant experiences paired with raw documentary journalism."
-icon: "history_edu"
+description: "Videos, articles and research curated for you. Read. Share. Build community resilience against housing discrimination."
+icon: "scroll-text"
 cell_number: "02"
 link_page: "stories"
 wide: false

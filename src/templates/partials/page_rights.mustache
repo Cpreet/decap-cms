@@ -13,13 +13,13 @@
         <!-- Main Content -->
         <main class="kyr-main">
             <div class="kyr-search">
-                <span class="material-symbols-outlined" style="color:var(--muted);font-size:20px">search</span>
+                <i data-lucide="search" style="color:var(--muted);width:20px;height:20px"></i>
                 <input type="text" placeholder="Search for 'security deposit', 'eviction', 'RWA'..." id="kyr-search-input" oninput="filterKYR(this.value)" />
             </div>
 
             <div class="kyr-disclaimer">
                 <div class="kyr-disclaimer-title">
-                    <span class="material-symbols-outlined" style="font-size:16px;color:var(--primary)">gavel</span>
+                    <i data-lucide="gavel" style="color:var(--primary);width:16px;height:16px"></i>
                     Legal Disclaimer
                 </div>
                 <p>This page links to publicly available resources and provides brief summaries for awareness only. It is not legal advice and does not substitute for professional counsel. Laws change and individual circumstances vary — always verify with official sources and consult a qualified lawyer before making tenancy decisions. Rent Without Fear accepts no liability for actions taken based on this content.</p>
@@ -36,7 +36,7 @@
                 <div class="legal-card">
                     <h3>{{title}}</h3>
                     <p>{{body}}</p>
-                    <div class="legal-tag">{{#source_url}}<span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> <a href="{{source_url}}" target="_blank">{{legal_ref}} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span></a>{{/source_url}}{{^source_url}}<span class="material-symbols-outlined" style="font-size:14px">gavel</span> {{legal_ref}}{{/source_url}}</div>
+                    <div class="legal-tag">{{#source_url}}<i data-lucide="external-link" style="width:14px;height:14px"></i> <a href="{{source_url}}" target="_blank">{{legal_ref}} <i data-lucide="arrow-right" style="vertical-align:middle;width:14px;height:14px"></i></a>{{/source_url}}{{^source_url}}<i data-lucide="gavel" style="width:14px;height:14px"></i> {{legal_ref}}{{/source_url}}</div>
                 </div>
                 {{/cards}}
             </section>

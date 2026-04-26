@@ -1,7 +1,7 @@
 ---
 title: "Testimonials"
-description: "Policy updates, legislative changes, and advocacy news from the field."
-icon: "article"
+description: "Conversations with renters who have faced discrimination, illegal eviction, and landlord harassment."
+icon: "mic"
 cell_number: "05"
 link_page: "journal"
 wide: false

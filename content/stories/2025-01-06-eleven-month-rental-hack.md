@@ -2,7 +2,7 @@
 title: "Why India's Rental Market Runs On An Eleven-Month Hack"
 excerpt: "How a nineteenth-century law, broken courts, and landlord risk aversion created the eleven-month contract — and what it costs India's mobile workforce."
 image: "https://swarajya.gumlet.io/swarajya/2026-04-01/3r1x68w0/download.jpg?w=1200&h=675&auto=format%2Ccompress&fit=max&enlarge=true"
-placeholder_icon: "description"
+placeholder_icon: "file-text"
 tag: "Legal Aid"
 tag_style: "default"
 city: "Swarajya Mag"

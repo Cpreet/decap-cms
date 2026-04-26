@@ -30,7 +30,7 @@
             {{#nav_grid}}
             <a class="grid-cell {{#wide}}grid-cell-wide{{/wide}}" onclick="showPage('{{link_page}}')">
                 <div class="cell-top">
-                    <span class="material-symbols-outlined">{{icon}}</span>
+                    <i data-lucide="{{icon}}"></i>
                     <span class="cell-num">{{cell_number}}</span>
                 </div>
                 <div>
@@ -46,10 +46,5 @@
 
     <footer>
         <p>{{settings.footer_text}}</p>
-        <div style="display:flex;gap:20px;flex-wrap:wrap">
-            <a onclick="showPage('rights')">Know Your Rights</a>
-            <a onclick="showPage('wall')">The Wall</a>
-            <a onclick="showPage('action')">Get Help Now</a>
-        </div>
     </footer>
 </div>

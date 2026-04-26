@@ -32,14 +32,14 @@
         </div>
         <div style="display:flex;justify-content:flex-end">
             <button class="form-submit" onclick="postWallWarning()">
-                <span class="material-symbols-outlined" style="font-size:18px">campaign</span> Post Warning
+                <i data-lucide="megaphone" style="width:18px;height:18px"></i> Post Warning
             </button>
         </div>
     </div>
 
     {{^has_community_posts}}
     <div class="wall-notice">
-        <span class="material-symbols-outlined" style="font-size:16px;color:var(--primary);flex-shrink:0">info</span>
+        <i data-lucide="info" style="color:var(--primary);flex-shrink:0;width:16px;height:16px"></i>
         <span>The warnings below are <strong style="color:var(--text)">illustrative examples</strong> to show how the wall works. Real submissions from the community will appear here once posted.</span>
     </div>
     {{/has_community_posts}}
@@ -56,12 +56,12 @@
     <div class="masonry" id="wall-cards">
         {{#all_wall_posts}}
         <div class="wall-card">
-            <div class="card-location"><span class="material-symbols-outlined" style="font-size:14px">location_on</span> {{location}}</div>
+            <div class="card-location"><i data-lucide="map-pin" style="width:14px;height:14px"></i> {{location}}</div>
             <div class="card-badge">{{issue_type}}</div>
             <p>{{body}}</p>
             <div class="card-footer">
-                <button class="upvote-btn" onclick="upvote(this)"><span class="material-symbols-outlined" style="font-size:18px">arrow_upward</span><span>{{upvotes}}</span></button>
-                <button class="share-btn" onclick="showToast('Link copied!')"><span class="material-symbols-outlined" style="font-size:18px">share</span></button>
+                <button class="upvote-btn" onclick="upvote(this)"><i data-lucide="arrow-up" style="width:18px;height:18px"></i><span>{{upvotes}}</span></button>
+                <button class="share-btn" onclick="showToast('Link copied!')"><i data-lucide="share-2" style="width:18px;height:18px"></i></button>
             </div>
         </div>
         {{/all_wall_posts}}

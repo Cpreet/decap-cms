@@ -14,10 +14,11 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/static/icon-512.png" />
     <meta name="theme-color" content="#F97316" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 
 <body>
@@ -51,6 +52,7 @@
     </script>
     <script src="main.js"></script>
     <script>
+      if (window.lucide) lucide.createIcons();
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", function(user) {
           if (!user) {

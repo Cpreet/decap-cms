@@ -2,7 +2,7 @@
 title: "India's Rental Housing Crisis"
 excerpt: "In-depth video journalism on the systemic exclusion of marginalised renters from housing."
 image: "https://i.ytimg.com/vi/DiBINtKML3w/maxresdefault.jpg"
-placeholder_icon: "play_circle"
+placeholder_icon: "play-circle"
 tag: "Documentary"
 tag_style: "default"
 city: "YouTube"

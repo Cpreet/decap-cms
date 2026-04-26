@@ -35,19 +35,14 @@
             font-family: 'Lora', serif
         }
 
-        .material-symbols-outlined {
-            font-family: 'Material Symbols Outlined';
-            font-weight: normal;
-            font-style: normal;
-            font-size: 24px;
-            line-height: 1;
-            letter-spacing: normal;
-            text-transform: none;
+        [data-lucide],
+        svg.lucide {
             display: inline-block;
-            white-space: nowrap;
-            word-wrap: normal;
-            direction: ltr;
-            -webkit-font-smoothing: antialiased
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+            vertical-align: middle;
+            flex-shrink: 0
         }
 
         /* PAGE SYSTEM */
@@ -474,13 +469,14 @@
             align-items: flex-start
         }
 
-        .grid-cell .material-symbols-outlined {
-            font-size: 36px;
+        .grid-cell svg.lucide {
+            width: 36px;
+            height: 36px;
             color: var(--muted);
             transition: color 0.2s
         }
 
-        .grid-cell:hover .material-symbols-outlined {
+        .grid-cell:hover svg.lucide {
             color: var(--primary)
         }
 
@@ -760,9 +756,9 @@
             text-decoration: underline
         }
 
-        .legal-tag .material-symbols-outlined {
-            font-size: 14px;
-            line-height: 1;
+        .legal-tag svg.lucide {
+            width: 14px;
+            height: 14px;
             flex-shrink: 0
         }
 
@@ -1287,9 +1283,10 @@
             line-height: 1.65
         }
 
-        .template-card .material-symbols-outlined {
+        .template-card svg.lucide {
             color: #999;
-            font-size: 28px;
+            width: 28px;
+            height: 28px;
             flex-shrink: 0
         }
 
@@ -1325,8 +1322,9 @@
             margin-bottom: 28px
         }
 
-        .crisis-icon .material-symbols-outlined {
-            font-size: 40px;
+        .crisis-icon svg.lucide {
+            width: 40px;
+            height: 40px;
             color: #fff
         }
 
@@ -2063,9 +2061,10 @@
             opacity: 1
         }
 
-        .toast .material-symbols-outlined {
+        .toast svg.lucide {
             color: var(--primary);
-            font-size: 20px
+            width: 20px;
+            height: 20px
         }
 
         /* ===== ACTION FLOATER ===== */

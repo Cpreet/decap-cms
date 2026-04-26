@@ -12,14 +12,14 @@
             {{/image}}
             {{^image}}
             <div class="story-img" style="background:linear-gradient(135deg,#1a1a1a,#333);display:flex;align-items:center;justify-content:center;aspect-ratio:16/9">
-                <span class="material-symbols-outlined" style="font-size:64px;color:var(--border)">{{#placeholder_icon}}{{placeholder_icon}}{{/placeholder_icon}}{{^placeholder_icon}}image{{/placeholder_icon}}</span>
+                <i data-lucide="{{#placeholder_icon}}{{placeholder_icon}}{{/placeholder_icon}}{{^placeholder_icon}}image{{/placeholder_icon}}" style="color:var(--border);width:64px;height:64px"></i>
             </div>
             {{/image}}
             <div class="story-content">
                 <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}} &middot; {{city}}</div>
                 <h3>{{title}}</h3>
                 <p>{{excerpt}}</p>
-                <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span> {{link_action}}</span>{{/link_action}}</div>
+                <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span><i data-lucide="arrow-right" style="vertical-align:middle;width:14px;height:14px"></i> {{link_action}}</span>{{/link_action}}</div>
             </div>
         </a>
         {{/featured_story}}
@@ -31,14 +31,14 @@
             {{/image}}
             {{^image}}
             <div class="story-img" style="background:linear-gradient(135deg,#1a1a1a,#2a2a2a);display:flex;align-items:center;justify-content:center;aspect-ratio:16/10">
-                <span class="material-symbols-outlined" style="font-size:40px;color:var(--border)">{{#placeholder_icon}}{{placeholder_icon}}{{/placeholder_icon}}{{^placeholder_icon}}image{{/placeholder_icon}}</span>
+                <i data-lucide="{{#placeholder_icon}}{{placeholder_icon}}{{/placeholder_icon}}{{^placeholder_icon}}image{{/placeholder_icon}}" style="color:var(--border);width:40px;height:40px"></i>
             </div>
             {{/image}}
             <div class="story-content">
                 <div class="story-tag {{#tag_style}}{{#isTagDanger}}story-tag-danger{{/isTagDanger}}{{/tag_style}}">{{tag}} &middot; {{city}}</div>
                 <h3>{{title}}</h3>
                 <p>{{excerpt}}</p>
-                <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span> {{link_action}}</span>{{/link_action}}</div>
+                <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span><i data-lucide="arrow-right" style="vertical-align:middle;width:14px;height:14px"></i> {{link_action}}</span>{{/link_action}}</div>
             </div>
         </a>
         {{/regular_stories}}
@@ -56,7 +56,7 @@
                 <div class="story-tag">{{tag}} &middot; {{city}}</div>
                 <h3>{{title}}</h3>
                 <p>{{excerpt}}</p>
-                <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">arrow_forward</span> {{link_action}}</span>{{/link_action}}</div>
+                <div class="story-meta"><span>{{city}}</span>{{#link_action}}<span><i data-lucide="arrow-right" style="vertical-align:middle;width:14px;height:14px"></i> {{link_action}}</span>{{/link_action}}</div>
             </div>
         </a>
         {{/research_stories}}

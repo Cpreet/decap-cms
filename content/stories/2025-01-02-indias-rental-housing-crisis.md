@@ -1,7 +1,10 @@
 ---
-title: India's Rental Housing Crisis
-excerpt: In-depth video journalism on the systemic exclusion of marginalised
-  renters from housing.
+title: Finding a home in Delhi as a Kashmiri Muslim woman
+excerpt: Like many cities in India, finding a rented house has become a
+  challenge for Kashmiri Muslim women in India's capital, New Delhi.
+  Discrimination based on identity is a major obstacle in their path. BBC's
+  Gafira Qadir found accommodation after more than a month of struggle and spoke
+  to many other women who face similar problems.
 image: https://i.ytimg.com/vi/DiBINtKML3w/maxresdefault.jpg
 placeholder_icon: play-circle
 section: stories

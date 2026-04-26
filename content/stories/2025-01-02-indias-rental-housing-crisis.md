@@ -5,7 +5,7 @@ excerpt: In-depth video journalism on the systemic exclusion of marginalised
 image: https://i.ytimg.com/vi/DiBINtKML3w/maxresdefault.jpg
 placeholder_icon: play-circle
 section: stories
-tag: Documentary
+tag: Discrimination
 tag_style: default
 city: BBC India
 url: https://www.youtube.com/watch?v=DiBINtKML3w

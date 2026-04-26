@@ -20,55 +20,126 @@ collections:
         label: "General Settings"
         file: "content/settings/general.yml"
         fields:
-          - { label: "Site Title", name: "site_title", widget: "string", default: "Rent Without Fear" }
-          - { label: "Site Tagline", name: "tagline", widget: "string" }
-          - { label: "Footer Text", name: "footer_text", widget: "text" }
-          - { label: "NALSA Helpline", name: "nalsa_helpline", widget: "string", default: "15100" }
+          - {
+              label: "Site Title",
+              name: "site_title",
+              widget: "string",
+              default: "Rent Without Fear",
+            }
+          - {label: "Site Tagline", name: "tagline", widget: "string"}
+          - {label: "Footer Text", name: "footer_text", widget: "text"}
+          - {
+              label: "NALSA Helpline",
+              name: "nalsa_helpline",
+              widget: "string",
+              default: "15100",
+            }
           - label: "Brand Colors"
             name: "colors"
             widget: "object"
             fields:
-              - { label: "Primary", name: "primary", widget: "color", default: "#f59f0a" }
-              - { label: "Background", name: "bg", widget: "color", default: "#1a1a1a" }
-              - { label: "Danger", name: "danger", widget: "color", default: "#dc2626" }
-              - { label: "Info", name: "info", widget: "color", default: "#3b82f6" }
+              - {label: "Primary", name: "primary", widget: "color", default: "#f59f0a"}
+              - {label: "Background", name: "bg", widget: "color", default: "#1a1a1a"}
+              - {label: "Danger", name: "danger", widget: "color", default: "#dc2626"}
+              - {label: "Info", name: "info", widget: "color", default: "#3b82f6"}
 
       - name: "hero"
         label: "Homepage Hero"
         file: "content/settings/hero.yml"
         fields:
-          - { label: "Heading Line 1", name: "heading_line1", widget: "string", default: "Your Home." }
-          - { label: "Heading Line 2", name: "heading_line2", widget: "string", default: "Your Rights." }
-          - { label: "Subheading", name: "subheading", widget: "text" }
-          - { label: "CTA Button Text", name: "cta_text", widget: "string", default: "Get Help Now" }
-          - { label: "CTA Link Page", name: "cta_page", widget: "select", options: ["action", "rights", "stories", "wall", "map"] }
-          - { label: "Hero Background Image", name: "hero_bg", widget: "image", required: false }
+          - {
+              label: "Heading Line 1",
+              name: "heading_line1",
+              widget: "string",
+              default: "Your Home.",
+            }
+          - {
+              label: "Heading Line 2",
+              name: "heading_line2",
+              widget: "string",
+              default: "Your Rights.",
+            }
+          - {label: "Subheading", name: "subheading", widget: "text"}
+          - {
+              label: "CTA Button Text",
+              name: "cta_text",
+              widget: "string",
+              default: "Get Help Now",
+            }
+          - {
+              label: "CTA Link Page",
+              name: "cta_page",
+              widget: "select",
+              options: ["action", "rights", "stories", "wall", "map"],
+            }
+          - {
+              label: "Hero Background Image",
+              name: "hero_bg",
+              widget: "image",
+              required: false,
+            }
 
       - name: "emergency_banner"
         label: "Emergency Banner"
         file: "content/settings/emergency_banner.yml"
         fields:
-          - { label: "Visible", name: "visible", widget: "boolean", default: true }
-          - { label: "Title", name: "title", widget: "string", default: "Facing imminent eviction?" }
-          - { label: "Description", name: "description", widget: "text" }
-          - { label: "Button Text", name: "button_text", widget: "string", default: "Get Emergency Toolkit" }
-          - { label: "Button Link Page", name: "button_page", widget: "select", options: ["action", "rights", "stories", "wall", "map"] }
+          - {label: "Visible", name: "visible", widget: "boolean", default: true}
+          - {
+              label: "Title",
+              name: "title",
+              widget: "string",
+              default: "Facing imminent eviction?",
+            }
+          - {label: "Description", name: "description", widget: "text"}
+          - {
+              label: "Button Text",
+              name: "button_text",
+              widget: "string",
+              default: "Get Emergency Toolkit",
+            }
+          - {
+              label: "Button Link Page",
+              name: "button_page",
+              widget: "select",
+              options: ["action", "rights", "stories", "wall", "map"],
+            }
 
       - name: "crisis_panel"
         label: "Crisis Panel (Get Help Now - Right Side)"
         file: "content/settings/crisis_panel.yml"
         fields:
-          - { label: "Heading", name: "heading", widget: "string", default: "Facing a lock-out right now?" }
-          - { label: "Warning Text", name: "warning_text", widget: "string", default: "Do not leave." }
-          - { label: "Description", name: "description", widget: "text" }
+          - {
+              label: "Heading",
+              name: "heading",
+              widget: "string",
+              default: "Facing a lock-out right now?",
+            }
+          - {
+              label: "Warning Text",
+              name: "warning_text",
+              widget: "string",
+              default: "Do not leave.",
+            }
+          - {label: "Description", name: "description", widget: "text"}
           - label: "Emergency Contacts"
             name: "contacts"
             widget: "list"
             fields:
-              - { label: "Label", name: "label", widget: "string" }
-              - { label: "Number", name: "number", widget: "string" }
-              - { label: "Phone URI", name: "phone_uri", widget: "string", hint: "e.g. tel:100" }
-              - { label: "Icon", name: "icon", widget: "string", default: "call", hint: "Material Symbol name" }
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Number", name: "number", widget: "string"}
+              - {
+                  label: "Phone URI",
+                  name: "phone_uri",
+                  widget: "string",
+                  hint: "e.g. tel:100",
+                }
+              - {
+                  label: "Icon",
+                  name: "icon",
+                  widget: "string",
+                  default: "call",
+                  hint: "Material Symbol name",
+                }
 
   # =====================================================
   # Ticker Statistics
@@ -79,9 +150,26 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Statistic Text", name: "text", widget: "string", hint: "e.g. '68% of Muslim home-seekers refused or given discriminatory terms'" }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
-      - { label: "Source URL", name: "source", widget: "string", required: false, hint: "URL to the source (e.g. https://example.com/study)" }
+      - {
+          label: "Statistic Text",
+          name: "text",
+          widget: "string",
+          hint: "e.g. '68% of Muslim home-seekers refused or given discriminatory terms'",
+        }
+      - {
+          label: "Order",
+          name: "order",
+          widget: "number",
+          value_type: "int",
+          default: 0,
+        }
+      - {
+          label: "Source URL",
+          name: "source",
+          widget: "string",
+          required: false,
+          hint: "URL to the source (e.g. https://example.com/study)",
+        }
 
   # =====================================================
   # Homepage Navigation Grid
@@ -92,13 +180,39 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Icon", name: "icon", widget: "string", hint: "Material Symbol name, e.g. gavel, history_edu, campaign, map, article" }
-      - { label: "Cell Number", name: "cell_number", widget: "string", hint: "e.g. 01, 02, 03" }
-      - { label: "Link Page", name: "link_page", widget: "select", options: ["rights", "stories", "journal", "wall", "map", "action"] }
-      - { label: "Wide Cell (spans 2 columns)", name: "wide", widget: "boolean", default: false }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {
+          label: "Icon",
+          name: "icon",
+          widget: "string",
+          hint: "Material Symbol name, e.g. gavel, history_edu, campaign, map, article",
+        }
+      - {
+          label: "Cell Number",
+          name: "cell_number",
+          widget: "string",
+          hint: "e.g. 01, 02, 03",
+        }
+      - {
+          label: "Link Page",
+          name: "link_page",
+          widget: "select",
+          options: ["rights", "stories", "journal", "wall", "map", "action"],
+        }
+      - {
+          label: "Wide Cell (spans 2 columns)",
+          name: "wide",
+          widget: "boolean",
+          default: false,
+        }
+      - {
+          label: "Order",
+          name: "order",
+          widget: "number",
+          value_type: "int",
+          default: 0,
+        }
 
   # =====================================================
   # Know Your Rights — Legal Categories & Cards
@@ -110,18 +224,50 @@ collections:
     slug: "{{slug}}"
     identifier_field: "category_title"
     fields:
-      - { label: "Category Title", name: "category_title", widget: "string", hint: "e.g. Eviction Safeguards, Maintenance & Essential Services" }
-      - { label: "Sidebar Label", name: "sidebar_label", widget: "string", hint: "Short name for sidebar navigation" }
-      - { label: "Sidebar Anchor ID", name: "anchor_id", widget: "string", hint: "e.g. eviction, services, deposit" }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+      - {
+          label: "Category Title",
+          name: "category_title",
+          widget: "string",
+          hint: "e.g. Eviction Safeguards, Maintenance & Essential Services",
+        }
+      - {
+          label: "Sidebar Label",
+          name: "sidebar_label",
+          widget: "string",
+          hint: "Short name for sidebar navigation",
+        }
+      - {
+          label: "Sidebar Anchor ID",
+          name: "anchor_id",
+          widget: "string",
+          hint: "e.g. eviction, services, deposit",
+        }
+      - {
+          label: "Order",
+          name: "order",
+          widget: "number",
+          value_type: "int",
+          default: 0,
+        }
       - label: "Legal Cards"
         name: "cards"
         widget: "list"
         fields:
-          - { label: "Card Title", name: "title", widget: "string" }
-          - { label: "Card Body", name: "body", widget: "text" }
-          - { label: "Source Label", name: "legal_ref", widget: "string", hint: "e.g. LegalKart — Full Guide" }
-          - { label: "Source URL", name: "source_url", widget: "string", required: false, hint: "Link to external resource" }
+          - {label: "Card Title", name: "title", widget: "string"}
+          - {label: "Card Body", name: "body", widget: "text"}
+          - {
+              label: "Source Label",
+              name: "legal_ref",
+              widget: "string",
+              hint: "e.g. LegalKart — Full Guide",
+            }
+          - {
+              label: "Source URL",
+              name: "source_url",
+              widget: "string",
+              required: false,
+              hint: "Link to external resource",
+            }
 
   # =====================================================
   # State-wise Rent Laws
@@ -133,22 +279,35 @@ collections:
     slug: "{{slug}}"
     identifier_field: "state_name"
     fields:
-      - { label: "State Name", name: "state_name", widget: "string" }
+      - {label: "State Name", name: "state_name", widget: "string"}
       - label: "Status"
         name: "status"
         widget: "select"
         options:
-          - { label: "MTA Adopted", value: "mta" }
-          - { label: "Older Act", value: "old" }
-          - { label: "In Transition / Partial", value: "partial" }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", required: false, hint: "Lower numbers sort first" }
-      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Plain-language explainer of this state's rent laws, exceptions, and warnings" }
+          - {label: "MTA Adopted", value: "mta"}
+          - {label: "Older Act", value: "old"}
+          - {label: "In Transition / Partial", value: "partial"}
+      - {
+          label: "Order",
+          name: "order",
+          widget: "number",
+          value_type: "int",
+          required: false,
+          hint: "Lower numbers sort first",
+        }
+      - {
+          label: "Excerpt",
+          name: "excerpt",
+          widget: "text",
+          hint: "Plain-language explainer of this state's rent laws, exceptions, and
+            warnings",
+        }
       - label: "Links"
         name: "links"
         widget: "list"
         fields:
-          - { label: "Link Text", name: "text", widget: "string" }
-          - { label: "URL", name: "url", widget: "string" }
+          - {label: "Link Text", name: "text", widget: "string"}
+          - {label: "URL", name: "url", widget: "string"}
 
   # =====================================================
   # Helplines & Resources
@@ -159,27 +318,33 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Organization Name", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
+      - {label: "Organization Name", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
       - label: "Category"
         name: "category"
         widget: "select"
         options:
-          - { label: "Legal Aid", value: "legal_aid" }
-          - { label: "Helplines for Women", value: "women_helplines" }
-          - { label: "Complaint Portals", value: "complaint_portals" }
-          - { label: "Mental Health Support", value: "mental_health" }
+          - {label: "Legal Aid", value: "legal_aid"}
+          - {label: "Helplines for Women", value: "women_helplines"}
+          - {label: "Complaint Portals", value: "complaint_portals"}
+          - {label: "Mental Health Support", value: "mental_health"}
         default: "legal_aid"
       - label: "Contact Type"
         name: "contact_type"
         widget: "select"
         options:
-          - { label: "Phone Helpline", value: "phone" }
-          - { label: "Website", value: "website" }
-          - { label: "Both", value: "both" }
-      - { label: "Phone Number", name: "phone", widget: "string", required: false }
-      - { label: "Website URL", name: "url", widget: "string", required: false }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+          - {label: "Phone Helpline", value: "phone"}
+          - {label: "Website", value: "website"}
+          - {label: "Both", value: "both"}
+      - {label: "Phone Number", name: "phone", widget: "string", required: false}
+      - {label: "Website URL", name: "url", widget: "string", required: false}
+      - {
+          label: "Order",
+          name: "order",
+          widget: "number",
+          value_type: "int",
+          default: 0,
+        }
 
   # =====================================================
   # Stories (Editorial Grid)
@@ -190,16 +355,22 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Excerpt", name: "excerpt", widget: "string" }
-      - { label: "Featured Image", name: "image", widget: "image", required: false }
-      - { label: "Placeholder Icon", name: "placeholder_icon", widget: "string", required: false, hint: "Material Symbol fallback if no image, e.g. mosque, visibility_off" }
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Excerpt", name: "excerpt", widget: "string"}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {
+          label: "Placeholder Icon",
+          name: "placeholder_icon",
+          widget: "string",
+          required: false,
+          hint: "Material Symbol fallback if no image, e.g. mosque, visibility_off",
+        }
       - label: "Section"
         name: "section"
         widget: "select"
         options:
-          - { label: "Stories", value: "stories" }
-          - { label: "Research & Reports", value: "research" }
+          - {label: "Stories", value: "stories"}
+          - {label: "Research & Reports", value: "research"}
         default: "stories"
       - label: "Tag"
         name: "tag"
@@ -215,19 +386,50 @@ collections:
           - "RWA Issue"
           - "Policy"
           - "Victory"
+          - "News"
+          - "Opinion"
       - label: "Tag Style"
         name: "tag_style"
         widget: "select"
         options:
-          - { label: "Default (Primary/Gold)", value: "default" }
-          - { label: "Danger (Red)", value: "danger" }
+          - {label: "Default (Primary/Gold)", value: "default"}
+          - {label: "Danger (Red)", value: "danger"}
         default: "default"
-      - { label: "Source Name", name: "city", widget: "string", hint: "e.g. YouTube, The Wire, DW, Cornell University" }
-      - { label: "External URL", name: "url", widget: "string", required: false, hint: "Link to the external article/video" }
-      - { label: "Link Action", name: "link_action", widget: "string", required: false, default: "Read", hint: "e.g. Read, Watch, Download PDF" }
-      - { label: "Publication Date", name: "date", widget: "datetime" }
-      - { label: "Featured (large card, spans 2 columns)", name: "featured", widget: "boolean", default: false }
-      - { label: "Full Article Body", name: "body", widget: "markdown", required: false, hint: "Optional long-form story content" }
+      - {
+          label: "Source Name",
+          name: "city",
+          widget: "string",
+          hint: "e.g. YouTube, The Wire, DW, Cornell University",
+        }
+      - {
+          label: "External URL",
+          name: "url",
+          widget: "string",
+          required: false,
+          hint: "Link to the external article/video",
+        }
+      - {
+          label: "Link Action",
+          name: "link_action",
+          widget: "string",
+          required: false,
+          default: "Read",
+          hint: "e.g. Read, Watch, Download PDF",
+        }
+      - {label: "Publication Date", name: "date", widget: "datetime"}
+      - {
+          label: "Featured (large card, spans 2 columns)",
+          name: "featured",
+          widget: "boolean",
+          default: false,
+        }
+      - {
+          label: "Full Article Body",
+          name: "body",
+          widget: "markdown",
+          required: false,
+          hint: "Optional long-form story content",
+        }
 
   # =====================================================
   # Testimonials (Audio)
@@ -238,12 +440,34 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Title / Name", name: "title", widget: "string", hint: "Name or description of the person" }
-      - { label: "Tag", name: "tag", widget: "string", hint: "e.g. Deposit Dispute · Mumbai" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Audio File", name: "audio", widget: "file", required: false, hint: "Upload MP3 audio testimonial" }
-      - { label: "Publication Date", name: "date", widget: "datetime" }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+      - {
+          label: "Title / Name",
+          name: "title",
+          widget: "string",
+          hint: "Name or description of the person",
+        }
+      - {
+          label: "Tag",
+          name: "tag",
+          widget: "string",
+          hint: "e.g. Deposit Dispute · Mumbai",
+        }
+      - {label: "Description", name: "description", widget: "text"}
+      - {
+          label: "Audio File",
+          name: "audio",
+          widget: "file",
+          required: false,
+          hint: "Upload MP3 audio testimonial",
+        }
+      - {label: "Publication Date", name: "date", widget: "datetime"}
+      - {
+          label: "Order",
+          name: "order",
+          widget: "number",
+          value_type: "int",
+          default: 0,
+        }
 
   # =====================================================
   # Legal Templates (Get Help Now - Left Side)
@@ -254,12 +478,29 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Template Name", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Icon", name: "icon", widget: "string", default: "description", hint: "Material Symbol name" }
-      - { label: "PDF File", name: "pdf_file", widget: "file", required: false }
-      - { label: "Download Filename", name: "download_filename", widget: "string", hint: "e.g. Eviction_Notice_Reply.pdf" }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+      - {label: "Template Name", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {
+          label: "Icon",
+          name: "icon",
+          widget: "string",
+          default: "description",
+          hint: "Material Symbol name",
+        }
+      - {label: "PDF File", name: "pdf_file", widget: "file", required: false}
+      - {
+          label: "Download Filename",
+          name: "download_filename",
+          widget: "string",
+          hint: "e.g. Eviction_Notice_Reply.pdf",
+        }
+      - {
+          label: "Order",
+          name: "order",
+          widget: "number",
+          value_type: "int",
+          default: 0,
+        }
 
   # =====================================================
   # The Wall — Posts / Warnings
@@ -270,7 +511,12 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Location", name: "location", widget: "string", hint: "e.g. Andheri West, MUM" }
+      - {
+          label: "Location",
+          name: "location",
+          widget: "string",
+          hint: "e.g. Andheri West, MUM",
+        }
       - label: "Issue Type"
         name: "issue_type"
         widget: "select"
@@ -282,7 +528,20 @@ collections:
           - "Discrimination"
           - "RWA Discrimination"
           - "Other Violation"
-      - { label: "Message", name: "body", widget: "text" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Upvotes", name: "upvotes", widget: "number", value_type: "int", default: 0 }
-      - { label: "Community Post", name: "community", widget: "boolean", default: false, hint: "Check if this is a real community submission (not an illustrative example)" }
+      - {label: "Message", name: "body", widget: "text"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {
+          label: "Upvotes",
+          name: "upvotes",
+          widget: "number",
+          value_type: "int",
+          default: 0,
+        }
+      - {
+          label: "Community Post",
+          name: "community",
+          widget: "boolean",
+          default: false,
+          hint: "Check if this is a real community submission (not an illustrative
+            example)",
+        }

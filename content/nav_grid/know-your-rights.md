@@ -1,6 +1,6 @@
 ---
 title: "Know Your Rights"
-description: "Searchable, jargon-free legal index for immediate tenant defence against illegal practices."
+description: "A curated, searchable index covering tenant rights, constitutional provisions, and more."
 icon: "gavel"
 cell_number: "01"
 link_page: "rights"

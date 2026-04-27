@@ -1,0 +1,13 @@
+{
+  "rewrites": [
+    { "source": "/img/:file*", "destination": "/static/img/:file*" }
+  ],
+  "headers": [
+    {
+      "source": "**",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" }
+      ]
+    }
+  ]
+}

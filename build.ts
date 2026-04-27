@@ -115,7 +115,7 @@ function generatePreviewScript(adminDist: string, partials: Record<string, strin
 
   // Site CSS + fonts for the preview iframe
   CMS.registerPreviewStyle("/style.css");
-  CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
+  CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600;700&display=swap");
 
   // Embedded Mustache partials (from src/templates/partials/)
   var partials = {
@@ -534,6 +534,12 @@ function build() {
   data.has_legal_rights = data.legal_rights.length > 0;
   data.has_stories = data.stories.length > 0;
   data.has_journal = data.journal.length > 0;
+  // Featured vs regular testimonials
+  const journalSorted = [...data.journal].sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0));
+  data.featured_testimonial = journalSorted.find((t: any) => t.featured && t.audio) || journalSorted.find((t: any) => t.audio) || journalSorted[0] || null;
+  data.regular_testimonials = journalSorted.filter((t: any) => t !== data.featured_testimonial);
+  data.has_featured_testimonial = !!data.featured_testimonial;
+  data.has_regular_testimonials = data.regular_testimonials.length > 0;
   data.has_templates = data.templates.length > 0;
   data.has_wall_posts = data.wall_posts.length > 0;
   data.has_helplines = data.helplines.length > 0;
@@ -571,6 +577,20 @@ function build() {
   const staticDist = path.join(DIST_DIR, 'static');
   if (fs.existsSync(staticSrc)) {
     copyDirSync(staticSrc, staticDist);
+  }
+
+  // Mirror static/img → dist/img so CMS-managed URLs (`public_folder: /img`)
+  // resolve in production hosts that don't honor serve.json rewrites.
+  const imgSrc = path.join(staticSrc, 'img');
+  const imgDist = path.join(DIST_DIR, 'img');
+  if (fs.existsSync(imgSrc)) {
+    copyDirSync(imgSrc, imgDist);
+  }
+
+  // Copy serve.json (dev-only static-server config) if present
+  const serveJsonSrc = path.join(import.meta.dir, 'serve.json');
+  if (fs.existsSync(serveJsonSrc)) {
+    fs.copyFileSync(serveJsonSrc, path.join(DIST_DIR, 'serve.json'));
   }
 
   // Duplicate favicon.ico at site root for browsers that probe /favicon.ico

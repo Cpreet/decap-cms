@@ -4,7 +4,10 @@
   "description": "Rent Without Fear — CMS-driven campaign site",
   "scripts": {
     "build": "bun build.ts",
-    "dev": "bun build.ts --watch"
+    "watch": "bun build.ts --watch",
+    "serve": "bunx serve dist -p 8080 --no-clipboard",
+    "cms:proxy": "bunx decap-server",
+    "dev": "bun build.ts && concurrently -n watch,serve,cms -c yellow,green,magenta \"bun run watch\" \"bun run serve\" \"bun run cms:proxy\""
   },
   "dependencies": {
     "@netlify/blobs": "^10.7.4",
@@ -18,6 +21,9 @@
   "devDependencies": {
     "@types/bun": "^1.3.11",
     "@types/js-yaml": "^4.0.9",
-    "@types/mustache": "^4.2.6"
+    "@types/mustache": "^4.2.6",
+    "concurrently": "^9.0.0",
+    "decap-server": "^3.3.0",
+    "serve": "^14.2.4"
   }
 }

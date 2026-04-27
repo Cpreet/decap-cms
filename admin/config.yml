@@ -2,6 +2,12 @@ backend:
   name: git-gateway
   branch: main
 
+# When `local_backend: true` and decap-server is running on
+# http://localhost:8081, the CMS proxies reads/writes to your local
+# filesystem instead of the configured backend above. In production the
+# proxy is unreachable and Decap falls back to git-gateway automatically.
+local_backend: true
+
 # Editorial Workflow: draft → in_review → ready → published
 publish_mode: editorial_workflow
 
@@ -452,13 +458,40 @@ collections:
           widget: "string",
           hint: "e.g. Deposit Dispute · Mumbai",
         }
-      - {label: "Description", name: "description", widget: "text"}
+      - {
+          label: "Description",
+          name: "description",
+          widget: "text",
+          hint: "Short context (1-2 lines) about the speaker and conversation",
+        }
+      - {
+          label: "Pull Quote (Framing)",
+          name: "featured_quote",
+          widget: "text",
+          required: false,
+          hint: "A single striking quote from the testimonial — displayed large alongside
+            the player",
+        }
       - {
           label: "Audio File",
           name: "audio",
           widget: "file",
           required: false,
           hint: "Upload MP3 audio testimonial",
+        }
+      - {
+          label: "Transcript (VTT)",
+          name: "transcript",
+          widget: "file",
+          required: false,
+          hint: "Upload .vtt file with line-level timestamps for synced highlighting",
+        }
+      - {
+          label: "Featured (hero player)",
+          name: "featured",
+          widget: "boolean",
+          default: false,
+          hint: "Pin this testimonial to the top of the page as the hero player",
         }
       - {label: "Publication Date", name: "date", widget: "datetime"}
       - {

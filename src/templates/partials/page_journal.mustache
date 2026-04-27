@@ -3,33 +3,148 @@
     <div class="stories-hero" style="border-bottom:1px solid var(--border)">
         <div style="font-size:11px;font-weight:700;color:var(--primary);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px">First-hand Accounts</div>
         <h1>Testimonials</h1>
-        <p style="color:var(--muted);font-size:16px;max-width:580px;line-height:1.7">Audio conversations with renters who have faced discrimination, illegal eviction, and landlord harassment.</p>
+        <p style="color:var(--muted);font-size:16px;max-width:580px;line-height:1.7">Audio conversations with renters who have faced discrimination, illegal eviction, and landlord harassment. Voices preserved with permission, identities protected.</p>
     </div>
+
+    {{^has_journal}}
     <div style="max-width:860px;margin:0 auto;padding:48px 40px 80px">
-        {{^has_journal}}
         <div style="text-align:center;padding:80px 20px;border:1px solid var(--border);background:var(--surface)">
             <i data-lucide="mic" style="color:var(--border);display:block;margin-bottom:20px;width:56px;height:56px"></i>
             <h2 style="font-size:24px;font-weight:700;margin-bottom:12px;font-family:'Lora',serif">Audio testimonials coming soon.</h2>
             <p style="color:var(--muted);font-size:15px;line-height:1.7;max-width:420px;margin:0 auto">We are recording conversations with renters across India. Their experiences will be published here.</p>
         </div>
-        {{/has_journal}}
-        {{#journal}}
-        <div class="legal-card" style="margin-bottom:24px">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:16px;flex-wrap:wrap">
-                <div>
-                    {{#tag}}<div style="font-size:10px;font-weight:700;color:var(--primary);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px">{{tag}}</div>{{/tag}}
-                    <h3 style="font-size:18px;font-weight:700;font-family:'Lora',serif">{{title}}</h3>
-                </div>
-                <i data-lucide="mic" style="color:var(--muted);flex-shrink:0;width:28px;height:28px"></i>
-            </div>
-            <p style="color:#d1d5db;font-size:14px;line-height:1.75;margin-bottom:16px">{{description}}</p>
+    </div>
+    {{/has_journal}}
+
+    {{#has_featured_testimonial}}
+    {{#featured_testimonial}}
+    <section class="testimonial-hero" aria-labelledby="testimonial-hero-title">
+        <div class="testimonial-hero-inner">
+            <header class="testimonial-hero-meta">
+                {{#tag}}<div class="testimonial-eyebrow">{{tag}}</div>{{/tag}}
+                <h2 id="testimonial-hero-title" class="testimonial-title">{{title}}</h2>
+                {{#description}}<p class="testimonial-desc">{{description}}</p>{{/description}}
+            </header>
+
+            {{#featured_quote}}
+            <figure class="testimonial-quote">
+                <blockquote>
+                    <p>{{featured_quote}}</p>
+                </blockquote>
+            </figure>
+            {{/featured_quote}}
+
             {{#audio}}
-            <audio controls style="width:100%;accent-color:var(--primary);margin-top:8px">
-                <source src="{{audio}}" type="audio/mpeg">
-            </audio>
-            <div style="font-size:11px;color:var(--muted);margin-top:8px">Audio shared with permission. Identity protected.</div>
+            <div class="testimonial-player"
+                 data-testimonial-player
+                 data-audio="{{audio}}"
+                 {{#transcript}}data-vtt="{{transcript}}"{{/transcript}}>
+                <div class="tp-controls">
+                    <button type="button" class="tp-play" aria-label="Play testimonial" data-tp-play>
+                        <i data-lucide="play" style="width:22px;height:22px"></i>
+                    </button>
+                    <div class="tp-times">
+                        <span data-tp-current>0:00</span>
+                        <span class="tp-sep">/</span>
+                        <span data-tp-duration>0:00</span>
+                    </div>
+                    <div class="tp-waveform" data-tp-waveform aria-hidden="true"></div>
+                    <button type="button" class="tp-mute" aria-label="Mute" data-tp-mute>
+                        <i data-lucide="volume-2" style="width:18px;height:18px"></i>
+                    </button>
+                    <a class="tp-download" href="{{audio}}" download aria-label="Download audio">
+                        <i data-lucide="download" style="width:18px;height:18px"></i>
+                    </a>
+                </div>
+                <audio preload="metadata" data-tp-audio>
+                    <source src="{{audio}}" type="audio/mpeg" />
+                    Your browser does not support audio playback.
+                </audio>
+
+                {{#transcript}}
+                <div class="tp-transcript-wrap">
+                    <div class="tp-transcript-head">
+                        <span class="tp-transcript-label">Transcript</span>
+                        <span class="tp-transcript-hint">Click any line to jump.</span>
+                    </div>
+                    <ol class="tp-transcript" data-tp-transcript aria-live="polite" aria-relevant="additions text" tabindex="0">
+                        <li class="tp-cue tp-cue-loading">Loading transcript…</li>
+                    </ol>
+                </div>
+                {{/transcript}}
+                <div class="tp-disclaimer">
+                    <i data-lucide="shield" style="width:14px;height:14px"></i>
+                    <span>The interviewee's voice has been modified to obfuscate their identity.</span>
+                </div>
+            </div>
+            {{/audio}}
+
+            {{^audio}}
+            <div class="testimonial-player testimonial-player-empty">
+                <i data-lucide="mic-off" style="width:24px;height:24px;color:var(--muted)"></i>
+                <span>Audio not yet uploaded for this testimonial.</span>
+            </div>
             {{/audio}}
         </div>
-        {{/journal}}
-    </div>
+    </section>
+    {{/featured_testimonial}}
+    {{/has_featured_testimonial}}
+
+    {{#has_regular_testimonials}}
+    <section class="testimonial-list-section" aria-labelledby="more-testimonials-title">
+        <div class="testimonial-list-inner">
+            <h3 id="more-testimonials-title" class="testimonial-list-heading">More testimonials</h3>
+            <ul class="testimonial-list">
+                {{#regular_testimonials}}
+                <li class="testimonial-list-card">
+                    <div class="testimonial-list-meta">
+                        {{#tag}}<div class="testimonial-eyebrow">{{tag}}</div>{{/tag}}
+                        <h4>{{title}}</h4>
+                        {{#description}}<p class="testimonial-desc">{{description}}</p>{{/description}}
+                    </div>
+                    {{#featured_quote}}
+                    <blockquote class="testimonial-list-quote"><p>{{featured_quote}}</p></blockquote>
+                    {{/featured_quote}}
+                    {{#audio}}
+                    <div class="testimonial-player testimonial-player-compact"
+                         data-testimonial-player
+                         data-audio="{{audio}}"
+                         {{#transcript}}data-vtt="{{transcript}}"{{/transcript}}>
+                        <div class="tp-controls">
+                            <button type="button" class="tp-play" aria-label="Play testimonial" data-tp-play>
+                                <i data-lucide="play" style="width:20px;height:20px"></i>
+                            </button>
+                            <div class="tp-times">
+                                <span data-tp-current>0:00</span>
+                                <span class="tp-sep">/</span>
+                                <span data-tp-duration>0:00</span>
+                            </div>
+                            <div class="tp-waveform" data-tp-waveform aria-hidden="true"></div>
+                            <a class="tp-download" href="{{audio}}" download aria-label="Download audio">
+                                <i data-lucide="download" style="width:16px;height:16px"></i>
+                            </a>
+                        </div>
+                        <audio preload="none" data-tp-audio>
+                            <source src="{{audio}}" type="audio/mpeg" />
+                        </audio>
+                        {{#transcript}}
+                        <details class="tp-transcript-collapsed">
+                            <summary>Show transcript</summary>
+                            <ol class="tp-transcript" data-tp-transcript aria-live="polite" tabindex="0">
+                                <li class="tp-cue tp-cue-loading">Loading transcript…</li>
+                            </ol>
+                        </details>
+                        {{/transcript}}
+                        <div class="tp-disclaimer">
+                            <i data-lucide="shield" style="width:13px;height:13px"></i>
+                            <span>The interviewee's voice has been modified to obfuscate their identity.</span>
+                        </div>
+                    </div>
+                    {{/audio}}
+                </li>
+                {{/regular_testimonials}}
+            </ul>
+        </div>
+    </section>
+    {{/has_regular_testimonials}}
 </div>

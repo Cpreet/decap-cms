@@ -477,6 +477,8 @@ collections:
           name: "audio",
           widget: "file",
           required: false,
+          media_folder: "/static/audio",
+          public_folder: "/audio",
           hint: "Upload MP3 audio testimonial",
         }
       - {
@@ -484,6 +486,8 @@ collections:
           name: "transcript",
           widget: "file",
           required: false,
+          media_folder: "/static/transcripts",
+          public_folder: "/transcripts",
           hint: "Upload .vtt file with line-level timestamps for synced highlighting",
         }
       - {

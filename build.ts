@@ -579,12 +579,12 @@ function build() {
     copyDirSync(staticSrc, staticDist);
   }
 
-  // Mirror static/img → dist/img so CMS-managed URLs (`public_folder: /img`)
-  // resolve in production hosts that don't honor serve.json rewrites.
-  const imgSrc = path.join(staticSrc, 'img');
-  const imgDist = path.join(DIST_DIR, 'img');
-  if (fs.existsSync(imgSrc)) {
-    copyDirSync(imgSrc, imgDist);
+  // Mirror static/<sub> → dist/<sub> so CMS-managed URLs resolve in
+  // production hosts that don't honor serve.json rewrites. Each entry maps
+  // a `public_folder` (left) to its `media_folder` subdir under static/.
+  for (const sub of ['img', 'audio', 'transcripts']) {
+    const src = path.join(staticSrc, sub);
+    if (fs.existsSync(src)) copyDirSync(src, path.join(DIST_DIR, sub));
   }
 
   // Copy serve.json (dev-only static-server config) if present

@@ -1,6 +1,8 @@
 {
   "rewrites": [
-    { "source": "/img/:file*", "destination": "/static/img/:file*" }
+    { "source": "/img/:file*", "destination": "/static/img/:file*" },
+    { "source": "/audio/:file*", "destination": "/static/audio/:file*" },
+    { "source": "/transcripts/:file*", "destination": "/static/transcripts/:file*" }
   ],
   "headers": [
     {

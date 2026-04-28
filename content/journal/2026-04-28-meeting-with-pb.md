@@ -1,7 +1,7 @@
 ---
-title: Meeting with PB
-tag: Discrimination on Sexual Orientation
-description: Eviction due to sexual orientation
+title: Conversation with PB
+tag: " "
+description: " "
 featured_quote: >-
   Hindu gay man, and that presentation protected me. But I couldn't be the
   version of myself I wanted to be in my own home. I had this fantasy: when I

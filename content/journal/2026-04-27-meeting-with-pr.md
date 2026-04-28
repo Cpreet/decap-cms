@@ -1,7 +1,7 @@
 ---
-title: Meeting With PR
-tag: Difficulties in renting
-description: Simple renting is very hard in india
+title: Conversation With PR
+tag: " "
+description: " "
 featured_quote: >-
   Prejudice wasn’t directly shown to our faces, but we were forced to look for
   places outside our budget in order to rent as an unmarried couple in Mumbai.

@@ -3,7 +3,7 @@ title: Conversation with PB
 tag: " "
 description: " "
 featured_quote: >-
-  I am a cis-presenting, upper cast, hindu gay man, and that presentation
+  I am a cis-presenting upper caste hindu gay man, and that presentation
   protected me. But I couldn't be the version of myself I wanted to be in my own
   home. I had this fantasy: when I finally lived alone and earned my own money,
   I would wear skirts, sarees, be androgynous or feminine. I couldn't do any of

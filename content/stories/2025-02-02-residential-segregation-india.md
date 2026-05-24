@@ -6,7 +6,7 @@ excerpt: Research on how housing segregation along caste and religion lines is
 section: research
 tag: Discrimination
 tag_style: default
-city: Sam Asher, et. al.
+city: Sam Asher, et al.
 url: https://paulnovosad.com/pdf/india-segregation.pdf
 link_action: Download PDF
 date: 2025-02-02T00:00:00.000+00:00

@@ -497,6 +497,13 @@ collections:
           default: false,
           hint: "Pin this testimonial to the top of the page as the hero player",
         }
+      - {
+          label: "Show voice-obfuscation notice",
+          name: "voice_disclaimer",
+          widget: "boolean",
+          default: true,
+          hint: "Display the 'voice has been modified to obfuscate identity' note under the player. Turn off if this audio's voice was not altered.",
+        }
       - {label: "Publication Date", name: "date", widget: "datetime"}
       - {
           label: "Order",

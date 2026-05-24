@@ -3,13 +3,13 @@ title: Conversation with PB
 tag: " "
 description: " "
 featured_quote: >-
-  Hindu gay man, and that presentation protected me. But I couldn't be the
-  version of myself I wanted to be in my own home. I had this fantasy: when I
-  finally lived alone and earned my own money, I would wear skirts, sarees, be
-  androgynous or feminine. I couldn't do any of those things. I was concealing
-  my identity from my landlords and neighbours. It felt too unsafe. It impacted
-  the idea of life I had envisioned for myself. I had to sacrifice that, and
-  live as this extremely masc presenting person.
+  I am a cis-presenting, upper cast, hindu gay man, and that presentation
+  protected me. But I couldn't be the version of myself I wanted to be in my own
+  home. I had this fantasy: when I finally lived alone and earned my own money,
+  I would wear skirts, sarees, be androgynous or feminine. I couldn't do any of
+  those things. I was concealing my identity from my landlords and neighbours.
+  It felt too unsafe. It impacted the idea of life I had envisioned for myself.
+  I had to sacrifice that, and live as this extremely masc presenting person.
 
 
   — PB, Delhi

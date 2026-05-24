@@ -4,7 +4,7 @@ title: Determinants of Discrimination in Access to Housing for Marginalised
 excerpt: Despite having affordability, equal access to housing is denied for
   marginalised social groups. This article attempts to understand the
   inter-group inequality in access to housing based on NSSO 76th round, 2018.
-section: stories
+section: research
 tag: Discrimination
 tag_style: default
 city: Vinod Kumar Mishra, Khalid Khan

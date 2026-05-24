@@ -5,7 +5,7 @@ excerpt: Literature tells us about the discriminatory practices and differential
   experiences of tenants in these markets through a lens of social relations
   between tenants and their landlords. Little is said about landlordism, its
   linkages to the built form produced or the theories of land rent.
-section: stories
+section: research
 tag: Arbitrary Rules
 tag_style: default
 city: Harish, et al.

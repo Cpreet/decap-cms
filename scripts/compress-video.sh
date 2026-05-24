@@ -34,13 +34,39 @@ video_k=$(( total_k - audio_k ))
 passlog="$(mktemp -u)"
 echo "→ ${in}  (${dur%.*}s)  target ${target_mb}MB  →  video ${video_k}k / audio ${audio_k}k"
 
-ffmpeg -y -hide_banner -loglevel error -i "$in" \
+# Render an ffmpeg `-progress pipe:1` stream as an in-place progress bar.
+# Reads key=value lines, tracks the encoded position (out_time_us) against the
+# known duration, and redraws on each `progress=` heartbeat.
+progress_bar() {
+  local label="$1" total="$2" width=32 cur=0 pct filled bars
+  local hashes='################################'  # length == width
+  while IFS='=' read -r k v; do
+    case "$k" in
+      out_time_us)
+        case "$v" in ''|*[!0-9]*) ;; *) cur="$v" ;; esac
+        ;;
+      progress)
+        if [ "$v" = "end" ]; then
+          pct=100
+        else
+          pct=$(awk -v u="$cur" -v t="$total" 'BEGIN{p=(t>0)?u/1000000/t*100:0; if(p>100)p=100; printf "%d",p}')
+        fi
+        filled=$(( pct * width / 100 ))
+        bars=$(printf '%.*s' "$filled" "$hashes")
+        printf '\r  %s [%-*s] %3d%%' "$label" "$width" "$bars" "$pct"
+        [ "$v" = "end" ] && printf '\n'
+        ;;
+    esac
+  done
+}
+
+ffmpeg -y -hide_banner -loglevel error -progress pipe:1 -nostats -i "$in" \
   -c:v libx264 -b:v "${video_k}k" -vf "scale='min(1280,iw)':-2" \
-  -passlogfile "$passlog" -pass 1 -an -f mp4 /dev/null
-ffmpeg -y -hide_banner -loglevel error -i "$in" \
+  -passlogfile "$passlog" -pass 1 -an -f mp4 /dev/null | progress_bar "pass 1/2" "$dur"
+ffmpeg -y -hide_banner -loglevel error -progress pipe:1 -nostats -i "$in" \
   -c:v libx264 -b:v "${video_k}k" -vf "scale='min(1280,iw)':-2" \
   -passlogfile "$passlog" -pass 2 -c:a aac -b:a "${audio_k}k" \
-  -movflags +faststart "$out"
+  -movflags +faststart "$out" | progress_bar "pass 2/2" "$dur"
 rm -f "${passlog}"*.log "${passlog}"*.log.mbtree 2>/dev/null || true
 
 size_mb=$(awk -v b="$(stat -c%s "$out" 2>/dev/null || stat -f%z "$out")" 'BEGIN{printf "%.2f", b/1048576}')

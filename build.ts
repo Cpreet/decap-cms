@@ -485,6 +485,7 @@ function build() {
     helplines: readCollection('helplines'),
     stories: readCollection('stories'),
     journal: readCollection('journal'),
+    updates: readCollection('updates'),
     templates: readCollection('templates'),
     wall_posts: readCollection('wall_posts'),
   };
@@ -540,6 +541,13 @@ function build() {
   data.regular_testimonials = journalSorted.filter((t: any) => t !== data.featured_testimonial);
   data.has_featured_testimonial = !!data.featured_testimonial;
   data.has_regular_testimonials = data.regular_testimonials.length > 0;
+  // Updates (video): featured hero + list, mirroring testimonials
+  data.has_updates = data.updates.length > 0;
+  const updatesSorted = [...data.updates].sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0));
+  data.featured_update = updatesSorted.find((u: any) => u.featured && u.video) || updatesSorted.find((u: any) => u.video) || updatesSorted[0] || null;
+  data.regular_updates = updatesSorted.filter((u: any) => u !== data.featured_update);
+  data.has_featured_update = !!data.featured_update;
+  data.has_regular_updates = data.regular_updates.length > 0;
   data.has_templates = data.templates.length > 0;
   data.has_wall_posts = data.wall_posts.length > 0;
   data.has_helplines = data.helplines.length > 0;
@@ -582,7 +590,7 @@ function build() {
   // Mirror static/<sub> → dist/<sub> so CMS-managed URLs resolve in
   // production hosts that don't honor serve.json rewrites. Each entry maps
   // a `public_folder` (left) to its `media_folder` subdir under static/.
-  for (const sub of ['img', 'audio', 'transcripts']) {
+  for (const sub of ['img', 'audio', 'transcripts', 'video']) {
     const src = path.join(staticSrc, sub);
     if (fs.existsSync(src)) copyDirSync(src, path.join(DIST_DIR, sub));
   }

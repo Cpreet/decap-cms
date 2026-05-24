@@ -1,12 +1,117 @@
 <!-- ===== PAGE: UPDATES ===== -->
+<!-- NOTE: page id is "map" for legacy routing reasons; the CMS collection is "updates". -->
 <div class="page" id="page-map">
     <div class="stories-hero" style="border-bottom:1px solid var(--border)">
         <div style="font-size:11px;font-weight:700;color:var(--primary);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px">Rent Without Fear</div>
         <h1>Updates</h1>
         <p style="color:var(--muted);font-size:16px;max-width:600px;line-height:1.7">Interviews and initiatives from Rent Without Fear — campaign milestones, community actions, and everything happening in the fight for renters’ rights in India.</p>
     </div>
-    <div style="max-width:860px;margin:0 auto;padding:48px 40px 80px;text-align:center">
-        <i data-lucide="megaphone" style="color:var(--border);display:block;margin-bottom:20px;width:56px;height:56px"></i>
-        <h2 style="font-size:24px;font-weight:700;margin-bottom:12px;font-family:'Lora',serif">Updates coming soon.</h2>
+
+    {{^has_updates}}
+    <div style="max-width:860px;margin:0 auto;padding:48px 40px 80px">
+        <div style="text-align:center;padding:80px 20px;border:1px solid var(--border);background:var(--surface)">
+            <i data-lucide="megaphone" style="color:var(--border);display:block;margin-bottom:20px;width:56px;height:56px"></i>
+            <h2 style="font-size:24px;font-weight:700;margin-bottom:12px;font-family:'Lora',serif">Updates coming soon.</h2>
+            <p style="color:var(--muted);font-size:15px;line-height:1.7;max-width:420px;margin:0 auto">Video updates from the campaign will be published here.</p>
+        </div>
     </div>
+    {{/has_updates}}
+
+    {{#has_featured_update}}
+    {{#featured_update}}
+    <section class="testimonial-hero" aria-labelledby="update-hero-title">
+        <div class="testimonial-hero-inner">
+            <header class="testimonial-hero-meta">
+                {{#tag}}<div class="testimonial-eyebrow">{{tag}}</div>{{/tag}}
+                <h2 id="update-hero-title" class="testimonial-title">{{title}}</h2>
+                {{#description}}<p class="testimonial-desc">{{description}}</p>{{/description}}
+            </header>
+
+            {{#featured_quote}}
+            <figure class="testimonial-quote">
+                <blockquote>
+                    <p>{{featured_quote}}</p>
+                </blockquote>
+            </figure>
+            {{/featured_quote}}
+
+            {{#video}}
+            <div class="testimonial-player update-player"
+                 data-update-player
+                 {{#transcript}}data-vtt="{{transcript}}"{{/transcript}}>
+                <div class="update-stage">
+                    <video class="update-video" data-up-video controls playsinline preload="metadata"{{#poster}} poster="{{poster}}"{{/poster}}>
+                        <source src="{{video}}" type="video/mp4" />
+                        {{#transcript}}<track kind="captions" src="{{transcript}}" srclang="en" label="English" />{{/transcript}}
+                        Your browser does not support video playback.
+                    </video>
+                </div>
+
+                {{#transcript}}
+                <div class="tp-transcript-wrap">
+                    <div class="tp-transcript-head">
+                        <span class="tp-transcript-label">Transcript</span>
+                        <span class="tp-transcript-hint">Click any line to jump.</span>
+                    </div>
+                    <ol class="tp-transcript" data-up-transcript aria-live="polite" aria-relevant="additions text" tabindex="0">
+                        <li class="tp-cue tp-cue-loading">Loading transcript…</li>
+                    </ol>
+                </div>
+                {{/transcript}}
+            </div>
+            {{/video}}
+
+            {{^video}}
+            <div class="testimonial-player testimonial-player-empty">
+                <i data-lucide="video-off" style="width:24px;height:24px;color:var(--muted)"></i>
+                <span>Video not yet uploaded for this update.</span>
+            </div>
+            {{/video}}
+        </div>
+    </section>
+    {{/featured_update}}
+    {{/has_featured_update}}
+
+    {{#has_regular_updates}}
+    <section class="testimonial-list-section" aria-labelledby="more-updates-title">
+        <div class="testimonial-list-inner">
+            <h3 id="more-updates-title" class="testimonial-list-heading">More updates</h3>
+            <ul class="testimonial-list">
+                {{#regular_updates}}
+                <li class="testimonial-list-card">
+                    <div class="testimonial-list-meta">
+                        {{#tag}}<div class="testimonial-eyebrow">{{tag}}</div>{{/tag}}
+                        <h4>{{title}}</h4>
+                        {{#description}}<p class="testimonial-desc">{{description}}</p>{{/description}}
+                    </div>
+                    {{#featured_quote}}
+                    <blockquote class="testimonial-list-quote"><p>{{featured_quote}}</p></blockquote>
+                    {{/featured_quote}}
+                    {{#video}}
+                    <div class="testimonial-player update-player update-player-compact"
+                         data-update-player
+                         {{#transcript}}data-vtt="{{transcript}}"{{/transcript}}>
+                        <div class="update-stage">
+                            <video class="update-video" data-up-video controls playsinline preload="none"{{#poster}} poster="{{poster}}"{{/poster}}>
+                                <source src="{{video}}" type="video/mp4" />
+                                {{#transcript}}<track kind="captions" src="{{transcript}}" srclang="en" label="English" />{{/transcript}}
+                                Your browser does not support video playback.
+                            </video>
+                        </div>
+                        {{#transcript}}
+                        <details class="tp-transcript-collapsed">
+                            <summary>Show transcript</summary>
+                            <ol class="tp-transcript" data-up-transcript aria-live="polite" tabindex="0">
+                                <li class="tp-cue tp-cue-loading">Loading transcript…</li>
+                            </ol>
+                        </details>
+                        {{/transcript}}
+                    </div>
+                    {{/video}}
+                </li>
+                {{/regular_updates}}
+            </ul>
+        </div>
+    </section>
+    {{/has_regular_updates}}
 </div>

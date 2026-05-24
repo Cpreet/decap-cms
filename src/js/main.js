@@ -50,6 +50,12 @@ function showPage(id) {
     if (window.WaveSurfer) initAllTestimonialPlayers();
     else window.addEventListener('load', initAllTestimonialPlayers, { once: true });
   }
+  // Lazy init update video players on first updates visit
+  // (page id is 'map' for legacy reasons; the collection is named 'updates')
+  if (id === 'map' && !window._updatesInited) {
+    window._updatesInited = true;
+    initAllUpdatePlayers();
+  }
 }
 
 // ===================== MOBILE MENU =====================
@@ -274,11 +280,129 @@ function splitSpeaker(text) {
   return { speaker: '', text };
 }
 
-const _testimonialPlayers = new WeakSet();
+// Shared lyric-style rolling transcript. Highlights + auto-scrolls VTT cues in
+// sync with any media element (audio or video). `seek`/`getTime` let the caller
+// route through a wrapper (e.g. WaveSurfer) instead of the raw media element;
+// `extraSource` is an optional event emitter (WaveSurfer) whose play/pause/etc
+// events should also drive the sync loop.
+function attachRollingTranscript({ mediaEl, transcriptEl, vttUrl, seek, getTime, extraSource }) {
+  if (!mediaEl || !transcriptEl || !vttUrl) return;
+  seek = seek || ((t) => { mediaEl.currentTime = t; });
+  getTime = getTime || (() => mediaEl.currentTime || 0);
+
+  let cues = [];
+  let activeIdx = -1;
+
+  function renderCues() {
+    transcriptEl.innerHTML = '';
+    cues.forEach((c, idx) => {
+      const li = document.createElement('li');
+      li.className = 'tp-cue';
+      li.dataset.idx = idx;
+      const { speaker, text } = splitSpeaker(c.text);
+      const time = document.createElement('span');
+      time.className = 'tp-cue-time';
+      time.textContent = fmtTime(c.start);
+      li.appendChild(time);
+      if (speaker) {
+        const sp = document.createElement('span');
+        sp.className = 'tp-cue-speaker';
+        sp.textContent = speaker;
+        li.appendChild(sp);
+      }
+      const txt = document.createElement('span');
+      txt.className = 'tp-cue-text';
+      txt.textContent = text;
+      li.appendChild(txt);
+      li.setAttribute('role', 'button');
+      li.setAttribute('tabindex', '0');
+      const jump = () => {
+        seek(c.start);
+        mediaEl.play();
+        setActive(idx);
+      };
+      li.addEventListener('click', jump);
+      li.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); jump(); }
+      });
+      transcriptEl.appendChild(li);
+    });
+  }
+
+  function findActive(t) {
+    if (!cues.length) return -1;
+    let lo = 0, hi = cues.length - 1, res = 0;
+    while (lo <= hi) {
+      const mid = (lo + hi) >> 1;
+      if (cues[mid].start <= t) { res = mid; lo = mid + 1; } else hi = mid - 1;
+    }
+    return res;
+  }
+
+  function setActive(idx) {
+    if (idx === activeIdx) return;
+    activeIdx = idx;
+    const items = transcriptEl.querySelectorAll('.tp-cue');
+    items.forEach((el) => {
+      const i = Number(el.dataset.idx);
+      const d = idx < 0 ? 99 : Math.abs(i - idx);
+      el.classList.toggle('tp-cue-active', d === 0);
+      if (d === 0) el.setAttribute('aria-current', 'true');
+      else el.removeAttribute('aria-current');
+      el.dataset.dist = d > 9 ? '9' : String(d);
+    });
+    if (idx < 0) return;
+    const el = transcriptEl.querySelector('[data-idx="' + idx + '"]');
+    if (el) {
+      const cRect = transcriptEl.getBoundingClientRect();
+      const eRect = el.getBoundingClientRect();
+      const delta = (eRect.top + eRect.height / 2) - (cRect.top + cRect.height / 2);
+      transcriptEl.scrollTo({ top: transcriptEl.scrollTop + delta, behavior: 'smooth' });
+    }
+  }
+
+  function syncActive() {
+    if (!cues.length) return;
+    setActive(findActive(getTime()));
+  }
+  let rafId = null;
+  function tick() {
+    syncActive();
+    rafId = requestAnimationFrame(tick);
+  }
+  function startTick() { if (rafId == null) rafId = requestAnimationFrame(tick); }
+  function stopTick() { if (rafId != null) { cancelAnimationFrame(rafId); rafId = null; } syncActive(); }
+  mediaEl.addEventListener('play', startTick);
+  mediaEl.addEventListener('pause', stopTick);
+  mediaEl.addEventListener('ended', stopTick);
+  mediaEl.addEventListener('seeked', syncActive);
+  mediaEl.addEventListener('timeupdate', syncActive);
+  if (extraSource && typeof extraSource.on === 'function') {
+    extraSource.on('play', startTick);
+    extraSource.on('pause', stopTick);
+    extraSource.on('finish', stopTick);
+    extraSource.on('seeking', syncActive);
+    extraSource.on('ready', syncActive);
+  }
+
+  fetch(vttUrl).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
+    cues = parseVTT(t);
+    if (!cues.length) {
+      transcriptEl.innerHTML = '<li class="tp-cue tp-cue-loading">Transcript could not be parsed.</li>';
+      return;
+    }
+    renderCues();
+    setActive(0);
+  }).catch(() => {
+    transcriptEl.innerHTML = '<li class="tp-cue tp-cue-loading">Transcript unavailable.</li>';
+  });
+}
+
+const _initedPlayers = new WeakSet();
 
 function initTestimonialPlayer(root) {
-  if (_testimonialPlayers.has(root)) return;
-  _testimonialPlayers.add(root);
+  if (_initedPlayers.has(root)) return;
+  _initedPlayers.add(root);
 
   const audioEl = root.querySelector('[data-tp-audio]');
   const playBtn = root.querySelector('[data-tp-play]');
@@ -365,130 +489,43 @@ function initTestimonialPlayer(root) {
     }
   });
 
-  // Transcript
-  let cues = [];
-  let activeIdx = -1;
-
-  function renderCues() {
-    transcriptEl.innerHTML = '';
-    cues.forEach((c, idx) => {
-      const li = document.createElement('li');
-      li.className = 'tp-cue';
-      li.dataset.idx = idx;
-      const { speaker, text } = splitSpeaker(c.text);
-      const time = document.createElement('span');
-      time.className = 'tp-cue-time';
-      time.textContent = fmtTime(c.start);
-      li.appendChild(time);
-      if (speaker) {
-        const sp = document.createElement('span');
-        sp.className = 'tp-cue-speaker';
-        sp.textContent = speaker;
-        li.appendChild(sp);
+  // Synced lyric-style transcript — route seek/time through WaveSurfer when present
+  attachRollingTranscript({
+    mediaEl: audioEl,
+    transcriptEl,
+    vttUrl,
+    getTime: () => {
+      if (ws && typeof ws.getCurrentTime === 'function') {
+        const wt = ws.getCurrentTime();
+        if (wt > 0) return wt;
       }
-      const txt = document.createElement('span');
-      txt.className = 'tp-cue-text';
-      txt.textContent = text;
-      li.appendChild(txt);
-      li.setAttribute('role', 'button');
-      li.setAttribute('tabindex', '0');
-      const jump = () => {
-        if (ws && typeof ws.setTime === 'function') ws.setTime(c.start);
-        else audioEl.currentTime = c.start;
-        audioEl.play();
-        setActive(idx);
-      };
-      li.addEventListener('click', jump);
-      li.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); jump(); }
-      });
-      transcriptEl.appendChild(li);
-    });
-  }
-
-  function findActive(t) {
-    if (!cues.length) return -1;
-    let lo = 0, hi = cues.length - 1, res = 0;
-    while (lo <= hi) {
-      const mid = (lo + hi) >> 1;
-      if (cues[mid].start <= t) { res = mid; lo = mid + 1; } else hi = mid - 1;
-    }
-    if (res >= 0 && cues[res].end < t - 0.5 && (res === cues.length - 1 || cues[res + 1].start > t + 0.5)) {
-      // gap — keep showing the previous one
-    }
-    return res;
-  }
-
-  function setActive(idx) {
-    if (idx === activeIdx) return;
-    activeIdx = idx;
-    const items = transcriptEl.querySelectorAll('.tp-cue');
-    items.forEach((el) => {
-      const i = Number(el.dataset.idx);
-      const d = idx < 0 ? 99 : Math.abs(i - idx);
-      el.classList.toggle('tp-cue-active', d === 0);
-      if (d === 0) el.setAttribute('aria-current', 'true');
-      else el.removeAttribute('aria-current');
-      el.dataset.dist = d > 9 ? '9' : String(d);
-    });
-    if (idx < 0) return;
-    const el = transcriptEl.querySelector('[data-idx="' + idx + '"]');
-    if (el) {
-      const cRect = transcriptEl.getBoundingClientRect();
-      const eRect = el.getBoundingClientRect();
-      const delta = (eRect.top + eRect.height / 2) - (cRect.top + cRect.height / 2);
-      transcriptEl.scrollTo({ top: transcriptEl.scrollTop + delta, behavior: 'smooth' });
-    }
-  }
-
-  function getTime() {
-    if (ws && typeof ws.getCurrentTime === 'function') {
-      const wt = ws.getCurrentTime();
-      if (wt > 0) return wt;
-    }
-    return audioEl.currentTime || 0;
-  }
-  function syncActive() {
-    if (!cues.length) return;
-    setActive(findActive(getTime()));
-  }
-  let rafId = null;
-  function tick() {
-    syncActive();
-    rafId = requestAnimationFrame(tick);
-  }
-  function startTick() { if (rafId == null) rafId = requestAnimationFrame(tick); }
-  function stopTick() { if (rafId != null) { cancelAnimationFrame(rafId); rafId = null; } syncActive(); }
-  audioEl.addEventListener('play', startTick);
-  audioEl.addEventListener('pause', stopTick);
-  audioEl.addEventListener('ended', stopTick);
-  audioEl.addEventListener('seeked', syncActive);
-  audioEl.addEventListener('timeupdate', syncActive);
-  if (ws) {
-    ws.on('play', startTick);
-    ws.on('pause', stopTick);
-    ws.on('finish', stopTick);
-    ws.on('seeking', syncActive);
-    ws.on('ready', syncActive);
-  }
-
-  if (vttUrl && transcriptEl) {
-    fetch(vttUrl).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
-      cues = parseVTT(t);
-      if (!cues.length) {
-        transcriptEl.innerHTML = '<li class="tp-cue tp-cue-loading">Transcript could not be parsed.</li>';
-        return;
-      }
-      renderCues();
-      setActive(0);
-    }).catch(() => {
-      transcriptEl.innerHTML = '<li class="tp-cue tp-cue-loading">Transcript unavailable.</li>';
-    });
-  }
+      return audioEl.currentTime || 0;
+    },
+    seek: (t) => {
+      if (ws && typeof ws.setTime === 'function') ws.setTime(t);
+      else audioEl.currentTime = t;
+    },
+    extraSource: ws,
+  });
 }
 
 function initAllTestimonialPlayers() {
   document.querySelectorAll('[data-testimonial-player]').forEach(initTestimonialPlayer);
+}
+
+// ===================== UPDATE (VIDEO) PLAYER =====================
+// Native <video> controls + the same lyric-style rolling transcript as testimonials.
+function initUpdatePlayer(root) {
+  if (_initedPlayers.has(root)) return;
+  _initedPlayers.add(root);
+  const videoEl = root.querySelector('[data-up-video]');
+  const transcriptEl = root.querySelector('[data-up-transcript]');
+  if (!videoEl || !transcriptEl) return;
+  attachRollingTranscript({ mediaEl: videoEl, transcriptEl, vttUrl: root.dataset.vtt });
+}
+
+function initAllUpdatePlayers() {
+  document.querySelectorAll('[data-update-player]').forEach(initUpdatePlayer);
 }
 
 // ===================== INIT =====================

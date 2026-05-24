@@ -16,6 +16,7 @@ featured_quote: >-
 audio: /audio/edited-call-with-pb.mp3
 transcript: /transcripts/transcript-2026-04-28.vtt
 featured: false
+voice_disclaimer: false
 date: 2026-04-28T23:15:00.000+05:30
 order: 1
 ---

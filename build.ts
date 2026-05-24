@@ -535,6 +535,8 @@ function build() {
   data.has_legal_rights = data.legal_rights.length > 0;
   data.has_stories = data.stories.length > 0;
   data.has_journal = data.journal.length > 0;
+  // Voice-obfuscation notice: shown unless an entry explicitly opts out
+  data.journal.forEach((t: any) => { t.voice_disclaimer = t.voice_disclaimer !== false; });
   // Featured vs regular testimonials
   const journalSorted = [...data.journal].sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0));
   data.featured_testimonial = journalSorted.find((t: any) => t.featured && t.audio) || journalSorted.find((t: any) => t.audio) || journalSorted[0] || null;

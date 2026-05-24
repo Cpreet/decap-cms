@@ -1,6 +1,6 @@
 ---
 title: Interview with Dr. Shriya Bhojwani, Professor of Constitutional and
-  Administrative Law at Nirma University, Ahmedabad
+  Administrative Law at Nirma University, Ahmedabad, India
 video: https://res.cloudinary.com/dss3ak5da/video/upload/v1779645225/RWF_video_-_Shriya_compressed_-web_xrj11x.mp4
 poster: /img/rwf-video-shriya-compressed-web-poster.jpg
 transcript: /transcripts/transcript-2026-05-22.vtt

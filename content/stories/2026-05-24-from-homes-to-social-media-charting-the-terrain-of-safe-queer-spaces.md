@@ -3,7 +3,7 @@ title: "From Homes to Social Media: Charting the Terrain of Safe Queer Spaces"
 excerpt: The present study explores the meanings, functions, and lived realities
   of queer safe spaces through the narratives of 18 self-identified queer
   individuals.
-section: stories
+section: research
 tag: Discrimination
 tag_style: default
 city: Naresh Phogat, Anamika Mishra

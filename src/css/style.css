@@ -2302,6 +2302,17 @@
         .testimonial-player-compact .tp-controls { padding: 10px 14px; }
         .testimonial-player-compact .tp-waveform { height: 36px; }
 
+        /* Updates: video player (reuses .tp-transcript / .tp-cue styling) */
+        .update-stage { background: #000; line-height: 0; }
+        .update-video {
+            display: block; width: 100%;
+            aspect-ratio: 16 / 9; max-height: 70vh;
+            background: #000; object-fit: contain;
+        }
+        .update-player .tp-transcript-wrap { border-top: 1px solid var(--border); }
+        .update-player-compact { background: transparent; }
+        .update-player-compact .update-video { aspect-ratio: 16 / 9; max-height: 360px; }
+
         @media (max-width: 720px) {
             .testimonial-hero { padding: 36px 20px 32px; }
             .testimonial-list-section { padding: 36px 20px 60px; }

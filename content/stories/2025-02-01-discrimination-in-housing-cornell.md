@@ -1,8 +1,8 @@
 ---
 title: "Isolated by Caste: Neighbourhood-Scale Residential Segregation in Indian
   Metros"
-excerpt: Academic study examining documented patterns of rental discrimination
-  across Indian cities.
+excerpt: Academic study examining documented patterns of caste-based residential
+  segregation across major Indian cities.
 section: research
 tag: Discrimination
 tag_style: default
